@@ -97,11 +97,9 @@ const groupedActivities = groupActivities(LOGIT_ACTIVITIES);
     }
   }
 
-  // Run setup on initial load
-  setupActivityLog();
-
-  // Re-run setup on Astro page changes
-  document.addEventListener("astro:page-load", setupActivityLog);
+  // Run setupActivityLog on both DOMContentLoaded and astro:page-load
+  document.addEventListener('DOMContentLoaded', setupActivityLog);
+  document.addEventListener('astro:page-load', setupActivityLog);
 </script>
 
 <style>

@@ -207,18 +207,3 @@ const streakCount = calculateStreak();
   }
 </style>
 
-<script>
-  function setupMonthlyCalendar() {
-    const calendarSquares = document.querySelectorAll('.calendar-square');
-    
-    calendarSquares.forEach(square => {
-      square.addEventListener('click', () => {
-        const date = square.getAttribute('data-date');
-        const activityLevel = square.getAttribute('data-activity-level');
-        const title = square.getAttribute('title');
-      });
-    });
-  }
-
-  document.addEventListener('astro:page-load', setupMonthlyCalendar);
-</script>

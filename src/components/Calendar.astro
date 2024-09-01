@@ -147,7 +147,7 @@ const activityDataJSON = JSON.stringify(updatedActivityData);
     return ACTIVITY_DATA.find(activity => activity.date === date);
   };
 
-  document.addEventListener('DOMContentLoaded', () => {
+  function initializeCalendar() {
     const calendar = document.querySelector('.calendar-container');
     const clickStates = {};
 
@@ -202,7 +202,7 @@ const activityDataJSON = JSON.stringify(updatedActivityData);
       }
     }
 
-    calendar.addEventListener('click', (event) => {
+    function handleCalendarClick(event) {
       const cell = event.target.closest('.calendar-cell');
       if (cell && !cell.classList.contains('today')) {
         const date = cell.dataset.date;
@@ -213,15 +213,15 @@ const activityDataJSON = JSON.stringify(updatedActivityData);
         }
         updateCellState(cell, clickStates[date]);
       }
-    });
+    }
 
-    calendar.addEventListener('mouseleave', (event) => {
-      const cell = event.target.closest('.calendar-cell');
-      if (cell) {
-        const date = cell.dataset.date;
-        delete clickStates[date];
-        updateCellState(cell, 0);
-      }
-    }, true);
-  });
+    if (calendar) {
+      calendar.addEventListener('click', handleCalendarClick);
+    }
+  }
+
+  // Run on both initial load and after Astro page transitions
+  document.addEventListener('astro:page-load', initializeCalendar);
+
+  window.initializeCalendar = initializeCalendar;
 </script>
