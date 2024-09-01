@@ -8,7 +8,8 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 
 export default defineConfig({
-  site: 'https://ShuiTang.github.io',
+  site: 'https://shuitang.github.io',
+  base: '/', // This should be '/' for deploying to the root of your GitHub Pages site
   integrations: [mdx(), tailwind()],
   markdown: {
     shikiConfig: {
