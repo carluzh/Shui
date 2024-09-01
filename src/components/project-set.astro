@@ -40,7 +40,7 @@ const formatDate = (dateString: string | Date) => {
           <div class="flex justify-between items-center">
             <h4 class="text-sm">
               {'slug' in article ? (
-                <a href={`/${article.slug}`} class="hover:underline">
+                <a href={`/Site/${article.slug}`} class="hover:underline">
                   {article.title}
                 </a>
               ) : (
