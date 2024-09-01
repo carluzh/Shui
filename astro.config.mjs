@@ -8,6 +8,8 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 
 export default defineConfig({
+  site: 'https://ShuiTang.github.io',
+  base: '/Site',
   integrations: [mdx(), tailwind()],
   markdown: {
     shikiConfig: {
