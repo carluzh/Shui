@@ -55,17 +55,19 @@ import MonthlyCalendar from './MonthlyCalendar.astro';
 
     let currentView = 'weekly';
 
-    function updateCalendarView(view) {
-      if (view === 'weekly') {
-        weeklyView.classList.remove('hidden');
-        monthlyView.classList.add('hidden');
-        expandToggle.textContent = 'Expand';
-        expandToggle.classList.remove('active');
-      } else {
-        weeklyView.classList.add('hidden');
-        monthlyView.classList.remove('hidden');
-        expandToggle.textContent = 'Expand';
-        expandToggle.classList.add('active');
+    function updateCalendarView(view: 'weekly' | 'monthly') {
+      if (weeklyView && monthlyView && expandToggle) {
+        if (view === 'weekly') {
+          weeklyView.classList.remove('hidden');
+          monthlyView.classList.add('hidden');
+          expandToggle.textContent = 'Expand';
+          expandToggle.classList.remove('active');
+        } else {
+          weeklyView.classList.add('hidden');
+          monthlyView.classList.remove('hidden');
+          expandToggle.textContent = 'Collapse';
+          expandToggle.classList.add('active');
+        }
       }
     }
 

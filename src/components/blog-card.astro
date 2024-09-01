@@ -1,11 +1,11 @@
 ---
-import type { CollectionEntry } from "astro:content";
+import type { CollectionEntry } from 'astro:content';
 
 interface Props {
-  post: CollectionEntry<"Back">;
+  post: CollectionEntry<'writing'>;
 }
 
-const { post } = Astro.props as Props;
+const { post } = Astro.props;
 ---
 
 <div class="border p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">

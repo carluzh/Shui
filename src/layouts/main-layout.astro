@@ -58,7 +58,7 @@ const {
     const svg = logoContainer?.querySelector('svg');
     const tempMessage = document.getElementById('temp-message');
 
-    function showMessage(message) {
+    function showMessage(message: string) {
       if (tempMessage) {
         tempMessage.textContent = message;
         tempMessage.style.opacity = '1';
@@ -133,6 +133,36 @@ const {
         }
       });
     }
+
+    // Calendar functionality
+    function setupCalendar() {
+      const calendar = document.querySelector('.calendar');
+      const expandButton = document.querySelector('.expand-button');
+      const squares = document.querySelectorAll('.calendar-square');
+
+      if (calendar && expandButton) {
+        expandButton.addEventListener('click', () => {
+          calendar.classList.toggle('expanded');
+          expandButton.textContent = calendar.classList.contains('expanded') ? 'Collapse' : 'Expand';
+        });
+      }
+
+      squares.forEach(square => {
+        square.addEventListener('click', () => {
+          const date = square.getAttribute('data-date');
+          const commits = square.getAttribute('data-commits');
+          if (date && commits) {
+            alert(`Date: ${date}\nCommits: ${commits}`);
+          }
+        });
+      });
+    }
+
+    // Call setupCalendar on initial load and after each navigation
+    setupCalendar();
+    document.addEventListener('astro:after-swap', setupCalendar);
+
+    // Add any other functionalities here...
   }
 
   document.addEventListener('astro:page-load', initializeFunctionality);

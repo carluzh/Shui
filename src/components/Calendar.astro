@@ -1,6 +1,6 @@
 ---
 import { format, subWeeks, eachDayOfInterval, isSameMonth, isSameDay, isFirstDayOfMonth, startOfWeek, endOfWeek } from 'date-fns';
-import { ACTIVITY_DATA, getActivityLevel, getActivityForDate, DayActivity } from '@/data/activityData';
+import { ACTIVITY_DATA, getActivityLevel, getActivityForDate, type DayActivity } from '@/data/activityData';
 
 const { view = 'weekly' } = Astro.props;
 
@@ -147,7 +147,7 @@ const activityDataJSON = JSON.stringify(updatedActivityData);
     return ACTIVITY_DATA.find(activity => activity.date === date);
   };
 
-  function setupCalendar() {
+  document.addEventListener('DOMContentLoaded', () => {
     const calendar = document.querySelector('.calendar-container');
     const clickStates = {};
 
@@ -202,38 +202,26 @@ const activityDataJSON = JSON.stringify(updatedActivityData);
       }
     }
 
-    if (calendar) {
-      calendar.addEventListener('click', (event) => {
-        const cell = event.target.closest('.calendar-cell');
-        if (cell && !cell.classList.contains('today')) {
-          const date = cell.dataset.date;
-          clickStates[date] = (clickStates[date] || 0) + 1;
-          if (clickStates[date] > 4) {
-            clickStates[date] = 0;
-            cell.classList.remove('clicked');
-          }
-          updateCellState(cell, clickStates[date]);
+    calendar.addEventListener('click', (event) => {
+      const cell = event.target.closest('.calendar-cell');
+      if (cell && !cell.classList.contains('today')) {
+        const date = cell.dataset.date;
+        clickStates[date] = (clickStates[date] || 0) + 1;
+        if (clickStates[date] > 4) {
+          clickStates[date] = 0;
+          cell.classList.remove('clicked');
         }
-      });
+        updateCellState(cell, clickStates[date]);
+      }
+    });
 
-      calendar.addEventListener('mouseleave', (event) => {
-        const cell = event.target.closest('.calendar-cell');
-        if (cell) {
-          const date = cell.dataset.date;
-          delete clickStates[date];
-          updateCellState(cell, 0);
-        }
-      }, true);
-    }
-  }
-
-  // Run setup when the DOM is fully loaded
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupCalendar);
-  } else {
-    setupCalendar();
-  }
-
-  // Re-run setup on Astro page changes
-  document.addEventListener('astro:page-load', setupCalendar);
+    calendar.addEventListener('mouseleave', (event) => {
+      const cell = event.target.closest('.calendar-cell');
+      if (cell) {
+        const date = cell.dataset.date;
+        delete clickStates[date];
+        updateCellState(cell, 0);
+      }
+    }, true);
+  });
 </script>
