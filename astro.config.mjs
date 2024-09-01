@@ -9,7 +9,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 // import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 
 export default defineConfig({
-  site: 'https://your-site-name.netlify.app',  // Update this to your Netlify URL
+  site: 'https://main--flourishing-cupcake-51dfe2.netlify.app/',  // Update this to your actual Netlify URL
   integrations: [mdx(), tailwind()],
   markdown: {
     shikiConfig: {

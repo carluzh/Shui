@@ -50,7 +50,7 @@ const groupedPosts: GroupedPosts = blogPosts.reduce<GroupedPosts>(
                 {posts.map((post) => (
                   <li class="flex justify-between py-2 border-b">
                     <a
-                      href={`/Site/${post.slug}`}
+                      href={`/${post.slug}`}
                       class="text-base font-medium no-underline hover:underline"
                     >
                       {post.data.title}
