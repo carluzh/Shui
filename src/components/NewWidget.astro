@@ -43,55 +43,34 @@ import MonthlyCalendar from './MonthlyCalendar.astro';
 </style>
 
 <script>
-  function setupCalendarToggle() {
+  const expandToggle = document.getElementById('expand-toggle');
+  let currentView: 'weekly' | 'monthly' = 'weekly';
+
+  const updateCalendarView = (view: 'weekly' | 'monthly') => {
     const weeklyView = document.getElementById('weekly-view');
     const monthlyView = document.getElementById('monthly-view');
     const expandToggle = document.getElementById('expand-toggle');
-
-    if (!weeklyView || !monthlyView || !expandToggle) {
-      console.warn('One or more required elements not found for calendar toggle');
-      return;
-    }
-
-    let currentView = 'weekly';
-
-    function updateCalendarView(view: 'weekly' | 'monthly') {
-      const weeklyView = document.getElementById('weekly-view');
-      const monthlyView = document.getElementById('monthly-view');
-      const expandToggle = document.getElementById('expand-toggle');
-      
-      if (weeklyView && monthlyView && expandToggle) {
-        if (view === 'weekly') {
-          weeklyView.classList.remove('hidden');
-          monthlyView.classList.add('hidden');
-          expandToggle.textContent = 'Expand';
-          expandToggle.classList.remove('active');
-        } else {
-          weeklyView.classList.add('hidden');
-          monthlyView.classList.remove('hidden');
-          expandToggle.textContent = 'Collapse';
-          expandToggle.classList.add('active');
-        }
+    
+    if (weeklyView && monthlyView && expandToggle) {
+      if (view === 'weekly') {
+        weeklyView.classList.remove('hidden');
+        monthlyView.classList.add('hidden');
+        expandToggle.textContent = 'Expand';
+        expandToggle.classList.remove('active');
+      } else {
+        weeklyView.classList.add('hidden');
+        monthlyView.classList.remove('hidden');
+        expandToggle.textContent = 'Collapse';
+        expandToggle.classList.add('active');
       }
     }
+  };
 
-    expandToggle.addEventListener('click', () => {
-      currentView = currentView === 'weekly' ? 'monthly' : 'weekly';
-      updateCalendarView(currentView);
-    });
+  expandToggle?.addEventListener('click', () => {
+    currentView = currentView === 'weekly' ? 'monthly' : 'weekly';
+    updateCalendarView(currentView);
+  });
 
-    // Initialize view (no need to call updateCalendarView here)
-  }
-
-  function initializeCalendar() {
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', setupCalendarToggle);
-    } else {
-      setupCalendarToggle();
-    }
-  }
-
-  // Run on initial load and after Astro page transitions
-  initializeCalendar();
-  document.addEventListener('astro:page-load', initializeCalendar);
+  // Initial setup
+  updateCalendarView(currentView);
 </script>
