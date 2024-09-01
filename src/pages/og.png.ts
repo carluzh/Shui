@@ -7,7 +7,11 @@ import path from "path";
 export const GET: APIRoute = async ({ params }) => {
   const { slug } = params;
 
-  const post = await getEntry("writing", slug as string);
+  if (!slug) {
+    return new Response("Slug is required", { status: 400 });
+  }
+
+  const post = await getEntry("writing", slug);
   if (!post) {
     return new Response("Not found", { status: 404 });
   }
