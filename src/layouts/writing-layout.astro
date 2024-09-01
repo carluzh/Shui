@@ -4,7 +4,6 @@ import ArticleHeader from "@/components/ArticleHeader.astro";
 import Footer from "@/components/footer.astro";
 
 const { title, description, date, slug, headings, colorClass } = Astro.props;
-baseUrl={import.meta.env.BASE_URL}
 ---
 
 <MainLayout
@@ -13,6 +12,7 @@ baseUrl={import.meta.env.BASE_URL}
   author="Shui"
   image={"/" + slug + "/og.png"}
   headings={headings}
+  baseUrl={import.meta.env.BASE_URL}
 >
   <article class={`mx-auto max-w-2xl px-4 sm:px-6 lg:px-8 writing-content ${colorClass}`}>
     <ArticleHeader title={title} date={date} />
