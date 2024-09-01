@@ -1,339 +1,57 @@
 import type { LogitActivity } from "@/types";
+import { getCollection } from 'astro:content';
+
+// This function will get all the writing entries and format them for ACTIVITIES
+async function getWritingActivities() {
+  const allWritingEntries = await getCollection('writing');
+  return allWritingEntries.map(entry => ({
+    title: entry.data.title,
+    date: entry.data.date,
+    slug: entry.slug,
+    type: 'article'
+  }));
+}
+
+// Export ACTIVITIES as an async function
+export async function getACTIVITIES() {
+  const writingActivities = await getWritingActivities();
+  
+  return [
+    ...writingActivities,
+    // You can add other non-article activities here if needed
+    {
+      id: "2",
+      type: "study",
+      icon: "💻",
+      title: "Researched StarkWare",
+      details: "Read and Summarized the majority of articles.",
+      date: new Date(2024, 7, 16),
+      tags: ["Website", "development"],
+      timeSpent: 90,
+    },
+    // ... other existing activities
+  ];
+}
 
 export const LOGIT_ACTIVITIES: LogitActivity[] = [
   {
-    id: "19",
-    type: "math-academy",
-    subtype: "milestone",
-    icon: "🏆",
-    title: "Reached 33% of Foundations II in Math Academy",
-    details: "One-third of the way through Foundations II course",
-    date: new Date(2024, 7, 15), // August 15, 2024
-    tags: ["math", "milestone", "achievement"],
-    milestoneProgress: {
-      current: 33,
-      total: 100,
-    },
-    leagueProgress: {
-      current: "Gold 🏅",
-      next: "Platinum 💎",
-      totalEarned: 1586,
-    },
-  },
-  {
-    id: "18",
-    type: "project",
-    icon: "🖊️",
-    title: "Started new blog post",
-    details: "First draft of 'How I use 'AI' for learning' blogpost",
-    date: new Date(2024, 7, 15), // August 15, 2024
-    tags: ["writing", "AI", "learning"],
-    progress: {
-      phase: "First Draft",
-      tasksCompleted: 1,
-      totalTasks: 3,
-    },
-    timeSpent: 60, // Estimated time, adjust as needed
-  },
-  {
-    id: "17",
-    type: "math-academy",
-    subtype: "progress",
-    icon: "🧮",
-    title: "Math Academy Progress",
-    details: "Completed 7 lessons and 1 assessment",
-    date: new Date(2024, 7, 15), // August 15, 2024
-    tags: ["math", "learning"],
-    progress: {
-      lessonsCompleted: 7,
-      pointsEarned: 84,
-      totalXP: 1586, // 1502 + 84
-      todayXP: 84,
-      dailyGoal: 70,
-      currentLevel: "Gold 🏅",
-    },
-    topics: [
-      "Exponential Decay",
-      "Limits Rules",
-      "Dilations",
-      "Cube Root Function",
-      "Sequences",
-      "Function Composition",
-    ],
-  },
-  {
-    id: "15",
+    id: "2",
     type: "study",
-    icon: "📚",
-    title: 'Chapter 7.3 of "The Rust Programming Language" book',
-    details: "Learned about relative & absolute paths, pub & crate keywords",
-    date: new Date(2024, 7, 15), // August 15, 2024
-    tags: ["rust", "book", "learning"],
-    bookProgress: {
-      currentChapter: 7,
-      totalChapters: 21,
-      current: 7,
-      total: 21,
-    },
-    topics: [
-      "Relative Paths",
-      "Absolute Paths",
-      "pub Keyword",
-      "crate Keyword",
-    ],
-    timeSpent: 35,
-  },
-  {
-    id: "16",
-    type: "project",
     icon: "💻",
-    title: "Refactored logit and added new features",
-    details: "Added sticky headers and compact view of cards",
-    date: new Date(2024, 7, 15), // August 15, 2024
-    tags: ["project", "development", "rust"],
+    title: "Researched StarkWare",
+    details: "Read and Summarized the majority of articles.",
+    date: new Date(2024, 7, 16),
+    tags: ["Website", "development"],
     timeSpent: 90, // Estimated time, adjust as needed
-    progress: {
-      phase: "Refactoring",
-      tasksCompleted: 2,
-      totalTasks: 3,
-    },
   },
   {
     id: "1",
-    type: "study",
-    icon: "📚",
-    title: 'Chapter 7 of "The Rust Programming Language" book',
-    details: "Learned about packages, crates, modules, and lib/bin mode",
-    date: new Date(2024, 7, 14),
-    tags: ["rust", "book", "learning"],
-    bookProgress: {
-      currentChapter: 7,
-      totalChapters: 21,
-      current: 7,
-      total: 21,
-    },
-    topics: ["Packages", "Crates", "Modules"],
-    timeSpent: 30,
-  },
-  {
-    id: "2",
     type: "project",
     icon: "💻",
-    title: "Refactored logit and added new features",
-    details:
-      "Added view transitions for smooth navigation, standardized layout",
-    date: new Date(2024, 7, 14),
-    tags: ["project", "development", "rust"],
-    timeSpent: 150,
-  },
-  {
-    id: "3",
-    type: "math-academy",
-    subtype: "progress",
-    icon: "🧮",
-    title: "Math Academy Progress",
-    details: "Completed 9 lessons",
-    date: new Date(2024, 7, 14),
-    tags: ["math", "learning"],
-    progress: {
-      lessonsCompleted: 9,
-      pointsEarned: 81,
-      totalXP: 1502,
-      todayXP: 84,
-      dailyGoal: 50,
-      currentLevel: "Gold 🏅",
-    },
-    topics: [
-      "Dilations",
-      "Real Numbers",
-      "Exponential Equations",
-      "Square Root Functions",
-      "Limits",
-      "One-To-One Functions",
-      "Logarithmic Equations",
-      "Triangle Area",
-    ],
-  },
-  {
-    id: "4",
-    type: "project",
-    icon: "💻",
-    title: "Created first draft of logit",
-    details: "Spent 2h45m working on the activity log page",
-    date: new Date(2024, 7, 13),
-    tags: ["project", "development"],
-    progress: {
-      phase: "First Draft",
-      tasksCompleted: 1,
-      totalTasks: 1,
-    },
-    timeSpent: 165,
-  },
-  {
-    id: "5",
-    type: "study",
-    icon: "📚",
-    title: 'Completed Chapter 6 of "The Rust Programming Language" book',
-    details:
-      "Read sections 6.2, 6.3, and 6.4, and solved corresponding Rustlings exercises (08 enums)",
-    date: new Date(2024, 7, 13),
-    tags: ["rust", "book", "learning"],
-    bookProgress: {
-      currentChapter: 6,
-      totalChapters: 21,
-      current: 6,
-      total: 21,
-    },
-    topics: ["Enums", "Pattern Matching", "Control Flow"],
-    timeSpent: 120,
-  },
-  {
-    id: "6",
-    type: "math-academy",
-    subtype: "progress",
-    icon: "🧮",
-    title: "Math Academy Progress",
-    details: "Completed 7 lessons and 1 assessment",
-    date: new Date(2024, 7, 13),
-    tags: ["math", "learning"],
-    progress: {
-      lessonsCompleted: 7,
-      pointsEarned: 70,
-      totalXP: 1418,
-      todayXP: 70,
-      dailyGoal: 50,
-      currentLevel: "Gold 🏅",
-    },
-    topics: [
-      "Intersections of Lines and Quadratic Functions",
-      "Average Rate of Change",
-      "Domain and Range of Quadratic Functions",
-      "Exponential Equations",
-      "Laws of Logarithms",
-      "Limits at Infinity",
-    ],
-  },
-  {
-    id: "7",
-    type: "progress",
-    icon: "🦀",
-    title: "Completed Rustlings exercises on structs and enums",
-    details: "34/94 exercises (36% complete)",
-    date: new Date(2024, 7, 12),
-    tags: ["rust", "learning"],
-    progress: {
-      current: 34,
-      total: 94,
-    },
-    topics: ["Structs", "Enums", "Pattern Matching"],
-  },
-  {
-    id: "8",
-    type: "math-academy",
-    subtype: "achievement",
-    icon: "🏅",
-    title: "Reached Gold League in Math Academy",
-    details: "Completed 8 lessons in Foundations II",
-    date: new Date(2024, 7, 12),
-    tags: ["math", "achievement"],
-    achievement: {
-      name: "Gold League",
-      description: "Reached Gold League in Math Academy",
-    },
-    progress: {
-      lessonsCompleted: 8,
-      pointsEarned: 83,
-      totalXP: 1348,
-      todayXP: 83,
-      dailyGoal: 50,
-      currentLevel: "Gold 🏅",
-    },
-    topics: ["Algebra", "Geometry", "Trigonometry"],
-  },
-  {
-    id: "9",
-    type: "study",
-    icon: "📚",
-    title: 'Continued "The Rust Programming Language" book',
-    details: "Focusing on structs and enums",
-    date: new Date(2024, 7, 12),
-    tags: ["rust", "book"],
-    bookProgress: {
-      currentChapter: 5,
-      totalChapters: 21,
-      current: 5,
-      total: 21,
-    },
-    timeSpent: 120,
-  },
-  {
-    id: "10",
-    type: "project",
-    icon: "💻",
-    title: "Started multi-client chat server project in Rust",
-    details: "Planning server + client implementation with TCP and concurrency",
-    date: new Date(2024, 7, 12),
-    tags: ["rust", "project", "networking"],
-    progress: {
-      phase: "Planning",
-      tasksCompleted: 2,
-      totalTasks: 10,
-    },
-  },
-  {
-    id: "11",
-    type: "learning",
-    icon: "🧮",
-    title: "Math Academy streak",
-    details: "16-day streak in Math Foundations",
-    date: new Date(2024, 7, 11),
-    tags: ["math", "streak"],
-    topicsLearned: ["Calculus", "Linear Algebra"],
-    timeSpent: 320,
-  },
-  {
-    id: "12",
-    type: "planning",
-    icon: "🗓️",
-    title: "Planned UI-oriented language project",
-    details: "Will be implemented in Rust",
-    date: new Date(2024, 7, 10),
-    tags: ["rust", "project", "planning"],
-    planDetails: {
-      goals: ["Create a UI-oriented language", "Implement in Rust"],
-      nextSteps: [
-        "Research existing UI languages",
-        "Define core language features",
-      ],
-    },
-  },
-  {
-    id: "13",
-    type: "math-academy",
-    subtype: "milestone",
-    icon: "🏆",
-    title: "Reached 25% of Foundations II in Math Academy",
-    details: "Currently in Silver League 🥈",
-    date: new Date(2024, 7, 9),
-    tags: ["math", "milestone"],
-    milestoneProgress: {
-      current: 25,
-      total: 100,
-    },
-    leagueProgress: {
-      current: "Silver 🥈",
-      next: "Gold 🏅",
-      totalEarned: 712,
-    },
-  },
-  {
-    id: "14",
-    type: "start",
-    icon: "🚀",
-    title: "Began low-level programming and math journey",
-    details: "Inspired by @ludwigABAP, @dnbt777, and @_MathAcademy_",
-    date: new Date(2024, 7, 1),
-    tags: ["rust", "math", "journey"],
-    goalsSet: ["Master Rust", "Improve math skills", "Build complex systems"],
+    title: "Forked Website",
+    details: "Moved Logit and Upcoming Projects to the Main Page.",
+    date: new Date(2024, 7, 16),
+    tags: ["Website", "development"],
+    timeSpent: 90, // Estimated time, adjust as needed
   },
 ];

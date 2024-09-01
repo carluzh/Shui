@@ -1,42 +1,21 @@
 import { defineConfig } from "astro/config";
-import rehypeKatex from "rehype-katex";
-import remarkMath from "remark-math";
-import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
-import oneHunterThemeVercelLight2024 from "./public/theme/one-hunter-vercel-light.json";
-import oneHunterThemeVercelDark2024 from "./public/theme/one-hunter-vercel-dark.json";
-import vercel from "@astrojs/vercel/serverless";
+import tailwind from "@astrojs/tailwind";
+
+import remarkGfm from "remark-gfm";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 
 export default defineConfig({
-  site: "https://www.railly.dev",
-  integrations: [
-    tailwind({
-      applyBaseStyles: false,
-    }),
-    mdx({
-      remarkPlugins: [remarkMath],
-      rehypePlugins: [rehypeKatex],
-    }),
-  ],
+  integrations: [mdx(), tailwind()],
   markdown: {
     shikiConfig: {
-      themes: {
-        light: oneHunterThemeVercelLight2024,
-        dark: oneHunterThemeVercelDark2024,
-      },
-      defaultColor: "light",
-      cssVariablePrefix: "--shiki-",
-      langs: [],
-      transformers: [
-        {
-          line(node, line) {
-            node.properties["data-line"] = line;
-            this.addClassToHast(node, "line");
-          },
-        },
-      ],
+      theme: "dracula",
+      wrap: true
     },
+    remarkPlugins: [remarkGfm],
+    rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings, rehypeHeadingIds],
+    extendDefaultPlugins: true,
   },
-  output: "server",
-  adapter: vercel(),
 });

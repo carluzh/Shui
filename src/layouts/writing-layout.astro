@@ -1,78 +1,88 @@
 ---
 import MainLayout from "./main-layout.astro";
+import ArticleHeader from "@/components/ArticleHeader.astro";
+import Footer from "@/components/footer.astro";
 
-const { title, description, date, slug, headings } = Astro.props;
+const { title, description, date, slug, headings, colorClass } = Astro.props;
 ---
 
 <MainLayout
   title={title}
   description={description}
-  author="Railly Hugo"
-  backTitle="Writing"
-  backUrl="/writing"
+  author="Shui"
+  image={"/" + slug + "/og.png"}
   headings={headings}
-  image={"/writing/" + slug + "/og.png"}
 >
-  <div class="[grid-content:2] prose dark:prose-invert">
-    <h2 class="font-bold m-0">{title}</h2>
-    <p class="text-sm mt-2 mb-8 text-muted-foreground">{date}</p>
-    <hr class="mt-0 mb-6" />
-    <slot />
-  </div>
+  <article class={`mx-auto max-w-2xl px-4 sm:px-6 lg:px-8 writing-content ${colorClass}`}>
+    <ArticleHeader title={title} date={date} />
+    <div class="prose prose-lg dark:prose-invert">
+      <slot />
+    </div>
+    <div class="mt-8 mb-2">
+      <div id="lottie-container"></div>
+    </div>
+    <Footer />
+  </article>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      const links = document.querySelectorAll('.writing-content a');
+      links.forEach(link => {
+        if (!link.getAttribute('href').startsWith('#') && !link.getAttribute('href').startsWith('/')) {
+          link.setAttribute('target', '_blank');
+          link.setAttribute('rel', 'noopener noreferrer');
+        }
+      });
+    });
+  </script>
+  
 </MainLayout>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const copyButtonLabel = "Copy";
-    const codeBlocks = Array.from(document.querySelectorAll("pre"));
+  import lottie from 'lottie-web';
 
-    codeBlocks.forEach((codeBlock) => {
-      const wrapper = document.createElement("div");
-      wrapper.classList.add("relative");
-
-      const copyButton = document.createElement("button");
-      copyButton.className =
-        "group absolute right-2 top-2 overflow-hidden rounded-full border border-muted hover:border-border py-1 px-2 text-xs font-medium backdrop-blur transition focus:opacity-100";
-      copyButton.innerHTML = `
-        <span class="pointer-events-none flex items-center gap-1 text-zinc-400 transition duration-300">
-          <svg viewBox="0 0 20 20" aria-hidden="true" class="h-5 w-5 fill-zinc-500/20 stroke-zinc-500 transition-colors group-hover:stroke-zinc-400">
-            <path stroke-width="0" d="M5.5 13.5v-5a2 2 0 0 1 2-2l.447-.894A2 2 0 0 1 9.737 4.5h.527a2 2 0 0 1 1.789 1.106l.447.894a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-5a2 2 0 0 1-2-2Z"></path>
-            <path fill="none" stroke-linejoin="round" d="M12.5 6.5a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2m5 0-.447-.894a2 2 0 0 0-1.79-1.106h-.527a2 2 0 0 0-1.789 1.106L7.5 6.5m5 0-1 1h-3l-1-1"></path>
-          </svg>
-          <span class="pointer-events-none">${copyButtonLabel}</span>
-        </span>
-        <span aria-hidden="true" class="copied-message pointer-events-none absolute inset-0 left-8 flex items-center justify-center transition duration-300 translate-y-1.5 opacity-0">Copied!</span>
-      `;
-
-      codeBlock.setAttribute("tabindex", "0");
-      wrapper.appendChild(copyButton);
-      codeBlock.parentNode?.insertBefore(wrapper, codeBlock);
-      wrapper.appendChild(codeBlock);
-
-      copyButton.addEventListener("click", async () => {
-        await copyCode(codeBlock, copyButton);
+  document.addEventListener('astro:page-load', () => {
+    const container = document.getElementById('lottie-container');
+    if (container) {
+      lottie.loadAnimation({
+        container: container,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: '/animations/squiggly-line.json' // Make sure this path is correct
       });
-    });
-
-    async function copyCode(block: HTMLElement, button: HTMLButtonElement) {
-      const code = block.querySelector("code");
-      const text = code?.innerText;
-
-      await navigator.clipboard.writeText(text || "");
-
-      const copyButton = button.querySelector("span:last-child");
-      const copiedMessage = button.querySelector(".copied-message");
-      copiedMessage?.classList.add("translate-y-0", "opacity-100");
-      copyButton?.classList.add(
-        "translate-y-1",
-        "opacity-0",
-        "transition-opacity",
-        "opacity-0",
-      );
-      setTimeout(() => {
-        copiedMessage?.classList.remove("opacity-100");
-        copyButton?.classList.remove("translate-y-1", "opacity-0");
-      }, 700);
     }
   });
 </script>
+
+<style>
+  .writing-content {
+    font-size: 0.9em !important;
+  }
+
+  .writing-content .prose.prose-lg h1,
+  .writing-content .prose.prose-lg h2,
+  .writing-content .prose.prose-lg h3,
+  .writing-content .prose.prose-lg h4,
+  .writing-content .prose.prose-lg h5,
+  .writing-content .prose.prose-lg h6 {
+    font-size: revert !important;
+    margin-top: 1.5em !important;
+    margin-bottom: 0.5em !important;
+    line-height: 1.2 !important;
+    color: hsl(var(--foreground)) !important;
+    font-weight: 700 !important;
+  }
+
+  .writing-content .prose.prose-lg h3 { font-size: 1.75em !important; }
+  .writing-content .prose.prose-lg h4 { font-size: 1.2em !important; }
+  .writing-content .prose.prose-lg h5 { font-size: 1.25em !important; }
+  .writing-content .prose.prose-lg h6 { font-size: 1.1em !important; }
+
+  .writing-content .prose.prose-lg {
+    font-size: inherit !important;
+  }
+
+
+</style>
+
+</rewritten_file>

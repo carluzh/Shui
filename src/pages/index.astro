@@ -5,23 +5,36 @@ import Projects from "@/components/Projects.astro";
 import Explore from "@/components/Explore.astro";
 import MainLayout from "@/layouts/main-layout.astro";
 import { BUILDING_PROJECTS, OPEN_SOURCE_PROJECTS } from "@/data/home";
+
+import ProjectSet from "@/components/project-set.astro";
+import ActivityLog from "@/components/activity-log.astro";
+import NewWidget from "@/components/NewWidget.astro"; // New import for the widget
 ---
 
 <MainLayout
-  title="Railly Hugo"
+  title="Shui"
   description="Software Engineer. Building developer tools and open source projects."
   author="Railly Hugo"
   image="/images/og.png"
 >
   <div class="[grid-column:2]">
-    <Header />
-    <CurrentWork />
-    <section class="mt-8 max-w-screen overflow-x-auto">
-      <div class="grid grid-cols-3 gap-6 w-[600px] md:w-full">
-        <Projects sectionTitle="Building" projects={BUILDING_PROJECTS} />
-        <Projects sectionTitle="Open Source" projects={OPEN_SOURCE_PROJECTS} />
-        <Explore />
+    <div class="grid grid-cols-5 gap-4">
+      <div class="col-span-3">
+        <Header />
+        <CurrentWork />
       </div>
-    </section>
+      <div class="col-span-2">
+        <NewWidget class="pl-4" />
+      </div>
+    </div>
+
+    <div style="height: 40px;"></div>
+
+    <div class="grid gap-12 md:grid-cols-2">
+      <div class="sticky top-4 mt-4 self-start">
+        <ProjectSet />
+      </div>
+      <ActivityLog />
+    </div>
   </div>
 </MainLayout>

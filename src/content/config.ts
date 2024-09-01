@@ -1,15 +1,16 @@
 import { defineCollection, z } from "astro:content";
 
-const blogCollection = defineCollection({
-  type: "content", // Content type for markdown files
+const writingCollection = defineCollection({
+  type: "content",
   schema: z.object({
     title: z.string(),
     excerpt: z.string(),
     date: z.string(),
-    image: z.string().optional(), // Add the image field as optional
+    image: z.string().optional(),
+    colorClass: z.string(),  // Add this line
   }),
 });
 
 export const collections = {
-  blog: blogCollection,
+  writing: writingCollection,
 };

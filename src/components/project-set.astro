@@ -1,11 +1,84 @@
 ---
-import { LOGIT_PROJECTS } from "@/data/projects";
-import ProjectCard from "./project-card.astro";
+import { getACTIVITIES } from "@/data/activities";
+
+const ACTIVITIES = await getACTIVITIES();
+const articles = ACTIVITIES.filter(activity => activity.type === 'article');
+
+// Group articles by year
+const groupedArticles = articles.reduce((acc, article) => {
+  const year = new Date(article.date).getFullYear();
+  if (!acc[year]) {
+    acc[year] = [];
+  }
+  acc[year].push(article);
+  return acc;
+}, {} as Record<number, typeof articles>);
+
+// Sort years in descending order
+const sortedYears = Object.keys(groupedArticles).map(Number).sort((a, b) => b - a);
+
+// Format the date to show only month and day
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+};
 ---
 
-<section class="space-y-6">
-  <h2 class="text-lg font-semibold">Upcoming Projects</h2>
-  <div class="grid gap-6">
-    {LOGIT_PROJECTS.map((project) => <ProjectCard project={project} />)}
+<section class="space-y-2">
+  <div class="space-y-1">
+    <h2 class="text-lg font-semibold">Writing</h2>
+    <p class="text-sm text-muted-foreground">Library of Articles, Threads, and other thoughts.</p>
   </div>
+  
+  <div id="lottie-container-project-set" class="w-full h-4 my-3"></div>
+
+  {sortedYears.map(year => (
+    <div class="space-y-2">
+      <h3 class="text-sm font-medium text-muted-foreground flex items-center">
+        {year}
+      </h3>
+      <div class="space-y-4">
+        {groupedArticles[year].map((article) => (
+          <div class="flex justify-between items-center">
+            <h4 class="text-sm">
+              <a href={`/${article.slug}`} class="hover:underline">
+                {article.title}
+              </a>
+            </h4>
+            <div class="text-sm text-muted-foreground">{formatDate(article.date)}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
 </section>
+
+<script>
+  import lottie from 'lottie-web';
+
+  document.addEventListener('astro:page-load', () => {
+    const container = document.getElementById('lottie-container-project-set');
+    if (container) {
+      lottie.loadAnimation({
+        container: container,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: '/animations/squiggly-line.json'
+      });
+    }
+  });
+</script>
+
+<style>
+  a {
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  #lottie-container-project-set {
+    margin: 0.5rem 0; /* Reduced margin */
+    overflow: hidden; /* Hide overflow */
+  }
+</style>
