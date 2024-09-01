@@ -56,6 +56,10 @@ import MonthlyCalendar from './MonthlyCalendar.astro';
     let currentView = 'weekly';
 
     function updateCalendarView(view: 'weekly' | 'monthly') {
+      const weeklyView = document.getElementById('weekly-view');
+      const monthlyView = document.getElementById('monthly-view');
+      const expandToggle = document.getElementById('expand-toggle');
+      
       if (weeklyView && monthlyView && expandToggle) {
         if (view === 'weekly') {
           weeklyView.classList.remove('hidden');

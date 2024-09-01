@@ -14,6 +14,7 @@ export const GET: APIRoute = async ({ params }) => {
 
   const html = {
     type: "div",
+    key: "og-image",
     props: {
       style: {
         fontFamily: "Figtree, sans-serif",

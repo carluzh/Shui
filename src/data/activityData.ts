@@ -1,5 +1,3 @@
-import { format, subDays } from 'date-fns';
-
 export interface DayActivity {
   date: string; // ISO date string
   sports: boolean;
