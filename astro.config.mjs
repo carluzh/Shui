@@ -5,11 +5,11 @@ import tailwind from "@astrojs/tailwind";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import { rehypeHeadingIds } from "@astrojs/markdown-remark";
+// Remove this line if it's causing issues:
+// import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 
 export default defineConfig({
-  site: 'https://ShuiTang.github.io',
-  base: '/Site',  // Remove the trailing slash
+  site: 'https://your-site-name.netlify.app',  // Update this to your Netlify URL
   integrations: [mdx(), tailwind()],
   markdown: {
     shikiConfig: {
@@ -17,7 +17,7 @@ export default defineConfig({
       wrap: true
     },
     remarkPlugins: [remarkGfm],
-    rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings, rehypeHeadingIds],
+    rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings],
     extendDefaultPlugins: true,
   },
 });
