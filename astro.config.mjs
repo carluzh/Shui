@@ -9,7 +9,7 @@ import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 
 export default defineConfig({
   site: 'https://ShuiTang.github.io',
-  base: '/',
+  base: '/Site/',  // Add this line
   integrations: [mdx(), tailwind()],
   markdown: {
     shikiConfig: {
