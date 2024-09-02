@@ -101,29 +101,6 @@ body {
     --layer-header: 10;
     --layer-sticky: 10;
 
-    --flexoki-bg: 48 100% 97%;
-    --flexoki-bg-2: 51 33% 92%;
-
-    --flexoki-ui: 51 21% 88%;
-    --flexoki-ui-2: 50 14% 83%;
-    --flexoki-ui-3: 55 10% 79%;
-
-    --flexoki-tx: 0 3% 6%;
-    --flexoki-tx-2: 50 3% 42%;
-    --flexoki-tx-3: 49 7% 70%;
-
-    --flexoki-re: 3 62% 42%;
-
-    --flexoki-or: 188 82 21;
-    --flexoki-ye: 173 131 1;
-    --flexoki-gr: 102 128 11;
-    --flexoki-cy: 36 131 123;
-    --flexoki-bl: 32 94 166;
-    --flexoki-pu: 94 64 157;
-    --flexoki-ma: 160 47 111;
-  }
-
-  .dark {
     --flexoki-bg: 0 3% 6%;
     --flexoki-bg-2: 30 4% 11%;
 
@@ -145,14 +122,6 @@ body {
     --flexoki-pu: 139 126 200;
     --flexoki-ma: 206 93 151;
   }
-  /* LIGHT MODE */
-  /* --flexoki-or: #bc5215;
-    --flexoki-ye: #ad8301;
-    --flexoki-gr: #66800b;
-    --flexoki-cy: #24837b;
-    --flexoki-bl: #205ea6;
-    --flexoki-pu: #5e409d;
-    --flexoki-ma: #a02f6f; */
 
   :root {
     --background: var(--flexoki-bg);
@@ -238,10 +207,12 @@ body {
     opacity: 0.5 !important;
   }
 
-  .astro-code,
-  .astro-code span {
-    color: var(--shiki-dark) !important;
-    background-color: var(--shiki-dark-bg) !important;
+  @media (prefers-color-scheme: dark) {
+    .astro-code,
+    .astro-code span {
+      color: var(--shiki-dark) !important;
+      background-color: var(--shiki-dark-bg) !important;
+    }
   }
 
   .dotted-background {
