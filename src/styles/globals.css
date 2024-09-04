@@ -380,6 +380,16 @@ body {
   }
 }
 
+@media (max-width: 767px) {
+  .main-container {
+    padding: 1rem;
+  }
+  
+  .flex-col.md\:flex-row {
+    gap: 2rem;
+  }
+}
+
 /* Article-specific colors */
 .article-orange-blue {
   --article-color: #FF8C00;
