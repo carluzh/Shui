@@ -383,10 +383,22 @@ body {
 @media (max-width: 767px) {
   .main-container {
     padding: 1rem;
+    padding-bottom: 4rem; /* Add extra padding at the bottom */
+    min-height: auto;
+    overflow-y: visible;
   }
   
   .flex-col.md\:flex-row {
     gap: 2rem;
+  }
+
+  body {
+    overflow-y: auto;
+  }
+
+  .main-grid {
+    overflow-y: visible;
+    height: auto;
   }
 }
 
