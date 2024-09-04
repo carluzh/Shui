@@ -139,4 +139,16 @@ const {
 
   // Run on both initial load and after Astro page transitions
   document.addEventListener('astro:page-load', initializeFunctionality);
+
+  // Add this new function
+  function setDocHeight() {
+    document.documentElement.style.setProperty('--doc-height', `${window.innerHeight}px`);
+  }
+
+  // Add these event listeners
+  window.addEventListener('resize', setDocHeight);
+  window.addEventListener('orientationchange', setDocHeight);
+
+  // Call the function initially
+  setDocHeight();
 </script>
