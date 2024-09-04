@@ -18,9 +18,9 @@ const ogImage = image || `/images/Adam.png`;
   headings={headings}
   baseUrl={import.meta.env.BASE_URL}
 >
-  <article class={`mx-auto max-w-2xl px-4 sm:px-6 lg:px-8 writing-content ${colorClass}`}>
+  <article class={`mx-auto max-w-2xl writing-content ${colorClass}`}>
     <ArticleHeader title={title} date={date} />
-    <div class="prose prose-lg dark:prose-invert">
+    <div class="prose prose-lg dark:prose-invert mt-4 sm:mt-8">
       <slot />
     </div>
     <div class="mt-8 mb-2">
