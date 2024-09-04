@@ -34,11 +34,15 @@ const {
       author={author}
     />
   </head>
-  <body class="min-h-screen flex flex-col">
-    <main class="flex-grow">
-      {backTitle && backUrl && <GoBack title={backTitle} to={backUrl} />}
-      <slot />
-    </main>
+  <body>
+    <div id="site-wrapper">
+      <main class="main-container">
+        <div class="main-grid">
+          {backTitle && backUrl && <GoBack title={backTitle} to={backUrl} />}
+          <slot />
+        </div>
+      </main>
+    </div>
   </body>
 </html>
 

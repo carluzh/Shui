@@ -57,6 +57,7 @@
 :root {
   /* ... existing custom properties ... */
   --scale-factor: 1; /* Adjust this value to scale up or down */
+  --doc-height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -386,6 +387,11 @@ body {
     padding-bottom: 4rem; /* Add extra padding at the bottom */
     min-height: auto;
     overflow-y: visible;
+  }
+    html, body {
+    height: 100%;
+    height: var(--doc-height);
+    overflow-y: auto;
   }
   
   .flex-col.md\:flex-row {
