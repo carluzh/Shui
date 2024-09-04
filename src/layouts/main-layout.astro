@@ -34,15 +34,11 @@ const {
       author={author}
     />
   </head>
-  <body>
-    <div id="site-wrapper" class="min-h-screen flex flex-col">
-      <main class="main-container flex-grow">
-        <div class="main-grid h-full">
-          {backTitle && backUrl && <GoBack title={backTitle} to={backUrl} />}
-          <slot />
-        </div>
-      </main>
-    </div>
+  <body class="min-h-screen flex flex-col">
+    <main class="flex-grow">
+      {backTitle && backUrl && <GoBack title={backTitle} to={backUrl} />}
+      <slot />
+    </main>
   </body>
 </html>
 
@@ -139,16 +135,4 @@ const {
 
   // Run on both initial load and after Astro page transitions
   document.addEventListener('astro:page-load', initializeFunctionality);
-
-  // Add this new function
-  function setDocHeight() {
-    document.documentElement.style.setProperty('--doc-height', `${window.innerHeight}px`);
-  }
-
-  // Add these event listeners
-  window.addEventListener('resize', setDocHeight);
-  window.addEventListener('orientationchange', setDocHeight);
-
-  // Call the function initially
-  setDocHeight();
 </script>

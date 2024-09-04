@@ -57,7 +57,6 @@
 :root {
   /* ... existing custom properties ... */
   --scale-factor: 1; /* Adjust this value to scale up or down */
-  --doc-height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -367,11 +366,6 @@ body {
   max-width: 100%;
   margin: 0 auto;
   padding: 1rem;
-  flex-grow: 1;
-  padding: 1rem;
-  padding-bottom: 4rem; /* Add extra padding at the bottom */
-  min-height: auto;
-  overflow-y: visible;
 }
 
 @media (min-width: 640px) {
@@ -393,19 +387,7 @@ body {
     min-height: auto;
     overflow-y: visible;
   }
-  html, body {
-    height: 100%;
-    height: var(--doc-height);
-    overflow-y: auto;
-  }
   
-  #site-wrapper {
-    min-height: 100%;
-    min-height: var(--doc-height);
-    display: flex;
-    flex-direction: column;
-  }
-
   .flex-col.md\:flex-row {
     gap: 2rem;
   }
