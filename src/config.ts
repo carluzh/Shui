@@ -1,4 +1,4 @@
-export const SITE_TITLE = "Railly Hugo";
+export const SITE_TITLE = "Shui";
 export const SITE_DESCRIPTION =
-  "Software Engineer. Building developer tools and open source projects";
-export const SITE_AUTHOR = "Railly Hugo";
+  "Independent Researcher. Crypto Enthusiast. Student.";
+export const SITE_AUTHOR = "Shui Tangs";

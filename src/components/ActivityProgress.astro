@@ -176,7 +176,15 @@ const uncompletedbgColor = 'rgb(25, 23, 22)';
                         <div style={`width: 5px; height: 5px; background-color: ${greyDotColor}; border-radius: 0.1rem;`}></div>
                       )}
                     </div>
-                    <span style="font-size: 0.75rem; color: hsl(var(--muted-foreground));">{item.text}</span>
+                      <span style="font-size: 0.75rem; color: hsl(var(--muted-foreground));">
+                      {item.link ? (
+                        <a href={item.link} target="_blank" rel="noopener noreferrer" class="hover:underline">
+                          {item.text}
+                        </a>
+                      ) : (
+                        item.text
+                      )}
+                    </span>
                   </div>
                 ))}
               </div>

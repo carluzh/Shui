@@ -3,7 +3,7 @@ import { LearningInPublic } from './LearningInPublic.jsx';
 ---
 
 <section class="mt-8">
-  <h2 class="text-base !font-medium mt-0">Learning in Public<span id="dots"></span></h2>
+  <h2 class="text-base !font-medium mt-0">Learning in Public<span class="dots" style="display: inline-block; width: 1em;"></span></h2>
   <p class="text-muted-foreground text-justify hyphens-auto leading-relaxed pr-4">
     Always Studying. Jumping from one rabbit hole to the next. Crypto fanatic and wannabe researcher.
     This site contains my thoughts and keeps me accountable.
@@ -25,8 +25,18 @@ import { LearningInPublic } from './LearningInPublic.jsx';
 </section>
 
 <style>
-  p {
-    text-align: justify;
+  @keyframes typingDots {
+    20% { content: ''; }
+    40% { content: '.'; }
+    60% { content: '..'; }
+    80%, 100% { content: '...'; }
+  }
+
+  .dots::after {
+    content: '';
+    display: inline-block;
+    animation: typingDots 3s infinite;
+    text-align: left;
   }
 </style>
 

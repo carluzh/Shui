@@ -3,14 +3,18 @@ import MainLayout from "./main-layout.astro";
 import ArticleHeader from "@/components/ArticleHeader.astro";
 import Footer from "@/components/footer.astro";
 
-const { title, description, date, slug, headings, colorClass } = Astro.props;
+const { title, description, date, slug, headings, colorClass, image } = Astro.props;
+
+// If image is not provided, fallback to a default OG image path
+const ogImage = image || `/images/Adam.png`;
+
 ---
 
 <MainLayout
   title={title}
   description={description}
   author="Shui"
-  image={"/" + slug + "/og.png"}
+  image={ogImage}
   headings={headings}
   baseUrl={import.meta.env.BASE_URL}
 >

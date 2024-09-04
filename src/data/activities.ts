@@ -60,39 +60,92 @@ export const ACTIVITIES = [
   {
     title: "Aerodrome Article",
     description: "Diving into ve(3,3), metrics and profitability",
-    colorClass: "rgb(176, 20, 0)",
+    colorClass: "rgb(31, 94, 255)",
     type: "article",
     todos: [
       {
         title: "Initial Research",
-        percentage: 100,
+        percentage: 10,
         items: [
-          { text: "Research", done: 1 },
-          { text: "Outline", done: 0 },
-          { text: "First Draft", done: 0 },
-          { text: "Revisions", done: 0 },
-          { text: "Publish", done: 0 }
+          { text: "Idea and General Knowledge", done: 1 },
+          { text: "Finding Articles, Content, etc.", done: 0 },
+          { text: "Taking Notes", done: 0 },
+          { text: "Contact relevant people", done: 0 }
         ]
       },
       {
-        title: "Rust for Beginners",
-        percentage: 20,
+        title: "Narrative & Approach",
+        percentage: 0,
         items: [
-          { text: "Outline", done: 0 },
-          { text: "Introduction", done: 0 },
-          { text: "Basic Syntax", done: 0 },
-          { text: "Memory Management", done: 0 },
-          { text: "Concurrency", done: 0 }
+          { text: "TBD", done: 0 }
         ]
       }
     ]
+  },
+  {
+    title: "Website",
+    description: "Creating a personal site with Cursor",
+    colorClass: "rgb(192, 255, 102)",
+    type: "skill",
+    todos: [
+      {
+        title: "Layout and Learning Curve",
+        percentage: 100,
+        items: [
+          { text: "Inspired by Railly Hugo", done: 1, link: "https://x.com/RaillyHugo" },
+          { text: "Fork Layout", done: 1 },
+          { text: "Cursor Setup", done: 1 },
+          { text: "Research Astro + basic Web Dev", done: 1 },
+        ]
+      },
+      {
+        title: "Implement Github-style activity tracker",
+        percentage: 100,
+        items: [
+          { text: "Create 3 week lookback Calendar", done: 1},
+          { text: "Simple, Low overhead Tracking Method", done: 1 },
+          { text: "Expanded View inspired by Github", done: 1 },
+          { text: "Streak + UI Improvements", done: 1 },
+        ]
+      },
+      {
+        title: "Article Layout",
+        percentage: 75,
+        items: [
+          { text: "Quotations", done: 1 },
+          { text: "Comments + Highlighted Text + Misc", done: 1 },
+          { text: "Footer", done: 1 },
+          { text: "Improve readability", done: 0 },
+        ]
+      },
+      {
+        title: "Current Projects",
+        percentage: 100,
+        items: [
+          { text: "Find ideal structure", done: 1,},
+          { text: "Implement colorClass and iconClass", done: 1 },
+          { text: "Content Navigation + Progress Bars", done: 1 },
+        ]
+      },      {
+        title: "Finalize and Publish",
+        percentage: 60,
+        items: [
+          { text: "Settle on Color Scheme", done: 1,},
+          { text: "Add Animations + Eastereggs", done: 1 },
+          { text: "Add relevant Articles/Threads", done: 1 },
+          { text: "Mobile Support", done: 0 },
+          { text: "Twitter Thread", done: 0 },
+        ]
+      },
+    ]
   }
+
 
 /*
 {
   title: "Research",
   description: "Exploring new technologies and concepts",
-  colorClass: "rgb(88, 255, 51)",
+  colorClass: "rgb(105, 73, 242)",
   type: "research", // Added type
   todos: [
     {
