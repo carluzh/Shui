@@ -12,7 +12,7 @@ const uncompletedbgColor = 'rgb(25, 23, 22)';
     <p>No activities available.</p>
   ) : (
     ACTIVITIES.map((activity) => (
-      <div class="activity-container border bg-muted/30 rounded-md transition-all hover:shadow-md hover:border-primary/50 p-4 group">
+      <div class="activity-container border bg-muted/10 rounded-md transition-all hover:border-primary/50 p-4 group">
         <div class="flex items-center space-x-4">
           <div class={`w-8 h-8 relative group rounded-md calendar-square`} 
                style={`background-color: ${uncompletedbgColor};`}
@@ -204,13 +204,15 @@ const uncompletedbgColor = 'rgb(25, 23, 22)';
 
       const todos = container.querySelectorAll('.activity-details > div');
       todos.forEach(todo => {
-        const items = todo.querySelector('.todo-items');
         todo.addEventListener('click', (e) => {
           e.stopPropagation();
-          const title = todoContainer.querySelector('.todo-title');
-          const items = todoContainer.querySelector('.todo-items');
-          title.classList.toggle('active');
-          items.classList.toggle('hidden');
+          try {
+            const title = todoContainer.querySelector('.todo-title');
+            const items = todoContainer.querySelector('.todo-items');
+            title.classList.toggle('active');
+            items.classList.toggle('hidden');
+          } catch (error) {
+          }
         });
       });
     });
