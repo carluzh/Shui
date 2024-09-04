@@ -320,6 +320,16 @@ body {
   }
 }
 
+.todo-title {
+  color: hsl(var(--muted-foreground));
+  transition: color 0.3s ease;
+}
+
+.todo-title:hover,
+.todo-title.active {
+  color: white;
+}
+
 /* Add this at the end of your file or in an appropriate @layer */
 @layer components {
   .ActivityTracker {
@@ -421,9 +431,7 @@ body {
 }
 
 /* Dark mode specific styles */
-.dark .writing-content blockquote p {
-  color: hsl(var(--foreground) / 0.9);
-}
+
 
 .writing-content h3,
 .writing-content h4 {

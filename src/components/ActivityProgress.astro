@@ -1,0 +1,238 @@
+---
+// Import necessary data and types
+import { ACTIVITIES } from '@/data/activities';
+
+// Define the grey dot color
+const greyDotColor = 'rgb(75, 75, 75)';
+const uncompletedbgColor = 'rgb(25, 23, 22)';
+---
+
+<div class="space-y-4">
+  {ACTIVITIES.length === 0 ? (
+    <p>No activities available.</p>
+  ) : (
+    ACTIVITIES.map((activity) => (
+      <div class="activity-container border bg-muted/30 rounded-md transition-all hover:shadow-md hover:border-primary/50 p-4 group">
+        <div class="flex items-center space-x-4">
+          <div class={`w-8 h-8 relative group rounded-md calendar-square`} 
+               style={`background-color: ${uncompletedbgColor};`}
+          >
+            {/* Default icon (grey) */}
+            {activity.type === "article" && (
+              <svg class="default-icon absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4" 
+                   style={`fill: ${greyDotColor};`}
+                   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 14">
+                <g id="Layer_2" data-name="Layer 2">
+                  <g id="Layer_1-2" data-name="Layer 1">
+                    <path d="M7.5,13a.5.5,0,0,1-.5-.5v-5a.5.5,0,0,1,1,0v5A.5.5,0,0,1,7.5,13Z"/>
+                    <path d="M14.5,13a.5.5,0,0,1-.5-.5v-5a.5.5,0,0,1,1,0v5A.5.5,0,0,1,14.5,13Z"/>
+                    <path d="M11,9l-.14,0L7.36,8A.5.5,0,0,1,7,7.36.52.52,0,0,1,7.36,7l3.5-1a.45.45,0,0,1,.28,0l3.5,1a.5.5,0,0,1,.34.62.52.52,0,0,1-.34.34l-3.5,1ZM9.32,7.5,11,8l1.68-.48L11,7Z"/>
+                    <path d="M11,14l-.14,0-3.5-1a.5.5,0,0,1,.28-1L11,13l3.36-1a.5.5,0,1,1,.28,1h0l-3.5,1Z"/>
+                    <path d="M11,14a.5.5,0,0,1-.5-.5v-5a.5.5,0,0,1,1,0v5A.5.5,0,0,1,11,14Z"/>
+                    <path d="M.5,13a.5.5,0,0,1-.5-.5v-5A.5.5,0,0,1,.5,7a.5.5,0,0,1,.5.5v5A.5.5,0,0,1,.5,13Z"/>
+                    <path d="M7.5,13a.5.5,0,0,1-.5-.5v-5a.5.5,0,0,1,1,0v5A.5.5,0,0,1,7.5,13Z"/>
+                    <path d="M4,9,3.86,9,.36,8A.5.5,0,0,1,0,7.36.52.52,0,0,1,.36,7l3.5-1a.45.45,0,0,1,.28,0l3.5,1A.5.5,0,0,1,8,7.64.52.52,0,0,1,7.64,8L4.14,9ZM2.32,7.5,4,8,5.68,7.5,4,7Z"/>
+                    <path d="M4,14l-.14,0L.36,13a.5.5,0,0,1,.28-1L4,13l3.36-1a.5.5,0,1,1,.28,1h0l-3.5,1Z"/>
+                    <path d="M4,14a.5.5,0,0,1-.5-.5v-5a.5.5,0,0,1,1,0v5A.5.5,0,0,1,4,14Z"/>
+                    <path d="M4,7a.5.5,0,0,1-.5-.5v-5a.5.5,0,0,1,1,0v5A.5.5,0,0,1,4,7Z"/>
+                    <path d="M11,7a.5.5,0,0,1-.5-.5v-5a.5.5,0,0,1,1,0v5A.5.5,0,0,1,11,7Z"/>
+                    <path d="M7.5,3,7.36,3,3.86,2a.5.5,0,0,1-.34-.62A.52.52,0,0,1,3.86,1l3.5-1a.45.45,0,0,1,.28,0l3.5,1a.5.5,0,0,1,.34.62.52.52,0,0,1-.34.34L7.64,3ZM5.82,1.5,7.5,2,9.18,1.5,7.5,1Z"/>
+                    <path d="M7.5,8A.5.5,0,0,1,7,7.5v-5a.5.5,0,0,1,1,0v5A.5.5,0,0,1,7.5,8Z"/>
+                  </g>
+                </g>
+              </svg>
+            )}
+            {activity.type === "research" && (
+              <svg class="default-icon absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4" 
+                   style={`fill: ${greyDotColor};`}
+                   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.01 16.01">
+                <g id="Layer_2" data-name="Layer 2">
+                  <g id="Layer_1-2" data-name="Layer 1">
+                    <path d="M11.5,16H.5a.5.5,0,0,1-.5-.5v-11A.5.5,0,0,1,.5,4h11a.5.5,0,0,1,.5.5v11A.5.5,0,0,1,11.5,16ZM1,15H11V5H1Z"/>
+                    <path d="M15.5,12H4.5a.5.5,0,0,1-.5-.5V.51A.5.5,0,0,1,4.5,0h11a.5.5,0,0,1,.5.5v11A.5.5,0,0,1,15.5,12ZM5,11H15V1H5Z"/>
+                    <path d="M11.5,16a.5.5,0,0,1-.5-.5.49.49,0,0,1,.15-.36l4-4a.5.5,0,0,1,.7.71l-4,4A.51.51,0,0,1,11.5,16Z"/>
+                    <path d="M.5,16a.5.5,0,0,1-.5-.5.49.49,0,0,1,.15-.36l4-4a.5.5,0,0,1,.7.71l-4,4A.51.51,0,0,1,.5,16Z"/>
+                    <path d="M.5,5a.5.5,0,0,1-.5-.5.49.49,0,0,1,.15-.36l4-4a.5.5,0,0,1,.7.71l-4,4A.51.51,0,0,1,.5,5Z"/>
+                    <path d="M11.5,5a.5.5,0,0,1-.5-.5.49.49,0,0,1,.15-.36l4-4a.49.49,0,0,1,.7,0,.5.5,0,0,1,0,.71h0l-4,4A.51.51,0,0,1,11.5,5Z"/>
+                  </g>
+                </g>
+              </svg>
+            )}
+            {activity.type === "skill" && (
+              <svg class="default-icon absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4" 
+                   style={`fill: ${greyDotColor};`}
+                   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.01 16">
+                <g id="Layer_2" data-name="Layer 2">
+                  <g id="Layer_1-2" data-name="Layer 1">
+                    <path d="M11.5,16h-7A.54.54,0,0,1,4.28,16l-4-2a.5.5,0,1,1,.44-.9L4.62,15h6.76l3.9-1.95a.5.5,0,1,1,.44.9h0l-4,2A.51.51,0,0,1,11.5,16Z"/>
+                    <path d="M15.5,14a.54.54,0,0,1-.22-.05l-.45-.23a.49.49,0,0,1-.22-.67.5.5,0,0,1,.67-.22h0l.44.22a.51.51,0,0,1,.23.67A.5.5,0,0,1,15.5,14Z"/>
+                    <path d="M2.86,12.82a.5.5,0,0,1-.5-.5.48.48,0,0,1,.27-.44l1-.48a.49.49,0,0,1,.67.22.5.5,0,0,1-.23.67l-1,.48A.44.44,0,0,1,2.86,12.82Zm10.28,0a.59.59,0,0,1-.22-.05l-1-.48a.5.5,0,0,1-.22-.67.49.49,0,0,1,.67-.22l1,.47a.52.52,0,0,1,.22.68.51.51,0,0,1-.45.27Zm-3-.82H9.07a.5.5,0,0,1,0-1h1.06a.5.5,0,1,1,0,1Zm-3.2,0H5.87a.5.5,0,0,1,0-1H6.93a.5.5,0,0,1,0,1Z"/>
+                    <path d="M.5,14a.5.5,0,0,1-.5-.5.51.51,0,0,1,.28-.45l.44-.22a.5.5,0,0,1,.48.88h0L.72,14A.54.54,0,0,1,.5,14Z"/>
+                    <path d="M.5,14a.5.5,0,0,1-.5-.5.45.45,0,0,1,.07-.25l7.5-13A.52.52,0,0,1,8.29.11a.47.47,0,0,1,.14.14l7.5,13a.5.5,0,1,1-.84.54l0,0L8,1.5.93,13.75A.48.48,0,0,1,.5,14Z"/>
+                    <path d="M4.5,16a.5.5,0,0,1-.5-.5s0-.08,0-.11l3.5-15A.52.52,0,0,1,8.12,0a.51.51,0,0,1,.37.6h0L5,15.61A.5.5,0,0,1,4.5,16Z"/>
+                    <path d="M11.5,16a.51.51,0,0,1-.49-.39L7.51.61A.51.51,0,0,1,7.89,0a.5.5,0,0,1,.6.38l3.5,15a.5.5,0,0,1-.38.6Z"/>
+                  </g>
+                </g>
+              </svg>
+            )}
+            
+            {/* Colored icon for hover and active state */}
+            {activity.type === "article" && (
+              <svg class="colored-icon absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
+                   style={`fill: ${activity.colorClass};`}
+                   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 14">
+                <g id="Layer_2" data-name="Layer 2">
+                  <g id="Layer_1-2" data-name="Layer 1">
+                    <path d="M7.5,13a.5.5,0,0,1-.5-.5v-5a.5.5,0,0,1,1,0v5A.5.5,0,0,1,7.5,13Z"/>
+                    <path d="M14.5,13a.5.5,0,0,1-.5-.5v-5a.5.5,0,0,1,1,0v5A.5.5,0,0,1,14.5,13Z"/>
+                    <path d="M11,9l-.14,0L7.36,8A.5.5,0,0,1,7,7.36.52.52,0,0,1,7.36,7l3.5-1a.45.45,0,0,1,.28,0l3.5,1a.5.5,0,0,1,.34.62.52.52,0,0,1-.34.34l-3.5,1ZM9.32,7.5,11,8l1.68-.48L11,7Z"/>
+                    <path d="M11,14l-.14,0-3.5-1a.5.5,0,0,1,.28-1L11,13l3.36-1a.5.5,0,1,1,.28,1h0l-3.5,1Z"/>
+                    <path d="M11,14a.5.5,0,0,1-.5-.5v-5a.5.5,0,0,1,1,0v5A.5.5,0,0,1,11,14Z"/>
+                    <path d="M.5,13a.5.5,0,0,1-.5-.5v-5A.5.5,0,0,1,.5,7a.5.5,0,0,1,.5.5v5A.5.5,0,0,1,.5,13Z"/>
+                    <path d="M7.5,13a.5.5,0,0,1-.5-.5v-5a.5.5,0,0,1,1,0v5A.5.5,0,0,1,7.5,13Z"/>
+                    <path d="M4,9,3.86,9,.36,8A.5.5,0,0,1,0,7.36.52.52,0,0,1,.36,7l3.5-1a.45.45,0,0,1,.28,0l3.5,1A.5.5,0,0,1,8,7.64.52.52,0,0,1,7.64,8L4.14,9ZM2.32,7.5,4,8,5.68,7.5,4,7Z"/>
+                    <path d="M4,14l-.14,0L.36,13a.5.5,0,0,1,.28-1L4,13l3.36-1a.5.5,0,1,1,.28,1h0l-3.5,1Z"/>
+                    <path d="M4,14a.5.5,0,0,1-.5-.5v-5a.5.5,0,0,1,1,0v5A.5.5,0,0,1,4,14Z"/>
+                    <path d="M4,7a.5.5,0,0,1-.5-.5v-5a.5.5,0,0,1,1,0v5A.5.5,0,0,1,4,7Z"/>
+                    <path d="M11,7a.5.5,0,0,1-.5-.5v-5a.5.5,0,0,1,1,0v5A.5.5,0,0,1,11,7Z"/>
+                    <path d="M7.5,3,7.36,3,3.86,2a.5.5,0,0,1-.34-.62A.52.52,0,0,1,3.86,1l3.5-1a.45.45,0,0,1,.28,0l3.5,1a.5.5,0,0,1,.34.62.52.52,0,0,1-.34.34L7.64,3ZM5.82,1.5,7.5,2,9.18,1.5,7.5,1Z"/>
+                    <path d="M7.5,8A.5.5,0,0,1,7,7.5v-5a.5.5,0,0,1,1,0v5A.5.5,0,0,1,7.5,8Z"/>
+                  </g>
+                </g>
+              </svg>
+            )}
+            {activity.type === "research" && (
+              <svg class="colored-icon absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
+                   style={`fill: ${activity.colorClass};`}
+                   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.01 16.01">
+                <g id="Layer_2" data-name="Layer 2">
+                  <g id="Layer_1-2" data-name="Layer 1">
+                    <path d="M11.5,16H.5a.5.5,0,0,1-.5-.5v-11A.5.5,0,0,1,.5,4h11a.5.5,0,0,1,.5.5v11A.5.5,0,0,1,11.5,16ZM1,15H11V5H1Z"/>
+                    <path d="M15.5,12H4.5a.5.5,0,0,1-.5-.5V.51A.5.5,0,0,1,4.5,0h11a.5.5,0,0,1,.5.5v11A.5.5,0,0,1,15.5,12ZM5,11H15V1H5Z"/>
+                    <path d="M11.5,16a.5.5,0,0,1-.5-.5.49.49,0,0,1,.15-.36l4-4a.5.5,0,0,1,.7.71l-4,4A.51.51,0,0,1,11.5,16Z"/>
+                    <path d="M.5,16a.5.5,0,0,1-.5-.5.49.49,0,0,1,.15-.36l4-4a.5.5,0,0,1,.7.71l-4,4A.51.51,0,0,1,.5,16Z"/>
+                    <path d="M.5,5a.5.5,0,0,1-.5-.5.49.49,0,0,1,.15-.36l4-4a.5.5,0,0,1,.7.71l-4,4A.51.51,0,0,1,.5,5Z"/>
+                    <path d="M11.5,5a.5.5,0,0,1-.5-.5.49.49,0,0,1,.15-.36l4-4a.49.49,0,0,1,.7,0,.5.5,0,0,1,0,.71h0l-4,4A.51.51,0,0,1,11.5,5Z"/>
+                  </g>
+                </g>
+              </svg>
+            )}
+            {activity.type === "skill" && (
+              <svg class="colored-icon absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
+                   style={`fill: ${activity.colorClass};`}
+                   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.01 16">
+                <g id="Layer_2" data-name="Layer 2">
+                  <g id="Layer_1-2" data-name="Layer 1">
+                    <path d="M11.5,16h-7A.54.54,0,0,1,4.28,16l-4-2a.5.5,0,1,1,.44-.9L4.62,15h6.76l3.9-1.95a.5.5,0,1,1,.44.9h0l-4,2A.51.51,0,0,1,11.5,16Z"/>
+                    <path d="M15.5,14a.54.54,0,0,1-.22-.05l-.45-.23a.49.49,0,0,1-.22-.67.5.5,0,0,1,.67-.22h0l.44.22a.51.51,0,0,1,.23.67A.5.5,0,0,1,15.5,14Z"/>
+                    <path d="M2.86,12.82a.5.5,0,0,1-.5-.5.48.48,0,0,1,.27-.44l1-.48a.49.49,0,0,1,.67.22.5.5,0,0,1-.23.67l-1,.48A.44.44,0,0,1,2.86,12.82Zm10.28,0a.59.59,0,0,1-.22-.05l-1-.48a.5.5,0,0,1-.22-.67.49.49,0,0,1,.67-.22l1,.47a.52.52,0,0,1,.22.68.51.51,0,0,1-.45.27Zm-3-.82H9.07a.5.5,0,0,1,0-1h1.06a.5.5,0,1,1,0,1Zm-3.2,0H5.87a.5.5,0,0,1,0-1H6.93a.5.5,0,0,1,0,1Z"/>
+                    <path d="M.5,14a.5.5,0,0,1-.5-.5.51.51,0,0,1,.28-.45l.44-.22a.5.5,0,0,1,.48.88h0L.72,14A.54.54,0,0,1,.5,14Z"/>
+                    <path d="M.5,14a.5.5,0,0,1-.5-.5.45.45,0,0,1,.07-.25l7.5-13A.52.52,0,0,1,8.29.11a.47.47,0,0,1,.14.14l7.5,13a.5.5,0,1,1-.84.54l0,0L8,1.5.93,13.75A.48.48,0,0,1,.5,14Z"/>
+                    <path d="M4.5,16a.5.5,0,0,1-.5-.5s0-.08,0-.11l3.5-15A.52.52,0,0,1,8.12,0a.51.51,0,0,1,.37.6h0L5,15.61A.5.5,0,0,1,4.5,16Z"/>
+                    <path d="M11.5,16a.51.51,0,0,1-.49-.39L7.51.61A.51.51,0,0,1,7.89,0a.5.5,0,0,1,.6.38l3.5,15a.5.5,0,0,1-.38.6Z"/>
+                  </g>
+                </g>
+              </svg>
+            )}
+          </div>
+          <div>
+            <h3 class="text-sm text-white">{activity.title}</h3>
+            <p class="text-sm text-muted-foreground">{activity.description}</p>
+          </div>
+        </div>
+        <div class="mt-4 space-y-2 hidden activity-details">
+          {activity.todos.map((todo) => (
+            <div class="todo-container">
+              <div class="flex items-center justify-between" onclick="this.querySelector('.todo-title').classList.toggle('active'); this.nextElementSibling.classList.toggle('hidden');">
+                <span class="text-sm font-medium todo-title cursor-pointer">
+                  {todo.title}
+                </span>
+                <div class="w-24 h-2.5 rounded-full relative">
+                  {todo.percentage === 100 ? (
+                    <div class="absolute right-0 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center">
+                      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 6L9 17L4 12" stroke={activity.colorClass} stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
+                  ) : (
+                    <div class="h-2.5 rounded-full" style={`background-color: ${uncompletedbgColor};`}>
+                      <div class="h-2.5 rounded-full" 
+                           style={`width: ${todo.percentage}%; background-color: ${activity.colorClass};`}
+                      ></div>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div class="pl-6 mt-2 space-y-1 hidden todo-items">
+                {todo.items.map((item) => (
+                  <div class="flex items-center space-x-2 relative">
+                    <div style={`width: 12px; height: 12px; position: absolute; left: -10px; display: flex; justify-content: center; align-items: center;`}>
+                      {item.done ? (
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill={activity.colorClass} width="12px" height="12px">
+                          <path d="M0 0h24v24H0z" fill="none"/>
+                          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                        </svg>
+                      ) : (
+                        <div style={`width: 5px; height: 5px; background-color: ${greyDotColor}; border-radius: 0.1rem;`}></div>
+                      )}
+                    </div>
+                    <span style="font-size: 0.75rem; color: hsl(var(--muted-foreground));">{item.text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))
+  )}
+</div>
+
+<script>
+  function initializeActivityProgress() {
+    const containers = document.querySelectorAll('.activity-container');
+    containers.forEach(container => {
+      const details = container.querySelector('.activity-details');
+      const coloredIcon = container.querySelector('.colored-icon');
+      const defaultIcon = container.querySelector('.default-icon');
+      
+      container.addEventListener('click', () => {
+        details.classList.toggle('hidden');
+        coloredIcon.classList.toggle('active');
+        defaultIcon.classList.toggle('hidden');
+      });
+
+      const todos = container.querySelectorAll('.activity-details > div');
+      todos.forEach(todo => {
+        const items = todo.querySelector('.todo-items');
+        todo.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const title = todoContainer.querySelector('.todo-title');
+          const items = todoContainer.querySelector('.todo-items');
+          title.classList.toggle('active');
+          items.classList.toggle('hidden');
+        });
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initializeActivityProgress);
+</script>
+
+<style>
+  .activity-container {
+    cursor: pointer;
+  }
+  .calendar-square {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.25rem;
+    position: relative;
+  }
+  .colored-icon.active {
+    opacity: 1;
+  }
+  .default-icon.hidden {
+    display: none;
+  }
+</style>

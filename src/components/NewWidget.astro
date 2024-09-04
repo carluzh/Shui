@@ -35,7 +35,7 @@ import MonthlyCalendar from './MonthlyCalendar.astro';
   }
 
   .view-toggle.active {
-    font-weight: 500;
+    font-weight: 400;
     text-decoration: underline;
   }
 
@@ -62,7 +62,7 @@ import MonthlyCalendar from './MonthlyCalendar.astro';
         } else {
           weeklyView.classList.add('hidden');
           monthlyView.classList.remove('hidden');
-          expandToggle.textContent = 'Collapse';
+          expandToggle.textContent = 'Expand';
           expandToggle.classList.add('active');
         }
       }
