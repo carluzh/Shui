@@ -381,24 +381,31 @@ body {
 }
 
 @media (max-width: 767px) {
-  .main-container {
-    padding: 1rem;
-    padding-bottom: 4rem; /* Add extra padding at the bottom */
-    min-height: auto;
-    overflow-y: visible;
-  }
-  
-  .flex-col.md\:flex-row {
-    gap: 2rem;
-  }
-
-  body {
+  html, body {
+    height: auto;
+    min-height: 100%;
     overflow-y: auto;
   }
 
-  .main-grid {
+  #site-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main-container {
+    flex-grow: 1;
+    padding: 1rem;
+    padding-bottom: 4rem;
     overflow-y: visible;
+  }
+  
+  .main-grid {
     height: auto;
+  }
+
+  .flex-col.md\:flex-row {
+    gap: 2rem;
   }
 }
 

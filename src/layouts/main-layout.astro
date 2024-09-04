@@ -35,9 +35,9 @@ const {
     />
   </head>
   <body>
-    <div id="site-wrapper">
-      <main class="main-container">
-        <div class="main-grid">
+    <div id="site-wrapper" class="min-h-screen flex flex-col">
+      <main class="main-container flex-grow">
+        <div class="main-grid h-full">
           {backTitle && backUrl && <GoBack title={backTitle} to={backUrl} />}
           <slot />
         </div>
