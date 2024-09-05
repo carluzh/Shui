@@ -1,47 +1,38 @@
 ---
 title: "Hyperliquid - Between Binance and Base"
-excerpt: "A brief description of your new article"
+excerpt: "The Hyperliquid Thesis. No. Cycle."
 date: "2024-08-04"
-image: "/images/Hyperliquid.png"
+image: "/images/Hyperliquid/Hyperliquid.png"
 slug: "Hyperliquid"
 colorClass: "article-green"
 ---
-# Hyperliquid
 
-Parent item: Twitter Threads (https://www.notion.so/Twitter-Threads-fdc8c48ba3d445cdb5a9372ff5ee9127?pvs=21)
-Status: Done
+![Hyperliquid.png](/images/Hyperliquid/Hyperliquid.png)
 
-Hyperliquid - between Binance and Base
+> When you see a 100x, you drop everything to make that a reality. Big things take time to build, but nothing else is worth building.
+> <span class="quote-author">@chameleon_jeff</span>
 
-When you see a 100x, you drop everything to make that a reality. Big things take time to build, but nothing else is worth building.
+How do you explain the feeling you get when you find something new. Something remarkable. Something that goes on to redefine an entire industry. The world. <span class="comment">My Portfolio.</span>
 
-- [@chameleon_jeff](https://x.com/chameleon_jeff)
 
----
-
-How do you explain the feeling you get when you find something new. Something remarkable. Something that goes on to redefine an entire industry. The world. *My portfolio.*
-
-How can I explain what it felt like getting my first phone.
-
-What it felt like using crypto for the first time.
-
+How can I explain what it felt like getting my first phone.<br>
+What it felt like using crypto for the first time.<br>
 Using DeFi. Uniswap. Aave. Yearn. Beefy. FTX. Anchor.
 
 I don’t have to study whitepapers. Learn about the intricacies of Scaling. Blockchain trilemmas. Data Availability. CLOBS vs AMMs. Game Theory. Tokenomics. Interoperability.
 
 To understand innovation.
 
-To understand vibes.
+To understand vibes. <span class="highlight">Hyperliquid.</span>
 
-Hyperliquid.
-
-**The Problem**
-
-Finance will move on-chain. Step by step. One sector after another. 
+### **The Problem**
+<span class="comment">Finance will move on-chain. Step by step. One sector after another.</span>
 
 First there were the cypherpunks. Ideologists. Today; mainly speculators. A couple fundamental investors. Early funds. Next in line are Institutions. First extractive, then additive as they realize the value-unlocks possible through decentralized rails. Finally. At the end. Businesses and Consumers.
 
 Speculation will remain the #1 use case for a long time. Embrace it if you want to make it. Sure, money will flow into rationality periodically. For beta or for worse. In the end, you want to be left holding dollars. Not Gold. And definitely not Shovels.
+
+![Farming.png](/images/Hyperliquid/Farming.png)
 
 Let’s stay with this metaphor for a while. I see the allure behind selling shovels. Not having to head down the trenches mining for gold. Digging through piles of valueless dirt, knee deep in mud and gangue. What many miss however is that the value of the shop selling these shovels, selling infrastructure, is a function of the perceived amount of gold inside the mine.
 
@@ -63,9 +54,9 @@ Unless you start thinking in first principles. Unless you notice that there is a
 
 Misalignment. Centralization.
 
-**DEX > CEX**
+### **DEX > CEX**
 
-I try not to talk in absolutes. This market moves so fast that todays consensus can be tomorrows demise. Remember FTX. Remember Luna, Anchor. I used them all. Doubted them. Sure. Easy to say in hindsight. If nothing happened I’d still be holding. Aware of the risk. *Except maybe FTX. Missing that one was largely luck.*
+I try not to talk in absolutes. This market moves so fast that todays consensus can be tomorrows demise. Remember FTX. Remember Luna, Anchor. I used them all. Doubted them. Sure. Easy to say in hindsight. If nothing happened I’d still be holding. Aware of the risk. <span class="comment">Except maybe FTX. Missing that one was largely luck.</span>
 
 I will say this however. The DEX to CEX ratio is destined to hit 80%. We cannot sell TradFi a decentralized system that can’t even efficiently facilitate itself.
 
@@ -75,7 +66,7 @@ GMX, Gains, dYdX, Jupiter, Vertex
 
 I tried every new perp DEX. Used them for a while. Yet. There was always something missing. I couldn’t even put my finger on it nowadays. The experience lacked… excitement.
 
-I used them towards an end. Throwing them out once the job was done. :)
+I used them towards an end. Throwing them out once the job was done. <span class="highlight">:)</span>
 
 I could go on to dive into the tech here. Say why it makes no sense to go the appchain route. Talk about the issues behind the approaches to attract liquidity. Criticize UX. The lack of AA. Unnecessarily complex incentivization campaigns. Social media strategies. But I don’t believe in that. I believe in vibes. 80/20. Even 90/10.
 
@@ -89,7 +80,7 @@ Today. Almost a year later. After the introduction of points. Of S2. Of spot tok
 
 Even more so.
 
-**Hyperliquid is Dead. Long live Hyperliquid.**
+### **Hyperliquid is Dead. Long live Hyperliquid.**
 
 I’m not some right curve, math wizard TA genius. I’m just a humble researcher that tries to find some edge in studying yields and early protocols. I hold spot for the most part. BTC. ETH. SOL.
 
@@ -109,9 +100,12 @@ No.
 
 They actually steered it. To the benefit of the broader ecosystem.
 
-**Airdrop. Drop-top. Smokin’ on points in the black box.**
+### **Airdrop. Drop-top. Smokin’ on points in the black box.**
 
-*Forgive me for that title.*
+<figure>
+  <img src="/images/Hyperliquid/Migos.png">
+  <figcaption>Forgive me for that title.</figcaption>
+</figure>
 
 Imagine you have a bunch of mid-curve airdrop farmers bidding your newly launched spot market. You throw them some illiquid incentivization and they keep going. You throw that incentivization somewhere else, they pivot.
 
@@ -127,7 +121,7 @@ Hyperliquid’s weekly retroactive points fixes this. Weekly dopamine to farmers
 
 Only thing left to nail now is TGE.
 
-**Grand Finale**
+### **Grand Finale**
 
 There is so much more I like. Communication. Partnerships. Listings. Lack of VCs. That little period between S1 and S2. Vaults. HLP. Community. The way the dashboard defaults to 30D so I’m in the green.
 
@@ -138,6 +132,8 @@ This is one of those protocols were farming will make money but staying up-to-da
 I called this article “between Binance and Base” and yet I haven’t even touched on the idea of Vertical Integration and siphoning normies. I guess this will be for another post. Maybe a part II.
 
 For now. Just look at this chart. BNB after the introduction of BSC. A successful exchange announcing an L1.
+
+![Binance.png](/images/Hyperliquid/Binance.png)
 
 Okay. Enough bull posting for this week.
 

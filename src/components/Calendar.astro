@@ -28,7 +28,7 @@ const activityColors = {
   sports: 'rgb(31, 94, 255)',  // Green
   twitter: 'rgb(31, 94, 255)',  // Blue
   work: 'rgb(31, 94, 255)',  // Red
-  todo: 'rgb(31, 94, 255)'  // Orange
+  growth: 'rgb(31, 94, 255)'  // Orange
 };
 
 // Create a map of all dates in the range with their activities
@@ -39,8 +39,8 @@ const activityMap = new Map(dateRange.map(date => {
     sports: false,
     twitter: false,
     work: false,
-    todo: false,
-    note: 'No activity'
+    growth: false,
+    note: ''
   };
   return [dateString, activity];
 }));
@@ -94,7 +94,7 @@ const activityDataJSON = JSON.stringify(updatedActivityData);
                   <div class="absolute top-0 left-0 w-1 h-1 rounded-full" style={`background-color: ${activity?.sports ? activityColors.sports : greyDotColor};`}></div>
                   <div class="absolute top-0 right-0 w-1 h-1 rounded-full" style={`background-color: ${activity?.twitter ? activityColors.twitter : greyDotColor};`}></div>
                   <div class="absolute bottom-0 left-0 w-1 h-1 rounded-full" style={`background-color: ${activity?.work ? activityColors.work : greyDotColor};`}></div>
-                  <div class="absolute bottom-0 right-0 w-1 h-1 rounded-full" style={`background-color: ${activity?.todo ? activityColors.todo : greyDotColor};`}></div>
+                  <div class="absolute bottom-0 right-0 w-1 h-1 rounded-full" style={`background-color: ${activity?.growth ? activityColors.growth : greyDotColor};`}></div>
                 </div>
               )}
             </div>

@@ -38,18 +38,26 @@ const formatDate = (dateString: string | Date) => {
     <div class="space-y-2">
       <h3 class="text-sm font-semibold">{year}</h3>
       <div class="space-y-4">
-        {groupedArticles[year].map(article => (
-          <div class="flex justify-between items-center">
-            <h4 class="text-sm">
-              {'slug' in article ? (
-                <a href={`${article.slug}`} class="hover:underline">
-                  {article.title}
-                </a>
-              ) : (
-                article.title
-              )}
-            </h4>
-            <div class="text-sm text-muted-foreground">{formatDate(article.date)}</div>
+        {groupedArticles[year].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).map((article, index) => (
+          <div class="flex justify-between items-center relative">
+            {index === 0 && year === sortedYears[0] && (
+              <>
+                <div class="w-1.5 h-1.5 rounded-full mr-2 md:hidden" style="background-color: rgb(31, 94, 255);"></div>
+                <div class="absolute -left-4 top-1/2 transform -translate-y-1/2 w-1.5 h-1.5 rounded-full hidden md:block" style="background-color: rgb(31, 94, 255);"></div>
+              </>
+            )}
+            <div class="flex items-center flex-grow">
+              <h4 class="text-sm">
+                {'slug' in article ? (
+                  <a href={`${article.slug}`} class="hover:underline">
+                    {article.title}
+                  </a>
+                ) : (
+                  article.title
+                )}
+              </h4>
+            </div>
+            <div class="text-sm text-muted-foreground ml-2">{formatDate(article.date)}</div>
           </div>
         ))}
       </div>

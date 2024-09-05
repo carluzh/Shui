@@ -1,7 +1,7 @@
 ---
 title: "StarkWare - Orange and Blue"
-excerpt: "A brief description of your new article"
-date: "2024-01-15"
+excerpt: "Thoughts about StarWare, OP_Cat and Settling on multiple chains"
+date: "2024-08-29"
 image: "/images/Starkware.png"
 slug: "StarkWare"
 colorClass: "article-orange-blue"
