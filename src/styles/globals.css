@@ -75,9 +75,14 @@
 #site-wrapper {
   transform: scale(var(--scale-factor));
   transform-origin: top left;
-  width: calc(100vw / var(--scale-factor));
-  height: calc(100vh / var(--scale-factor));
-  overflow: auto;
+  width: calc(100vw / 1);
+  height: calc(100vh / 1);
+  height: --webkit-fill-available;
+  overflow: scroll;
+}
+
+html {
+  height: --webkit-fill-available;
 }
 
 body {
