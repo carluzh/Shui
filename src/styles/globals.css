@@ -331,6 +331,11 @@ body {
   color: white;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+
 /* Add this at the end of your file or in an appropriate @layer */
 @layer components {
   .ActivityTracker {
