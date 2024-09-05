@@ -110,12 +110,12 @@ export const ACTIVITIES = [
       },
       {
         title: "Article Layout",
-        percentage: 75,
+        percentage: 100,
         items: [
           { text: "Quotations", done: 1 },
           { text: "Comments + Highlighted Text + Misc", done: 1 },
           { text: "Footer", done: 1 },
-          { text: "Improve readability", done: 0 },
+          { text: "Improve readability", done: 1 },
         ]
       },
       {
@@ -133,7 +133,7 @@ export const ACTIVITIES = [
           { text: "Settle on Color Scheme", done: 1,},
           { text: "Add Animations + Eastereggs", done: 1 },
           { text: "Add relevant Articles/Threads", done: 1 },
-          { text: "Mobile Support", done: 0 },
+          { text: "Mobile Support", done: 1 },
           { text: "Twitter Thread", done: 0 },
         ]
       },
