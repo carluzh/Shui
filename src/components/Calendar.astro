@@ -4,10 +4,11 @@ import { ACTIVITY_DATA, getActivityLevel, getActivityForDate, type DayActivity }
 
 const { view = 'weekly' } = Astro.props;
 
-const today = new Date();
-const startDate = startOfWeek(subWeeks(today, 2), { weekStartsOn: 1 });
-const endDate = endOfWeek(today, { weekStartsOn: 1 });
-const dateRange = eachDayOfInterval({ start: startDate, end: endDate });
+// Keep the server-side date calculation for initial render
+const initialToday = new Date();
+const initialStartDate = startOfWeek(subWeeks(initialToday, 2), { weekStartsOn: 1 });
+const initialEndDate = endOfWeek(initialToday, { weekStartsOn: 1 });
+const initialDateRange = eachDayOfInterval({ start: initialStartDate, end: initialEndDate });
 
 const daysOfWeek = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 
@@ -32,7 +33,7 @@ const activityColors = {
 };
 
 // Create a map of all dates in the range with their activities
-const activityMap = new Map(dateRange.map(date => {
+const activityMap = new Map(initialDateRange.map(date => {
   const dateString = format(date, 'yyyy-MM-dd');
   const activity = getActivityForDate(dateString) || {
     date: dateString,
@@ -58,7 +59,7 @@ const activityDataJSON = JSON.stringify(updatedActivityData);
       {daysOfWeek.map(day => (
         <div class="text-center text-xs font-medium text-muted-foreground">{day}</div>
       ))}
-      {dateRange.map(date => {
+      {initialDateRange.map(date => {
         const activity = getActivityForDate(format(date, 'yyyy-MM-dd'));
         const activityLevel = activity ? getActivityLevel(activity) : 0;
         const activityColor = getActivityColor(activityLevel);
@@ -66,8 +67,8 @@ const activityDataJSON = JSON.stringify(updatedActivityData);
           <div
             class={`
               calendar-cell aspect-square rounded-sm relative cursor-pointer
-              ${!isSameMonth(date, today) ? 'opacity-50' : ''}
-              ${isSameDay(date, today) ? 'ring-2 ring-white today' : ''}
+              ${!isSameMonth(date, initialToday) ? 'opacity-50' : ''}
+              ${isSameDay(date, initialToday) ? 'ring-2 ring-white today' : ''}
               ${isFirstDayOfMonth(date) ? 'first-of-month' : ''}
               group
             `}
@@ -89,7 +90,7 @@ const activityDataJSON = JSON.stringify(updatedActivityData);
             </div>
             <div class="icon-container absolute inset-0 flex items-center justify-center hidden z-10"></div>
             <div class="dots-container absolute inset-0 flex items-center justify-center z-10">
-              {!isSameDay(date, today) && !isFirstDayOfMonth(date) && (
+              {!isSameDay(date, initialToday) && !isFirstDayOfMonth(date) && (
                 <div class="w-4 h-4 relative">
                   <div class="absolute top-0 left-0 w-1 h-1 rounded-full" style={`background-color: ${activity?.sports ? activityColors.sports : greyDotColor};`}></div>
                   <div class="absolute top-0 right-0 w-1 h-1 rounded-full" style={`background-color: ${activity?.twitter ? activityColors.twitter : greyDotColor};`}></div>
@@ -232,6 +233,33 @@ const activityDataJSON = JSON.stringify(updatedActivityData);
       calendar.addEventListener('click', handleCalendarClick);
       calendar.addEventListener('mouseleave', resetAllCells);
     }
+
+    // Add this function to update dates
+    function updateDates() {
+      const today = new Date();
+      const startDate = startOfWeek(subWeeks(today, 2), { weekStartsOn: 1 });
+      const endDate = endOfWeek(today, { weekStartsOn: 1 });
+      const dateRange = eachDayOfInterval({ start: startDate, end: endDate });
+
+      document.querySelectorAll('.calendar-cell').forEach((cell, index) => {
+        const date = dateRange[index];
+        cell.dataset.date = format(date, 'yyyy-MM-dd');
+        cell.classList.toggle('opacity-50', !isSameMonth(date, today));
+        cell.classList.toggle('ring-2', isSameDay(date, today));
+        cell.classList.toggle('ring-white', isSameDay(date, today));
+        cell.classList.toggle('today', isSameDay(date, today));
+        cell.classList.toggle('first-of-month', isFirstDayOfMonth(date));
+
+        const dateNumber = cell.querySelector('.date-number');
+        if (dateNumber) {
+          dateNumber.textContent = isFirstDayOfMonth(date) ? format(date, 'MMM') : format(date, 'd');
+        }
+      });
+    }
+
+    // Call updateDates initially and set interval
+    updateDates();
+    setInterval(updateDates, 60000); // Update every minute
   }
 
   // Run on both initial load and after Astro page transitions

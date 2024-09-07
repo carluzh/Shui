@@ -24,10 +24,10 @@ const formatDate = (dateString: string | Date) => {
 };
 ---
 
-<section class="space-y-2">
+<section class="space-y-0">
   <div class="space-y-1">
     <h2 class="text-lg font-semibold">Writing</h2>
-    <p class="text-sm text-muted-foreground">Library of Articles, Threads, and other thoughts.</p>
+    <p class="text-sm text-muted-foreground">Curated collection of articles, threads, and insights.</p>
   </div>
   
   <div class="animation-container" id="lottie-container-project-set">
@@ -35,9 +35,9 @@ const formatDate = (dateString: string | Date) => {
   </div>
 
   {sortedYears.map(year => (
-    <div class="space-y-2">
+    <div class="space-y-2 pt-6"> <!-- Added pt-6 for top padding -->
       <h3 class="text-sm font-semibold">{year}</h3>
-      <div class="space-y-4">
+      <div class="space-y-3"> <!-- Changed from space-y-4 to space-y-2 -->
         {groupedArticles[year].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).map((article, index) => (
           <div class="flex justify-between items-center relative">
             {index === 0 && year === sortedYears[0] && (
