@@ -13,10 +13,42 @@ jobs:
         with:
           token: ${{ secrets.PAT }}
       
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      
       - name: Update activity data
         run: |
-          NEW_ENTRY="  { date: '$(date +%Y-%m-%d)', sports: true, twitter: true, work: true, growth: true, note: 'To be updated' },"
-          sed -i "/export const ACTIVITY_DATA: DayActivity\[] = \[/a $NEW_ENTRY" src/data/activityData.ts
+          python - <<EOF
+          import json
+          from datetime import datetime
+
+          file_path = 'src/data/activityData.ts'
+          
+          with open(file_path, 'r') as file:
+              content = file.read()
+          
+          start = content.index('[') + 1
+          end = content.rindex(']')
+          data = json.loads('[' + content[start:end] + ']')
+          
+          new_entry = {
+              "date": datetime.now().strftime('%Y-%m-%d'),
+              "sports": True,
+              "twitter": True,
+              "work": True,
+              "growth": True,
+              "note": "To be updated"
+          }
+          
+          data.insert(0, new_entry)
+          
+          updated_content = content[:start] + json.dumps(data, indent=2)[1:-1] + content[end:]
+          
+          with open(file_path, 'w') as file:
+              file.write(updated_content)
+          EOF
           
       - name: Commit and push changes
         run: |
