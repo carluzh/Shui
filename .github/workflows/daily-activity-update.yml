@@ -1,0 +1,30 @@
+name: Daily Activity Update
+
+on:
+  schedule:
+    - cron: '52 11 * * *'  # Runs at 11:52 UTC daily
+
+jobs:
+  update-activity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Update activity data
+        run: |
+          echo "  {
+            date: '$(date +%Y-%m-%d)',
+            sports: true,
+            twitter: true,
+            work: true,
+            growth: true,
+            note: 'To be updated'
+          }," >> dev/src/data/activityData.ts
+          
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git add dev/src/data/activityData.ts
+          git commit -m "Add activity placeholder for $(date +'%Y-%m-%d')"
+          git push

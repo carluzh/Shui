@@ -2,11 +2,11 @@
 import { format, subMonths, eachDayOfInterval, startOfWeek, endOfWeek, isSameMonth, isSameDay, addDays, startOfMonth, differenceInDays, isFirstDayOfMonth, subDays } from 'date-fns';
 import { ACTIVITY_DATA, getActivityLevel, getActivityForDate } from '@/data/activityData';
 
-const initialToday = new Date();
-const monthlyEndDate = endOfWeek(initialToday, { weekStartsOn: 1 });
+const today = new Date();
+const monthlyEndDate = endOfWeek(today, { weekStartsOn: 1 });
 const monthlyStartDate = startOfWeek(subMonths(monthlyEndDate, 3), { weekStartsOn: 1 });
 const monthlyDateRange = eachDayOfInterval({ start: monthlyStartDate, end: monthlyEndDate });
-const months = Array.from({ length: 3 }, (_, i) => subMonths(initialToday, 2 - i));
+const months = Array.from({ length: 3 }, (_, i) => subMonths(today, 2 - i));
 
 function getActivityColor(activityLevel: number): string {
   const colors = [
@@ -31,7 +31,7 @@ const monthPositions = months.map(getMonthStartColumn);
 
 function calculateStreak(): number {
   let streak = 0;
-  let currentDate = subDays(initialToday, 1); // Start from yesterday
+  let currentDate = subDays(today, 1); // Start from yesterday
 
   while (true) {
     const dateString = format(currentDate, 'yyyy-MM-dd');
@@ -62,7 +62,7 @@ const streakCount = calculateStreak();
           const activityLevel = activity ? getActivityLevel(activity) : 0;
           const backgroundColor = getActivityColor(activityLevel);
           const isFullActivity = activityLevel === 4;
-          const isToday = isSameDay(date, initialToday);  // Change this line
+          const isToday = isSameDay(date, today);
           
           return (
             <div
