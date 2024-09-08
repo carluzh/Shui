@@ -23,14 +23,6 @@ import NewWidget from "@/components/NewWidget.astro";
       </div>
     </div>
 
-    <div class="md:hidden mt-8">
-      <ActivityLog />
-    </div>
-
-    <div class="md:hidden mt-8">
-      <ProjectSet />
-    </div>
-
     <div class="hidden md:block" style="height: 40px;"></div>
 
     <div class="hidden md:grid gap-12 md:grid-cols-2 min-h-full">
@@ -40,6 +32,14 @@ import NewWidget from "@/components/NewWidget.astro";
       <div class="order-1 md:order-2">
         <ActivityLog />
       </div>
+    </div>
+
+    <div class="md:hidden mt-8">
+      <ActivityLog />
+    </div>
+
+    <div class="md:hidden mt-8">
+      <ProjectSet />
     </div>
   </div>
 </MainLayout>

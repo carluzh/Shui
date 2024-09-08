@@ -4,6 +4,9 @@ import { getACTIVITIES } from "@/data/activities";
 const ACTIVITIES = await getACTIVITIES();
 const articles = ACTIVITIES.filter(activity => activity.type === 'article');
 
+// Get the current year
+const currentYear = new Date().getFullYear();
+
 // Group articles by year
 const groupedArticles = articles.reduce((acc, article) => {
   const year = new Date(article.date).getFullYear();
@@ -27,7 +30,7 @@ const formatDate = (dateString: string | Date) => {
 <section class="space-y-0">
   <div class="space-y-1">
     <h2 class="text-lg font-semibold">Writing</h2>
-    <p class="text-sm text-muted-foreground">Curated collection of articles, threads, and insights.</p>
+    <p class="text-sm text-muted-foreground pb-2 md:pb-0">Curated collection of articles, threads, and insights.</p>
   </div>
   
   <div class="animation-container" id="lottie-container-project-set">
@@ -35,9 +38,9 @@ const formatDate = (dateString: string | Date) => {
   </div>
 
   {sortedYears.map(year => (
-    <div class="space-y-2 pt-6"> <!-- Added pt-6 for top padding -->
-      <h3 class="text-sm font-semibold">{year}</h3>
-      <div class="space-y-3"> <!-- Changed from space-y-4 to space-y-2 -->
+    <div class="space-y-1 pt-3">
+      {year !== currentYear && <h3 class="text-sm font-semibold">{year}</h3>}
+      <div class="space-y-3">
         {groupedArticles[year].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).map((article, index) => (
           <div class="flex justify-between items-center relative">
             {index === 0 && year === sortedYears[0] && (
@@ -89,8 +92,5 @@ const formatDate = (dateString: string | Date) => {
     display: flex; /* Use flexbox for horizontal alignment */
     align-items: center; /* Center align items vertically */
     overflow: visible; /* Allow overflow */
-  }
-  .lottie-animation {
-    margin-top: -0.25rem; /* Move the animation up by 5px */
   }
 </style>
