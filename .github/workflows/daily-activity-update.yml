@@ -2,7 +2,7 @@ name: Daily Activity Update
 
 on:
   schedule:
-    - cron: '52 11 * * *'  # Runs at 11:52 UTC daily
+    - cron: '58 11 * * *'  # Runs at 11:52 UTC daily
 
 jobs:
   update-activity:
