@@ -2,7 +2,8 @@ name: Daily Activity Update
 
 on:
   schedule:
-    - cron: '58 11 * * *'  # Runs at 11:52 UTC daily
+    - cron: '02 14 * * *'  # Runs at 11:58 UTC daily
+    workflow_dispatch:  # Allows manual triggering 
 
 jobs:
   update-activity:
