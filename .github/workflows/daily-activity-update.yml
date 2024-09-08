@@ -15,14 +15,7 @@ jobs:
       
       - name: Update activity data
         run: |
-          NEW_ENTRY="  {
-            date: '$(date +%Y-%m-%d)',
-            sports: true,
-            twitter: true,
-            work: true,
-            growth: true,
-            note: 'To be updated'
-          },"
+          NEW_ENTRY="  { date: '$(date +%Y-%m-%d)', sports: true, twitter: true, work: true, growth: true, note: 'To be updated' },"
           sed -i "/export const ACTIVITY_DATA: DayActivity\[] = \[/a $NEW_ENTRY" src/data/activityData.ts
           
       - name: Commit and push changes
