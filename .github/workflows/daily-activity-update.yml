@@ -2,7 +2,7 @@ name: Daily Activity Update
 
 on:
   schedule:
-    - cron: '44 10 * * *'  # Runs at 14:12 UTC daily
+    - cron: '34 10 * * *'  # Runs at 10:34 UTC daily
   workflow_dispatch:  # Allows manual triggering 
 
 jobs:
@@ -15,14 +15,15 @@ jobs:
       
       - name: Update activity data
         run: |
-          echo "  {
+          NEW_ENTRY="  {
             date: '$(date +%Y-%m-%d)',
             sports: true,
             twitter: true,
             work: true,
             growth: true,
             note: 'To be updated'
-          }," >> src/data/activityData.ts
+          },"
+          sed -i "/export const ACTIVITY_DATA: DayActivity\[] = \[/a $NEW_ENTRY" src/data/activityData.ts
           
       - name: Commit and push changes
         run: |
