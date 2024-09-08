@@ -31,20 +31,19 @@ jobs:
           
           start = content.index('[') + 1
           end = content.rindex(']')
-          data = json.loads('[' + content[start:end] + ']')
+          data = content[start:end]
           
-          new_entry = {
-              "date": datetime.now().strftime('%Y-%m-%d'),
-              "sports": True,
-              "twitter": True,
-              "work": True,
-              "growth": True,
-              "note": "To be updated"
-          }
+          new_entry = f"""
+  {{
+    date: '{datetime.now().strftime('%Y-%m-%d')}',
+    sports: true,
+    twitter: true,
+    work: true,
+    growth: true,
+    note: 'To be updated'
+  }},"""
           
-          data.insert(0, new_entry)
-          
-          updated_content = content[:start] + json.dumps(data, indent=2)[1:-1] + content[end:]
+          updated_content = content[:start] + new_entry + data + content[end:]
           
           with open(file_path, 'w') as file:
               file.write(updated_content)
