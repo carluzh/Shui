@@ -1,4 +1,3 @@
-import json
 from datetime import datetime
 
 file_path = 'src/data/activityData.ts'
@@ -6,9 +5,9 @@ file_path = 'src/data/activityData.ts'
 with open(file_path, 'r') as file:
     content = file.read()
 
-start = content.index('[') + 1
-end = content.rindex(']')
-data = content[start:end]
+array_start = content.index('ACTIVITY_DATA: DayActivity[] = [')
+data_start = content.index('[', array_start) + 1
+data_end = content.rindex(']')
 
 new_entry = f"""
   {{
@@ -20,7 +19,12 @@ new_entry = f"""
     note: 'To be updated'
   }},"""
 
-updated_content = content[:start] + new_entry + data + content[end:]
+updated_content = (
+    content[:data_start] +
+    new_entry +
+    content[data_start:data_end] +
+    content[data_end:]
+)
 
 with open(file_path, 'w') as file:
     file.write(updated_content)
