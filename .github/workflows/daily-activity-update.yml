@@ -19,7 +19,7 @@ jobs:
           python-version: '3.x'
       
       - name: Update activity data
-        run: python update_activity.py
+        run: python .github/scripts/update_activity.py
           
       - name: Commit and push changes
         run: |
