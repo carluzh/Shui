@@ -40,4 +40,11 @@ export function getActivityLevel(activity: DayActivity): number {
 
 export function getActivityForDate(date: string): DayActivity | undefined {
   return ACTIVITY_DATA.find(activity => activity.date === date);
-}
+}  {
+  date: '2024-09-08',
+  sports: true,
+  twitter: true,
+  work: true,
+  growth: true,
+  note: 'To be updated'
+},
