@@ -31,6 +31,14 @@ export const ACTIVITY_DATA: DayActivity[] = [
     work: true,
     growth: true,
     note: ''
+  },
+  {
+    date: '2024-09-07',
+    sports: false,
+    twitter: false,
+    work: true,
+    growth: true,
+    note: ''
   }
 ];
 
