@@ -1,0 +1,30 @@
+---
+interface Props {
+  activity: {
+    title: string;
+    date: string;
+    slug?: string;
+  };
+}
+
+const { activity } = Astro.props;
+
+// Format the date to show only month and day
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+};
+---
+
+<div class="flex justify-between items-center">
+  <h4 class="text-sm">
+    {activity.slug ? (
+      <a href={`/writing/${activity.slug}`} class="hover:underline">
+        {activity.title}
+      </a>
+    ) : (
+      activity.title
+    )}
+  </h4>
+  <div class="text-sm text-muted-foreground">{formatDate(activity.date)}</div>
+</div>

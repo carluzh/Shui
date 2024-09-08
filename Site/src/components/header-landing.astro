@@ -1,0 +1,103 @@
+---
+
+---
+
+<section class="flex gap-2 items-center relative">
+  <h1 class="text-lg font-medium m-0">ShuiTangs</h1>
+  <div id="logo-container" class="cursor-pointer relative">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 111.08 109.06"
+      xmlns="http://www.w3.org/2000/svg"
+      class="transition-all duration-300 ease-in-out"
+    >
+      <path
+        d="M75.75,61.83l22.6,22.45A7.46,7.46,0,0,0,111.08,79V34.08a7.47,7.47,0,0,0-12.73-5.3L75.75,51.23A7.47,7.47,0,0,0,75.75,61.83Z"
+      ></path>
+      <path
+        d="M35.34,61.83,12.73,84.28A7.46,7.46,0,0,1,0,79V34.08a7.47,7.47,0,0,1,12.73-5.3L35.34,51.23A7.47,7.47,0,0,1,35.34,61.83Z"
+      ></path>
+      <line
+        class="cls-2" x1="55.54" y1="5" x2="55.54" y2="104.06"
+        stroke-width="13"
+        stroke-linecap="round"></line>
+    </svg>
+    <span id="temp-message" class="absolute left-full ml-2 top-1/2 -translate-y-1/2 text-xs font-normal text-[rgb(31,94,255)] opacity-0 transition-opacity duration-300 whitespace-nowrap pointer-events-none select-none"></span>
+  </div>
+</section>
+<section class="inline-flex gap-2 items-center mt-2 select-none">
+  <h3 class="text-sm md:text-lg !font-medium m-0 text-muted-foreground">
+    Independent Researcher
+  </h3>
+  <p class="m-0">~</p>
+  <h4 class="text-sm md:text-lg !font-medium m-0 text-muted-foreground">
+    <span class="md:hidden">BA in Finance</span>
+    <span class="hidden md:inline">Finance Student</span>
+  </h4>
+</section>
+
+<script>
+  let rotation = 0;
+  let clickCount = 0;
+  const logoContainer = document.getElementById('logo-container');
+  const svg = logoContainer?.querySelector('svg');
+  const tempMessage = document.getElementById('temp-message');
+
+  function showMessage(message: string) {
+    if (tempMessage) {
+      tempMessage.textContent = message;
+      tempMessage.style.opacity = '1';
+      setTimeout(() => {
+        tempMessage.style.opacity = '0';
+      }, 2000);
+    }
+  }
+
+  logoContainer?.addEventListener('click', () => {
+    rotation += 90;
+    clickCount++;
+
+    if (svg) {
+      svg.style.transform = `rotate(${rotation}deg) scale(${rotation % 180 === 90 ? 0.8 : 1})`;
+    }
+
+    switch (clickCount) {
+      case 7:
+        showMessage("Slow down there Buckaroo.");
+        break;
+      case 15:
+        showMessage("Read an article or something.");
+        break;
+      case 25:
+        showMessage("Stop.");
+        break;
+      case 35:
+        showMessage("No seriously. Please stop.");
+        break;
+      case 50:
+        showMessage("STOOOP!!");
+        break;
+      case 55:
+        showMessage("stop.");
+        break;
+      case 60:
+        window.open('https://www.youtube.com/watch?v=tJXGz4N00dA', '_blank');
+        break;
+    }
+  });
+</script>
+
+<style>
+  #logo-container svg {
+    transition: transform 0.3s ease-in-out, fill 0.3s ease-in-out, stroke 0.3s ease-in-out;
+  }
+  #logo-container svg * {
+    fill: currentColor;
+    stroke: currentColor;
+  }
+  #logo-container:hover svg * {
+    fill: rgb(31, 94, 255);
+    stroke: rgb(31, 94, 255);
+  }
+</style>

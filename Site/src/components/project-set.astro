@@ -1,0 +1,96 @@
+---
+import { getACTIVITIES } from "@/data/activities";
+
+const ACTIVITIES = await getACTIVITIES();
+const articles = ACTIVITIES.filter(activity => activity.type === 'article');
+
+// Get the current year
+const currentYear = new Date().getFullYear();
+
+// Group articles by year
+const groupedArticles = articles.reduce((acc, article) => {
+  const year = new Date(article.date).getFullYear();
+  if (!acc[year]) {
+    acc[year] = [];
+  }
+  acc[year].push(article);
+  return acc;
+}, {} as Record<number, typeof articles>);
+
+// Sort years in descending order
+const sortedYears = Object.keys(groupedArticles).map(Number).sort((a, b) => b - a);
+
+// Format the date to show only month and day
+const formatDate = (dateString: string | Date) => {
+  const date = typeof dateString === 'string' ? new Date(dateString) : dateString;
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+};
+---
+
+<section class="space-y-0">
+  <div class="space-y-1">
+    <h2 class="text-lg font-semibold">Writing</h2>
+    <p class="text-sm text-muted-foreground">Curated collection of articles, threads, and insights.</p>
+  </div>
+  
+  <div class="animation-container" id="lottie-container-project-set">
+    <div class="lottie-animation" id="squiggly-line"></div>
+  </div>
+
+  {sortedYears.map(year => (
+    <div class="space-y-1 pt-3">
+      {year !== currentYear && <h3 class="text-sm font-semibold">{year}</h3>}
+      <div class="space-y-3">
+        {groupedArticles[year].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).map((article, index) => (
+          <div class="flex justify-between items-center relative">
+            {index === 0 && year === sortedYears[0] && (
+              <>
+                <div class="w-1.5 h-1.5 rounded-full mr-2 md:hidden" style="background-color: rgb(31, 94, 255);"></div>
+                <div class="absolute -left-4 top-1/2 transform -translate-y-1/2 w-1.5 h-1.5 rounded-full hidden md:block" style="background-color: rgb(31, 94, 255);"></div>
+              </>
+            )}
+            <div class="flex items-center flex-grow">
+              <h4 class="text-sm">
+                {'slug' in article ? (
+                  <a href={`${article.slug}`} class="hover:underline">
+                    {article.title}
+                  </a>
+                ) : (
+                  article.title
+                )}
+              </h4>
+            </div>
+            <div class="text-sm text-muted-foreground ml-2">{formatDate(article.date)}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
+</section>
+
+<script>
+  import lottie from 'lottie-web';
+
+  document.addEventListener('astro:page-load', () => {
+    const squigglyLineContainer = document.getElementById('squiggly-line');
+
+    if (squigglyLineContainer) {
+      // Load the squiggly line animation
+      lottie.loadAnimation({
+        container: squigglyLineContainer,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: '/animations/squiggly-line.json' // Ensure this path points to the new animation
+      });
+    }
+  });
+</script>
+
+<style>
+  .animation-container {
+    display: flex; /* Use flexbox for horizontal alignment */
+    align-items: center; /* Center align items vertically */
+    overflow: visible; /* Allow overflow */
+  }
+</style>

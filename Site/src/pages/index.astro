@@ -1,0 +1,45 @@
+---
+import Header from "@/components/header-landing.astro";
+import CurrentWork from "@/components/CurrentWork.astro";
+import MainLayout from "@/layouts/main-layout.astro";
+import ProjectSet from "@/components/project-set.astro";
+import ActivityLog from "@/components/activity-log.astro";
+import NewWidget from "@/components/NewWidget.astro";
+---
+
+<MainLayout
+  title="New Favorite Site"
+  description="Researcher. Crypto Enthusiast. Student."
+  author="Shui Tangs"
+>
+  <div class="[grid-column:2]">
+    <div class="flex flex-col md:flex-row gap-4">
+      <div class="w-full md:w-3/5 mt-6 md:mt-0">
+        <Header />
+        <CurrentWork />
+      </div>
+      <div class="w-full md:w-2/5 -mt-6 md:mt-0">
+        <NewWidget class="md:pl-4" />
+      </div>
+    </div>
+
+    <div class="hidden md:block" style="height: 40px;"></div>
+
+    <div class="hidden md:grid gap-12 md:grid-cols-2 min-h-full">
+      <div class="order-2 md:order-1 md:sticky md:top-4 mt-4 md:self-start">
+        <ProjectSet />
+      </div>
+      <div class="order-1 md:order-2">
+        <ActivityLog />
+      </div>
+    </div>
+
+    <div class="md:hidden mt-8">
+      <ActivityLog />
+    </div>
+
+    <div class="md:hidden mt-8">
+      <ProjectSet />
+    </div>
+  </div>
+</MainLayout>
