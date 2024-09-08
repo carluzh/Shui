@@ -435,7 +435,9 @@ html {
 .article-white {
   --article-color: #ffffff;
 }
-
+.article-pink {
+  --article-color: #ff64ff;
+}
 /* Add more article color classes as needed */
 
 /* Blockquote styles */
@@ -510,4 +512,48 @@ html {
 
 .writing-content .highlight {
   color: var(--article-color, hsl(var(--primary)));
+}
+
+.tweet-container {
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.tweet {
+  background-color: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tweet:hover {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  border-color: color-mix(in srgb, var(--article-color, hsl(var(--primary))) 80%, transparent);
+}
+
+.tweet-content {
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: normal;
+  color: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.tweet-separator {
+  text-align: center;
+  margin: 24px 0;
+  color: hsl(var(--muted-foreground));
+  font-size: 12px;
+  line-height: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }

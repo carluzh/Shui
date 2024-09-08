@@ -1,6 +1,6 @@
 ---
-title: "Hyperliquid - Between Binance and Base"
-excerpt: "The Hyperliquid Thesis. No. Cycle."
+title: "Between Binance and Base"
+excerpt: "The Hyperliquid Thesis - or rather Cycle."
 date: "2024-08-04"
 image: "/images/Hyperliquid/Hyperliquid.png"
 slug: "Hyperliquid"

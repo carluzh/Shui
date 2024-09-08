@@ -83,6 +83,39 @@ export const ACTIVITIES = [
     ]
   },
   {
+    title: "Starknet Gaming",
+    description: "Testing Influence, Loot, Realms and co",
+    colorClass: "rgb(255, 100, 255)",
+    type: "research",
+    todos: [
+      {
+        title: "Influence",
+        percentage: 40,
+        items: [
+          { text: "Fund Argent Wallet", done: 1 },
+          { text: "Build Miners and Warehouses", done: 1 },
+          { text: "Start simple Production", done: 1 },
+          { text: "Look into Profitability and Late Game", done: 0 },
+          { text: "Understand Vision", done: 0 },
+        ]
+      },
+      {
+        title: "Other Games",
+        percentage: 0,
+        items: [
+          { text: "Decide which ones to test", done: 0 }
+        ]
+      },
+      {
+        title: "Document",
+        percentage: 0,
+        items: [
+          { text: "Jot down learnings, benefits and downsides", done: 0 }
+        ]
+      }
+    ]
+  },
+  {
     title: "Website",
     description: "Creating a personal site with Cursor",
     colorClass: "rgb(192, 255, 102)",
@@ -128,13 +161,13 @@ export const ACTIVITIES = [
         ]
       },      {
         title: "Finalize and Publish",
-        percentage: 60,
+        percentage: 100,
         items: [
           { text: "Settle on Color Scheme", done: 1,},
           { text: "Add Animations + Eastereggs", done: 1 },
           { text: "Add relevant Articles/Threads", done: 1 },
           { text: "Mobile Support", done: 1 },
-          { text: "Twitter Thread", done: 0 },
+          { text: "Twitter Thread", done: 1 },
         ]
       },
     ]

@@ -79,7 +79,7 @@ const activityDataJSON = JSON.stringify(updatedActivityData);
             data-state="0"
           >
             <div class="absolute inset-0 flex items-center justify-center z-10">
-              <span class="date-number text-xs font-bold text-white">
+              <span class="date-number text-xs font-bold">
                 {isFirstDayOfMonth(date) ? (
                   format(date, 'MMM')
                 ) : (
@@ -135,6 +135,16 @@ const activityDataJSON = JSON.stringify(updatedActivityData);
   }
   .calendar-cell.clicked {
     background-color: rgb(25, 23, 22) !important;
+  }
+  .calendar-cell .date-number {
+    color: rgb(200, 200, 200);
+    transition: color 0.2s ease-in-out;
+  }
+  .calendar-cell.first-of-month .date-number {
+    color: rgb(100, 100, 100);
+  }
+  .calendar-cell:hover .date-number {
+    color: white;
   }
 </style>
 
