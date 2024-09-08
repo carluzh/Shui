@@ -2,7 +2,7 @@ name: Daily Activity Update
 
 on:
   schedule:
-    - cron: '34 10 * * *'  # Runs at 14:12 UTC daily
+    - cron: '44 10 * * *'  # Runs at 14:12 UTC daily
   workflow_dispatch:  # Allows manual triggering 
 
 jobs:
@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.PAT }}
       
       - name: Update activity data
         run: |
