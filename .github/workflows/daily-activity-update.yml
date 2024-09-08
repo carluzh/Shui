@@ -2,7 +2,7 @@ name: Daily Activity Update
 
 on:
   schedule:
-    - cron: '27 10 * * *'  # Runs at 14:12 UTC daily
+    - cron: '34 10 * * *'  # Runs at 14:12 UTC daily
   workflow_dispatch:  # Allows manual triggering 
 
 jobs:
@@ -20,12 +20,12 @@ jobs:
             work: true,
             growth: true,
             note: 'To be updated'
-          }," >> dev/src/data/activityData.ts
+          }," >> src/data/activityData.ts
           
       - name: Commit and push changes
         run: |
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
-          git add dev/src/data/activityData.ts
+          git add src/data/activityData.ts
           git commit -m "Add activity placeholder for $(date +'%Y-%m-%d')"
           git push
