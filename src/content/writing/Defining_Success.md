@@ -2,7 +2,7 @@
 title: "Defining Success"
 excerpt: "How do you define success. How do you measure it. Especially in crypto."
 date: "2024-07-10"
-image: "/images/chaos/image.png"
+image: "images/success/title.png"
 slug: "success"
 colorClass: "article-neon-green"
 ---

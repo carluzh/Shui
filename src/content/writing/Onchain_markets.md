@@ -2,7 +2,7 @@
 title: "The Future of Onchain Markets"
 excerpt: "How cross-chain order books create a more efficient and secure on-chain market."
 date: "2023-10-18"
-image: "/images/chaos/image.png"
+image: ""
 slug: "onchain-markets"
 colorClass: "article-pink"
 ---
