@@ -8,7 +8,8 @@ interface Props {
   image?: string;
 }
 
-const { title, description, author, image = "/images/op.png" } = Astro.props;
+const { title, description, author } = Astro.props;
+const image = "/images/op.png"; // Set static image
 ---
 
 <meta charset="utf-8" />
@@ -24,17 +25,14 @@ const { title, description, author, image = "/images/op.png" } = Astro.props;
 <meta property="og:description" content={description} />
 <meta property="og:type" content="website" />
 <meta property="og:url" content={Astro.url} />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
-<meta property="og:type" content="website" />
 <meta property="og:site_name" content={author} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:image" content={new URL(image, Astro.url)} /> <!-- Static image -->
 
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
+<meta property="twitter:image" content={new URL(image, Astro.url)} /> <!-- Static image -->
 
 <ViewTransitions />
 
