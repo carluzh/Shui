@@ -10,6 +10,7 @@ interface Props {
 
 const { title, description, author } = Astro.props;
 const image = "/images/op.png"; // Set static image
+const baseUrl = "https://shuitangs.com"; // Set your custom domain
 ---
 
 <meta charset="utf-8" />
@@ -26,13 +27,13 @@ const image = "/images/op.png"; // Set static image
 <meta property="og:type" content="website" />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:site_name" content={author} />
-<meta property="og:image" content={new URL(image, Astro.url)} /> <!-- Static image -->
+<meta property="og:image" content={`${baseUrl}${image}`} /> <!-- Use custom domain -->
 
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} /> <!-- Static image -->
+<meta property="twitter:image" content={`${baseUrl}${image}`} /> <!-- Use custom domain -->
 
 <ViewTransitions />
 
