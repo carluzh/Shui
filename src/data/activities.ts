@@ -58,6 +58,66 @@ export const LOGIT_ACTIVITIES: LogitActivity[] = [
 
 export const ACTIVITIES = [
   {
+    title: "Daily Threads",
+    description: "Trying to push a thread a day. From the 16th - 22nd.",
+    colorClass: "rgb(192, 255, 102)",
+    type: "skill",
+    todos: [
+      {
+        title: "On Doing the Bit",
+        percentage: 100,
+        items: [
+          { text: "Posted on X", done: 1, link: "https://x.com/ShuiTangs/status/1835606660364091844" },
+          { text: "Title Image", done: 1 },
+          { text: "Writing Done", done: 1 },
+          { text: "Initital Research", done: 1 },
+        ]
+      },
+      {
+        title: "TPS on Starknet",
+        percentage: 0,
+        items: [
+          { text: "To be updated", done: 0 }
+        ]
+      },
+      {
+        title: "The Opposite of a Good Idea",
+        percentage: 0,
+        items: [
+          { text: "To be updated", done: 0 }
+        ]
+      },
+      {
+        title: "Uniswap Profitability",
+        percentage: 0,
+        items: [
+          { text: "To be updated", done: 0 }
+        ]
+      },
+      {
+        title: "Has Crypto gotten safer?",
+        percentage: 0,
+        items: [
+          { text: "To be updated", done: 0 }
+        ]
+      },
+      {
+        title: "Iterating on the Attention Economy",
+        percentage: 0,
+        items: [
+          { text: "To be updated", done: 0 }
+        ]
+      },
+      {
+        title: "Article: Aerodrome",
+        percentage: 0,
+        items: [
+          { text: "To be updated", done: 0 }
+        ]
+      }
+    ]
+  },
+  {
     title: "Aerodrome Article",
     description: "Diving into ve(3,3), metrics and profitability",
     colorClass: "rgb(31, 94, 255)",
@@ -113,63 +173,6 @@ export const ACTIVITIES = [
           { text: "Jot down learnings, benefits and downsides", done: 0 }
         ]
       }
-    ]
-  },
-  {
-    title: "Website",
-    description: "Creating a personal site with Cursor",
-    colorClass: "rgb(192, 255, 102)",
-    type: "skill",
-    todos: [
-      {
-        title: "Layout and Learning Curve",
-        percentage: 100,
-        items: [
-          { text: "Inspired by Railly Hugo", done: 1, link: "https://x.com/RaillyHugo" },
-          { text: "Fork Layout", done: 1 },
-          { text: "Cursor Setup", done: 1 },
-          { text: "Research Astro + basic Web Dev", done: 1 },
-        ]
-      },
-      {
-        title: "Implement Github-style activity tracker",
-        percentage: 100,
-        items: [
-          { text: "Create 3 week lookback Calendar", done: 1},
-          { text: "Simple, Low overhead Tracking Method", done: 1 },
-          { text: "Expanded View inspired by Github", done: 1 },
-          { text: "Streak + UI Improvements", done: 1 },
-        ]
-      },
-      {
-        title: "Article Layout",
-        percentage: 100,
-        items: [
-          { text: "Quotations", done: 1 },
-          { text: "Comments + Highlighted Text + Misc", done: 1 },
-          { text: "Footer", done: 1 },
-          { text: "Improve readability", done: 1 },
-        ]
-      },
-      {
-        title: "Current Projects",
-        percentage: 100,
-        items: [
-          { text: "Find ideal structure", done: 1,},
-          { text: "Implement colorClass and iconClass", done: 1 },
-          { text: "Content Navigation + Progress Bars", done: 1 },
-        ]
-      },      {
-        title: "Finalize and Publish",
-        percentage: 100,
-        items: [
-          { text: "Settle on Color Scheme", done: 1,},
-          { text: "Add Animations + Eastereggs", done: 1 },
-          { text: "Add relevant Articles/Threads", done: 1 },
-          { text: "Mobile Support", done: 1 },
-          { text: "Twitter Thread", done: 1 },
-        ]
-      },
     ]
   }
 
