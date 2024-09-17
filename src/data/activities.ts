@@ -74,14 +74,14 @@ export const ACTIVITIES = [
         ]
       },
       {
-        title: "TPS on Starknet",
+        title: "Fragmentation Quickie",
         percentage: 0,
         items: [
-          { text: "To be updated", done: 0 }
+          { text: "Posted on X", done: 1, link: "https://x.com/ShuiTangs/status/1836013031987233031" }
         ]
       },
       {
-        title: "The Opposite of a Good Idea",
+        title: "What happened to Heroglyphs",
         percentage: 0,
         items: [
           { text: "To be updated", done: 0 }
