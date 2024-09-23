@@ -1,7 +1,7 @@
 ---
 title: "What happened to Heroglyphs?"
 excerpt: "The once hyped protocol attempting to fix Validator Centralization with Degeneracy."
-date: "2024-09-20"
+date: "2024-09-23"
 image: "/images/Heroglyph/Hero.png"
 slug: "heroglyph"
 colorClass: "article-orange-hero"
