@@ -56,7 +56,7 @@
 
 :root {
   /* ... existing custom properties ... */
-  --scale-factor: 1; /* Adjust this value to scale up or down */
+  --scale-factor: ; /* Adjust this value to scale up or down */
   --doc-height: 100%;
 }
 
@@ -422,6 +422,11 @@ html {
 .article-orange-blue {
   --article-color: #FF8C00;
 }
+
+.article-orange-hero {
+  --article-color: rgb(248, 170, 25);
+}
+
 
 .article-green {
   --article-color: #98fce4;

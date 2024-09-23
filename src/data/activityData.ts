@@ -14,39 +14,39 @@ export const ACTIVITY_DATA: DayActivity[] = [
     twitter: true,
     work: true,
     growth: true,
-    note: 'To be updated'
+    note: ''
   },
   {
     date: '2024-09-22',
     sports: true,
-    twitter: true,
-    work: true,
+    twitter: false,
+    work: false,
     growth: true,
-    note: 'To be updated'
+    note: ''
   },
   {
     date: '2024-09-21',
-    sports: true,
-    twitter: true,
-    work: true,
+    sports: false,
+    twitter: false,
+    work: false,
     growth: true,
-    note: 'To be updated'
+    note: ''
   },
   {
     date: '2024-09-20',
-    sports: true,
-    twitter: true,
-    work: true,
+    sports: false,
+    twitter: false,
+    work: false,
     growth: true,
-    note: 'To be updated'
+    note: ''
   },
   {
     date: '2024-09-19',
-    sports: true,
-    twitter: true,
+    sports: false,
+    twitter: false,
     work: true,
     growth: true,
-    note: 'To be updated'
+    note: ''
   },
   {
     date: '2024-09-18',
@@ -54,7 +54,7 @@ export const ACTIVITY_DATA: DayActivity[] = [
     twitter: true,
     work: true,
     growth: true,
-    note: 'To be updated'
+    note: ''
   },
   {
     date: '2024-09-17',
@@ -62,7 +62,7 @@ export const ACTIVITY_DATA: DayActivity[] = [
     twitter: true,
     work: false,
     growth: false,
-    note: 'To be updated'
+    note: ''
   },
   {
     date: '2024-09-16',

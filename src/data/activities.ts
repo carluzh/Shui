@@ -58,6 +58,101 @@ export const LOGIT_ACTIVITIES: LogitActivity[] = [
 
 export const ACTIVITIES = [
   {
+    title: "Aerodrome Article",
+    description: "Diving into ve(3,3), metrics and profitability",
+    colorClass: "rgb(31, 94, 255)",
+    type: "article",
+    todos: [
+      {
+        title: "Initial Research",
+        percentage: 25,
+        items: [
+          { text: "Idea and General Knowledge", done: 1 },
+          { text: "Finding Articles, Content, etc.", done: 1 },
+          { text: "Taking Notes", done: 0 },
+          { text: "Contact relevant people", done: 1 }
+        ]
+      },
+      {
+        title: "Narrative & Approach",
+        percentage: 0,
+        items: [
+          { text: "TBD", done: 0 }
+        ]
+      }
+    ]
+  },
+  {
+    title: "Starknet Gaming",
+    description: "Testing Influence, Loot, Realms and co",
+    colorClass: "rgb(255, 100, 255)",
+    type: "research",
+    todos: [
+      {
+        title: "Influence",
+        percentage: 40,
+        items: [
+          { text: "Fund Argent Wallet", done: 1 },
+          { text: "Build Miners and Warehouses", done: 1 },
+          { text: "Start simple Production", done: 1 },
+          { text: "Look into Profitability and Late Game", done: 0 },
+          { text: "Aborted. Dumb Game Design.", done: 1 },
+        ]
+      },
+      {
+        title: "Loot Survivor",
+        percentage: 80,
+        items: [
+          { text: "Read through Documents", done: 1 },
+          { text: "Start playing off-chain", done: 1 },
+          { text: "Try on-chain, farm Beasts", done: 1 },
+          { text: "Fix Addiction", done: 0 }
+        ]
+      },
+      {
+        title: "Document",
+        percentage: 0,
+        items: [
+          { text: "Jot down learnings, benefits and downsides", done: 0 }
+        ]
+      }
+    ]
+  }
+
+
+/*
+{
+  title: "Research",
+  description: "Exploring new technologies and concepts",
+  colorClass: "rgb(105, 73, 242)",
+  type: "research", // Added type
+  todos: [
+    {
+      title: "Layer 2 Solutions",
+      percentage: 75,
+      items: ["Optimistic Rollups", "ZK Rollups", "Plasma", "State Channels", "Comparative Analysis"]
+    },
+    {
+      title: "Decentralized Identity",
+      percentage: 40,
+      items: ["W3C Standards", "DID Methods", "Verifiable Credentials", "Use Cases", "Implementation Challenges"]
+    }
+  ]
+},
+{
+  title: "Skill Development",
+  description: "Learning new programming languages",
+  colorClass: "rgb(204, 14, 191)",
+  type: "skill", // Added type
+  todos: [
+    {
+      title: "JavaScript",
+      percentage: 50,
+      items: ["Basics", "Advanced Concepts", "Frameworks"]
+    }
+  ]
+}
+  {
     title: "Daily Threads",
     description: "Trying to push a thread a day. From the 16th - 22nd.",
     colorClass: "rgb(192, 255, 102)",
@@ -117,97 +212,5 @@ export const ACTIVITIES = [
       }
     ]
   },
-  {
-    title: "Aerodrome Article",
-    description: "Diving into ve(3,3), metrics and profitability",
-    colorClass: "rgb(31, 94, 255)",
-    type: "article",
-    todos: [
-      {
-        title: "Initial Research",
-        percentage: 10,
-        items: [
-          { text: "Idea and General Knowledge", done: 1 },
-          { text: "Finding Articles, Content, etc.", done: 0 },
-          { text: "Taking Notes", done: 0 },
-          { text: "Contact relevant people", done: 0 }
-        ]
-      },
-      {
-        title: "Narrative & Approach",
-        percentage: 0,
-        items: [
-          { text: "TBD", done: 0 }
-        ]
-      }
-    ]
-  },
-  {
-    title: "Starknet Gaming",
-    description: "Testing Influence, Loot, Realms and co",
-    colorClass: "rgb(255, 100, 255)",
-    type: "research",
-    todos: [
-      {
-        title: "Influence",
-        percentage: 40,
-        items: [
-          { text: "Fund Argent Wallet", done: 1 },
-          { text: "Build Miners and Warehouses", done: 1 },
-          { text: "Start simple Production", done: 1 },
-          { text: "Look into Profitability and Late Game", done: 0 },
-          { text: "Understand Vision", done: 0 },
-        ]
-      },
-      {
-        title: "Other Games",
-        percentage: 0,
-        items: [
-          { text: "Decide which ones to test", done: 0 }
-        ]
-      },
-      {
-        title: "Document",
-        percentage: 0,
-        items: [
-          { text: "Jot down learnings, benefits and downsides", done: 0 }
-        ]
-      }
-    ]
-  }
-
-
-/*
-{
-  title: "Research",
-  description: "Exploring new technologies and concepts",
-  colorClass: "rgb(105, 73, 242)",
-  type: "research", // Added type
-  todos: [
-    {
-      title: "Layer 2 Solutions",
-      percentage: 75,
-      items: ["Optimistic Rollups", "ZK Rollups", "Plasma", "State Channels", "Comparative Analysis"]
-    },
-    {
-      title: "Decentralized Identity",
-      percentage: 40,
-      items: ["W3C Standards", "DID Methods", "Verifiable Credentials", "Use Cases", "Implementation Challenges"]
-    }
-  ]
-},
-{
-  title: "Skill Development",
-  description: "Learning new programming languages",
-  colorClass: "rgb(204, 14, 191)",
-  type: "skill", // Added type
-  todos: [
-    {
-      title: "JavaScript",
-      percentage: 50,
-      items: ["Basics", "Advanced Concepts", "Frameworks"]
-    }
-  ]
-}
 */
 ];
