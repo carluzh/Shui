@@ -14,23 +14,23 @@ export const ACTIVITY_DATA: DayActivity[] = [
     twitter: true,
     work: true,
     growth: true,
-    note: 'To be updated'
+    note: ''
   },
   {
     date: '2024-09-25',
     sports: true,
-    twitter: true,
-    work: true,
+    twitter: false,
+    work: false,
     growth: true,
-    note: 'To be updated'
+    note: 'S'
   },
   {
     date: '2024-09-24',
     sports: true,
     twitter: true,
-    work: true,
+    work: false,
     growth: true,
-    note: 'To be updated'
+    note: ''
   },
   {
     date: '2024-09-23',
