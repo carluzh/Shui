@@ -161,7 +161,7 @@ The idea of 'fair launching' memecoins has been proven by pump.fun and other cop
 </figure>
 
 
-####The Other Stuff
+#### The Other Stuff
 In my opinion, the base-level incentive distribution is flawed which would prevent any flourishing speculative asset from establishing itself. Pushing that opinion to the side, there have also been clear mistakes in terms of execution.
 
 First the simple fact that 95% of Key holders are not Validators. This points at a lack of education and guidance for Degens and ultimately led to the firework blowing up on the ground and with it all hopes of a posterchild asset forming.
