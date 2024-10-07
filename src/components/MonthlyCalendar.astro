@@ -2,7 +2,9 @@
 import { format, subMonths, eachDayOfInterval, startOfWeek, endOfWeek, isSameMonth, isSameDay, addDays, startOfMonth, differenceInDays, isFirstDayOfMonth, subDays } from 'date-fns';
 import { ACTIVITY_DATA, getActivityLevel, getActivityForDate } from '@/data/activityData';
 
-const today = new Date();
+<script>
+  const today = new Date().toISOString().split('T')[0]; // Format: 'YYYY-MM-DD'
+</script>
 const monthlyEndDate = endOfWeek(today, { weekStartsOn: 1 });
 const monthlyStartDate = startOfWeek(subMonths(monthlyEndDate, 3), { weekStartsOn: 1 });
 const monthlyDateRange = eachDayOfInterval({ start: monthlyStartDate, end: monthlyEndDate });
