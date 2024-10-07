@@ -2,15 +2,16 @@
 import { format, subMonths, eachDayOfInterval, startOfWeek, endOfWeek, isSameMonth, isSameDay, addDays, startOfMonth, differenceInDays, isFirstDayOfMonth, subDays } from 'date-fns';
 import { ACTIVITY_DATA, getActivityLevel, getActivityForDate } from '@/data/activityData';
 
-let today; // Declare today without initializing
-
-// Use a function to set today's date on the client side
-function setToday() {
-  today = new Date(); // This will reflect the viewer's local date
-  const monthlyEndDate = endOfWeek(today, { weekStartsOn: 1 });
-  const monthlyStartDate = startOfWeek(subMonths(monthlyEndDate, 3), { weekStartsOn: 1 });
-  const monthlyDateRange = eachDayOfInterval({ start: monthlyStartDate, end: monthlyEndDate });
-  const months = Array.from({ length: 3 }, (_, i) => subMonths(today, 2 - i));
+// Function to get the current date
+function getCurrentDate() {
+  return new Date();
+}
+// Update all references to 'today' with the function call
+const today = getCurrentDate();
+const monthlyEndDate = endOfWeek(today, { weekStartsOn: 1 });
+const monthlyStartDate = startOfWeek(subMonths(monthlyEndDate, 3), { weekStartsOn: 1 });
+const monthlyDateRange = eachDayOfInterval({ start: monthlyStartDate, end: monthlyEndDate });
+const months = Array.from({ length: 3 }, (_, i) => subMonths(today, 2 - i));
 
 function getActivityColor(activityLevel: number): string {
   const colors = [
@@ -22,7 +23,7 @@ function getActivityColor(activityLevel: number): string {
   ];
   return colors[activityLevel];
 }
-document.addEventListener('DOMContentLoaded', setToday);
+
 const weekDays = 7;
 const totalWeeks = 14; // Fixed number of weeks
 
