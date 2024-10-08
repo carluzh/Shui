@@ -123,7 +123,7 @@ export const ACTIVITIES = [
       },
       {
         title: "Publish",
-        percentage: 15,
+        percentage: 20,
         items: [
           { text: "Deliver First Draft to Od1n, Oded, etc.", done: 1 },
           { text: "Deliver Final Article", done: 0 },
