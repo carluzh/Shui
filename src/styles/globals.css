@@ -423,6 +423,10 @@ html {
   --article-color: #FF8C00;
 }
 
+.article-purple {
+  --article-color: #df206d;
+}
+
 .article-orange-hero {
   --article-color: rgb(248, 170, 25);
 }
