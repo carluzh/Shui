@@ -111,26 +111,26 @@ export const ACTIVITIES = [
       },
       {
         title: "Writing",
-        percentage: 60,
+        percentage: 100,
         items: [
           { text: "Create Structure/Outline", done: 1 },
           { text: "Pivot: General Gaming piece, learnings in future articles", done: 1 },
           { text: "Write First Draft", done: 1 },
-          { text: "Implement Feedback", done: 0 },
-          { text: "Polish Article, Add Images", done: 0 },
+          { text: "Implement Feedback", done: 1 },
+          { text: "Polish Article, Add Images", done: 1 },
 
         ]
       },
       {
         title: "Publish",
-        percentage: 20,
+        percentage: 100,
         items: [
           { text: "Deliver First Draft to Od1n, Oded, etc.", done: 1 },
-          { text: "Deliver Final Article", done: 0 },
-          { text: "Create X Article Overview", done: 0 },
-          { text: "Push Article to Site", done: 0 },
-          { text: "Create KOL list", done: 0 },
-          { text: "Publish", done: 0 }
+          { text: "Deliver Final Article", done: 1 },
+          { text: "Create X Article Overview", done: 1 },
+          { text: "Push Article to Site", done: 1 },
+          { text: "Create KOL list", done: 1 },
+          { text: "Publish", done: 1 }
         ]
       }
     ]

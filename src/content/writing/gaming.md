@@ -51,7 +51,7 @@ How? <span class="highlight">*Kevin the Zombie*</span>. The strongest brand brou
 
 <span class="highlight">*Blankos Block Party*.</span> A different story. Starting with a functioning product. Not just an idea. A game that was... surprisingly decent. Fun even. It launched through Epic Games, backed by partnerships with brands like *Burberry*. Things were looking good. Until they noticed that the game they were building was little more than a vehicle for speculation on in-game items. Skins.
 
-So they gave their players what they wanted. They released skins. Multiple a week. <span class="comment">*Great ones. Kudos to the design team.*</span> The focus shifted entirely to monetization. Effort was put into the marketplace. More partnerships for more skins. Visa payments to simplify buying Skins. Skins. Skins.  What about the game? It stagnated. The tiny organic player base withered away. Until Epic Games delisted it. The studio - Mythical Games - has since pivoted to a mobile version and an NFL game. The original vision. Left in the dust.
+So they gave their players what they wanted. They released skins. Multiple a week. <span class="comment">*Great ones. Kudos to the design team.*</span> The focus shifted entirely to monetization. Effort was put into the marketplace. More partnerships for more skins. Visa payments to simplify buying Skins. Skins. Skins.  What about the game? It stagnated. The tiny organic player base withered away. Until Epic Games delisted it. The studio - Mythical Games - has since pivoted to a mobile version and an NFL game. The original vision... left in the dust.
 
 ___
 
@@ -76,14 +76,14 @@ It's a behemoth. About five times bigger than the music industry. **[FIVE](https
 
 So no wonder then that the free-to-play model has been gaining popularity amongst publishers. The incentive model has long shifted from simply getting players to buy a game to increasing customer lifetime value - maximizing the funds spent on cosmetics. Games like *League of Legends* and *CS:GO* have been routinely pushing updates, balancing gameplay and introducing new characters and mechanics to maintain a loyal player base. To maintain customers.
 
-#### Middlefinger to Players
-All of these games are black boxes. Unfortunately. You can put money in - <span class="comment">buy a lootbox, a skin you saved up for, a dance</span> - but you cannot get the items out. That is not an issue if the game continues to exist and receive updates for decades. But that's not the case for the majority. The minute these games lose traction and the player base starts to dwindle, there is a possibility of the plug being pulled. Servers go down. <span class="highlight">Items are lost. Forever.</span>
+#### Middle finger to Players
+All of these games are black boxes. Unfortunately. You can put money in - <span class="comment">buy a lootbox, a skin you saved up for, a dance</span> - but you cannot get the items out. That is not an issue if the game continues to exist and receives updates for decades. But that's not the case for the majority. The minute these games lose traction and the player base starts to dwindle, there is a possibility of the plug being pulled. Servers go down. <span class="highlight">Items are lost. Forever.</span>
 
 <span class="highlight">FIFA/EA FC.</span> Take the biggest soccer game. The most played mode - *Ultimate Team* - is a basic team builder at its core. Open packs. Get players. Build a team. Compete. You can either grind for hours to get a pack or... <span class="comment">*you guessed it*…</span> buy one. FC25 launched recently. Europe went crazy. As every year. Buying pack after pack to get enough coins to buy a good team. Maybe even pack someone useable while you're at it. A genius way to monetize. Randomized. Dancing dangerously close to gambling. Fun to watch.
 
 This wouldn't suck if EA didn't release a new game each year. This wouldn't suck if the players you collected stayed in your inventory. This wouldn't suck if the market worked across versions. This wouldn't suck if there was innovation. But it sucks.... <span class="highlight">real bad.</span>
 
-Each new release requires players to buy the new game for $50-100. Starting all over again. Nothing carried over. Nothing. You lose your entire collection each year. Why would EA change anything. It continues to work. There is little to no serious competition. Year after year they get to sell an almost identical game to a miserable player base with increasing revenue <span class="comment">(see below)</span>.
+Each new release requires players to buy the new game for $50-100. Starting all over again. Nothing carried over. Nothing. You lose your entire collection each year. Why would EA change anything? It continues to work. There is little to no serious competition. Year after year, they get to sell an almost identical game to a miserable player base with increasing revenue <span class="comment">(see below)</span>.
 
 <figure>
   <img src="/images/gaming/Dara.png">
@@ -127,7 +127,7 @@ This is the bull case for Gaming. A promise pitched by NFT projects years ago. A
 **That might be about to change.**
 
 ### Starknet - The fastest Horse
-I don't want to bore you with complex explanations of mechanisms. Spreading knowledge that ultimately won't matter to anyone but a select few. This is why I chose to take a different approach. One less focussed on quantitative data. Stats. <span class="comment">*5,000 TPS don't matter if there is no substance.*</span> So instead of working through documentation and numbers I chose to play. <span class="comment">*What a great job I have.*</span>
+I don't want to bore you with complex explanations of mechanisms. Spreading knowledge that ultimately won't matter to anyone but a select few. This is why I chose to take a different approach. One less focussed on quantitative data. Stats. <span class="comment">*5,000 TPS don't matter if there is no substance.*</span> So instead of working through documentation and numbers, I chose to play. <span class="comment">*What a great job I have.*</span>
 
 Starknet is my chain of choice. This is not meant to discredit the amazing work done across other ecosystems. At the end of the day they are all pushing boundaries towards one common goal. But... ever since my initial research for the [StarkWare - Orange and Blue](https://shuitangs.com/starkware/) article, I've been... hooked. <span class="comment">*Starknet-pilled?*</span>
 
