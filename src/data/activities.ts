@@ -84,53 +84,35 @@ export const ACTIVITIES = [
   },
   {
     title: "Starknet Gaming",
-    description: "Testing Influence, Loot, Realms and co",
+    description: "Article on Influence",
     colorClass: "rgb(255, 100, 255)",
     type: "research",
     todos: [
       {
-        title: "Influence",
+        title: "Playing Influence",
         percentage: 80,
         items: [
           { text: "Fund Argent Wallet", done: 1 },
           { text: "Build Miners and Warehouses", done: 1 },
           { text: "Start simple Production", done: 1 },
           { text: "Look into Profitability and Late Game", done: 0 },
-          { text: "Aborted. Dumb Game Design.", done: 1 },
         ]
       },
       {
-        title: "Loot Survivor",
-        percentage: 100,
+        title: "Initial Research",
+        percentage: 0,
         items: [
-          { text: "Read through Documents", done: 1 },
-          { text: "Start playing off-chain", done: 1 },
-          { text: "Try on-chain, farm Beasts", done: 1 },
-          { text: "Fix Addiction", done: 0 }
+          { text: "Idea and General Knowledge", done: 0 },
+          { text: "Finding Articles, Content, etc.", done: 0 },
+          { text: "Taking Notes", done: 0 },
+          { text: "Contact relevant people", done: 0 }
         ]
       },
       {
-        title: "Writing",
+        title: "Narrative & Approach",
         percentage: 100,
         items: [
-          { text: "Create Structure/Outline", done: 1 },
-          { text: "Pivot: General Gaming piece, learnings in future articles", done: 1 },
-          { text: "Write First Draft", done: 1 },
-          { text: "Implement Feedback", done: 1 },
-          { text: "Polish Article, Add Images", done: 1 },
-
-        ]
-      },
-      {
-        title: "Publish",
-        percentage: 100,
-        items: [
-          { text: "Deliver First Draft to Od1n, Oded, etc.", done: 1 },
-          { text: "Deliver Final Article", done: 1 },
-          { text: "Create X Article Overview", done: 1 },
-          { text: "Push Article to Site", done: 1 },
-          { text: "Create KOL list", done: 1 },
-          { text: "Publish", done: 1 }
+          { text: "TBD", done: 0 },
         ]
       }
     ]
