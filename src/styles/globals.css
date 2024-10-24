@@ -566,3 +566,7 @@ html {
   align-items: center;
   justify-content: space-between;
 }
+
+.personal {
+  background-color: rgb(100, 149, 237); /* Cornflower Blue */
+}
