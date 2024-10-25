@@ -6,7 +6,7 @@ const { view = 'weekly' } = Astro.props;
 
 // Function to get the current date
 function getCurrentDate() {
-  return new Date();
+  return new Date('2024-11-12');
 }
 
 // Update all references to 'today' with the function call
@@ -95,7 +95,7 @@ const activityDataJSON = JSON.stringify(updatedActivityData);
             </div>
             <div class="icon-container absolute inset-0 flex items-center justify-center hidden z-10"></div>
             <div class="dots-container absolute inset-0 flex items-center justify-center z-10">
-              {!isSameDay(date, today) && !isFirstDayOfMonth(date) && (
+              {!isSameDay(date, today) && (
                 <div class="w-4 h-4 relative">
                   <div class="absolute top-0 left-0 w-1 h-1 rounded-full" style={`background-color: ${activity?.sports ? activityColors.sports : greyDotColor};`}></div>
                   <div class="absolute top-0 right-0 w-1 h-1 rounded-full" style={`background-color: ${activity?.twitter ? activityColors.twitter : greyDotColor};`}></div>
@@ -146,8 +146,36 @@ const activityDataJSON = JSON.stringify(updatedActivityData);
     color: rgb(200, 200, 200);
     transition: color 0.2s ease-in-out;
   }
+  .calendar-cell:hover .date-number {
+    color: white;
+  }
+  .calendar-cell {
+    cursor: pointer;
+  }
   .calendar-cell.first-of-month .date-number {
-    color: rgb(100, 100, 100);
+    visibility: visible;
+  }
+  .calendar-cell.first-of-month:hover .date-number,
+  .calendar-cell.clicked .date-number {
+    visibility: hidden;
+  }
+  .calendar-cell.first-of-month:hover .dots-container,
+  .calendar-cell.clicked .dots-container {
+    opacity: 1;
+  }
+  .calendar-cell.first-of-month .dots-container {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+  .calendar-cell.clicked .activity-background {
+    opacity: 0 !important;
+  }
+  .calendar-cell.clicked {
+    background-color: rgb(25, 23, 22) !important;
+  }
+  .calendar-cell .date-number {
+    color: rgb(200, 200, 200);
+    transition: color 0.2s ease-in-out;
   }
   .calendar-cell:hover .date-number {
     color: white;
@@ -255,3 +283,4 @@ const activityDataJSON = JSON.stringify(updatedActivityData);
 
   window.initializeCalendar = initializeCalendar;
 </script>
+

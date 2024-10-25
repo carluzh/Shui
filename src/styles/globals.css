@@ -570,3 +570,9 @@ html {
 .personal {
   background-color: rgb(100, 149, 237); /* Cornflower Blue */
 }
+
+.personal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
