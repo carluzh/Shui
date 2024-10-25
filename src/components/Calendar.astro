@@ -6,7 +6,7 @@ const { view = 'weekly' } = Astro.props;
 
 // Function to get the current date
 function getCurrentDate() {
-  return new Date('2024-11-12');
+  return new Date();
 }
 
 // Update all references to 'today' with the function call
@@ -153,13 +153,13 @@ const activityDataJSON = JSON.stringify(updatedActivityData);
     cursor: pointer;
   }
   .calendar-cell.first-of-month .date-number {
+    color: rgb(75, 75, 75); /* Set initials color to greyDotColor */
     visibility: visible;
   }
   .calendar-cell.first-of-month:hover .date-number,
   .calendar-cell.clicked .date-number {
     visibility: hidden;
   }
-  .calendar-cell.first-of-month:hover .dots-container,
   .calendar-cell.clicked .dots-container {
     opacity: 1;
   }
@@ -283,4 +283,3 @@ const activityDataJSON = JSON.stringify(updatedActivityData);
 
   window.initializeCalendar = initializeCalendar;
 </script>
-
