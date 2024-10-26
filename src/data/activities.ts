@@ -123,7 +123,9 @@ export const ACTIVITIES = [
         title: "Features",
         percentage: 100,
         items: [
-          { text: "Newsletter Pup-up", done: 1 }
+          { text: "Newsletter Pup-up", done: 1 },
+          { text: "Article 'Show More'", done: 1 },
+          { text: "Highlight Activities", done: 1 }
         ]
       },
       {
@@ -137,11 +139,11 @@ export const ACTIVITIES = [
       },
       {
         title: "UX",
-        percentage: 40,
+        percentage: 66,
         items: [
-          { text: "Writing Curation + Overhaul", done: 0 },
-          { text: "Calendar ToM", done: 0 },
-          { text: "General Layout", done: 0 }
+          { text: "Writing Overhaul", done: 1 },
+          { text: "Calendar ToM", done: 1 },
+          { text: "Writing Curation + Search", done: 0 }
         ]
       }
     ]
