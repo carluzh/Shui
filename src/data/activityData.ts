@@ -21,7 +21,7 @@ export const ACTIVITY_DATA: DayActivity[] = [
     sports: true,
     twitter: true,
     work: true,
-    growth: true,
+    growth: false,
     note: ''
   },
   {
