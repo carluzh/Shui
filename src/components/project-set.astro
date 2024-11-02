@@ -109,8 +109,8 @@ const remainingYears = Object.keys(remainingGroupedArticles).map(Number).sort((a
     </div>
   ))}
 
-  <!-- Hidden articles -->
-  <div id="remaining-articles" style="display: none;">
+  <!-- Modify the remaining articles section -->
+  <div id="remaining-articles" class="md:hidden">
     {remainingYears.map(year => (
       <div class="space-y-1 pt-1">
         {year !== currentYear && <h3 class="text-sm font-semibold pt-2">{year}</h3>}
@@ -136,7 +136,35 @@ const remainingYears = Object.keys(remainingGroupedArticles).map(Number).sort((a
     ))}
   </div>
 
-  <div class="pt-1">
+  <!-- Hidden articles for desktop -->
+  <div id="remaining-articles-desktop" class="hidden md:hidden">
+    {remainingYears.map(year => (
+      <div class="space-y-1 pt-1">
+        {year !== currentYear && <h3 class="text-sm font-semibold pt-2">{year}</h3>}
+        <div class="space-y-3">
+          {remainingGroupedArticles[year].map((article, index) => (
+            <div class="article-item flex justify-between items-center relative">
+              <div class="flex items-center flex-grow">
+                <h4 class="text-sm">
+                  {'slug' in article ? (
+                    <a href={`${article.slug}`} class="hover:underline">
+                      {article.title}
+                    </a>
+                  ) : (
+                    article.title
+                  )}
+                </h4>
+              </div>
+              <div class="text-sm text-muted-foreground ml-2">{formatDate(article.date)}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Show More button only on desktop -->
+  <div class="pt-1 hidden md:block">
     <button class="view-toggle" id="show-more-btn">Show More</button>
   </div>
 </section>
@@ -160,14 +188,14 @@ const remainingYears = Object.keys(remainingGroupedArticles).map(Number).sort((a
 
     // Simplified toggle functionality
     const showMoreBtn = document.getElementById('show-more-btn');
-    const remainingArticles = document.getElementById('remaining-articles');
+    const remainingArticles = document.getElementById('remaining-articles-desktop');
     
     if (showMoreBtn && remainingArticles) {
       showMoreBtn.addEventListener('click', () => {
-        const isExpanded = remainingArticles.style.display !== 'block';
-        remainingArticles.style.display = isExpanded ? 'block' : 'none';
+        const isExpanded = remainingArticles.style.display === 'block';
+        remainingArticles.style.display = isExpanded ? 'none' : 'block';
         showMoreBtn.classList.toggle('active');
-        showMoreBtn.textContent = isExpanded ? 'Show Less' : 'Show More';
+        showMoreBtn.textContent = isExpanded ? 'Show More' : 'Show Less';
       });
     }
   });
