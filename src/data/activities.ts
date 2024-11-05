@@ -68,9 +68,9 @@ export const ACTIVITIES = [
       // Bodybuilding
       {
         title: "Bodybuilding",
-        percentage: 0,
+        percentage: 10,
         items: [
-          { text: "Week 1 - PPL (5x)", done: 0 },
+          { text: "Week 1 - PPL (5x)", done: 1 },
           { text: "Week 2 - PPL (5x)", done: 0 },
           { text: "Week 3 - Arms, Legs, Core (3x)", done: 0 },
           { text: "Week 4 - PPL (5x)", done: 0 },
@@ -83,9 +83,9 @@ export const ACTIVITIES = [
       },
       {
         title: "Stretching",
-        percentage: 0,
+        percentage: 10,
         items: [
-          { text: "Week 1 - Sleep, Hamstrings I, Post Run", done: 0 },
+          { text: "Week 1 - Sleep, Hamstrings I, Post Run", done: 1 },
           { text: "Week 2 - Detox, Shoulders I, Cool Down", done: 0 },
           { text: "Week 3 - Core, Posture Power, Planks I", done: 0 },
           { text: "Week 4 - Back, Posture Stabilizer, Planks II", done: 0 },
