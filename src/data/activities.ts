@@ -71,7 +71,7 @@ export const ACTIVITIES = [
         percentage: 10,
         items: [
           { text: "Week 1 - PPL (5x)", done: 1 },
-          { text: "Week 2 - PPL (5x)", done: 0 },
+          { text: "Week 2 - PPL (5x)", done: 2 },
           { text: "Week 3 - Arms, Legs, Core (3x)", done: 0 },
           { text: "Week 4 - PPL (5x)", done: 0 },
           { text: "Week 5 - PPL (5x)", done: 0 },
@@ -86,7 +86,7 @@ export const ACTIVITIES = [
         percentage: 10,
         items: [
           { text: "Week 1 - Sleep, Hamstrings I, Post Run", done: 1 },
-          { text: "Week 2 - Detox, Shoulders I, Cool Down", done: 0 },
+          { text: "Week 2 - Detox, Shoulders I, Cool Down", done: 2 },
           { text: "Week 3 - Core, Posture Power, Planks I", done: 0 },
           { text: "Week 4 - Back, Posture Stabilizer, Planks II", done: 0 },
           { text: "Week 5 - Full Body, Pelvic Tilt, Planks III", done: 0 },
@@ -100,8 +100,8 @@ export const ACTIVITIES = [
         title: "Running",
         percentage: 0,
         items: [
-          { text: "Week 1 - 4km in 25:00", done: 0 },
-          { text: "Week 2 - 4km in 23:30", done: 0 },
+          { text: "Week 1 - 4km in 25:00", done: 2 },
+          { text: "Week 2 - 4km in 23:30", done: 2 },
           { text: "Week 3 - 9km in 1:10:00", done: 0 },
           { text: "Week 4 - 4km in 22:30", done: 0 },
           { text: "Week 5 - 4km in 21:45", done: 0 },

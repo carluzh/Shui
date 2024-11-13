@@ -1,16 +1,11 @@
 ---
 import { format, subWeeks, eachDayOfInterval, isSameMonth, isSameDay, isFirstDayOfMonth, startOfWeek, endOfWeek } from 'date-fns';
 import { ACTIVITY_DATA, getActivityLevel, getActivityForDate, type DayActivity } from '@/data/activityData';
+import { getToday, formatDate } from '@/utils/dateUtils';
 
 const { view = 'weekly' } = Astro.props;
 
-// Function to get the current date
-function getCurrentDate() {
-  return new Date();
-}
-
-// Update all references to 'today' with the function call
-const today = getCurrentDate();
+const today = getToday();
 const startDate = startOfWeek(subWeeks(today, 2), { weekStartsOn: 1 });
 const endDate = endOfWeek(today, { weekStartsOn: 1 });
 const dateRange = eachDayOfInterval({ start: startDate, end: endDate });
