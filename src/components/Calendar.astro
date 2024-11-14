@@ -187,6 +187,24 @@ const script = `
   .calendar-cell:hover .date-number {
     color: white;
   }
+  .calendar-cell .date-number {
+    visibility: hidden;
+  }
+  .calendar-cell.today .date-number {
+    visibility: visible;
+  }
+  .calendar-cell .dots-container {
+    opacity: 1;
+  }
+  .calendar-cell.today .dots-container {
+    opacity: 0;
+  }
+  .calendar-cell.first-of-month .dots-container {
+    opacity: 0 !important;
+  }
+  .calendar-cell.first-of-month .date-number {
+    visibility: visible !important;
+  }
 </style>
 
 <script>
@@ -198,30 +216,22 @@ const script = `
 
   function updateCalendarDates() {
     const today = getToday();
-    
     document.querySelectorAll('.calendar-cell').forEach(cell => {
       const dateStr = cell.dataset.date;
       const date = new Date(dateStr);
-      
+
       if (isSameDay(date, today)) {
         cell.classList.add('ring-2', 'ring-white', 'today');
-        // Remove click handlers from today's cell
-        cell.classList.remove('clicked');
-        const iconContainer = cell.querySelector('.icon-container');
-        const dotsContainer = cell.querySelector('.dots-container');
-        if (iconContainer) {
-          iconContainer.innerHTML = '';
-          iconContainer.classList.add('hidden');
-        }
-        if (dotsContainer) {
-          dotsContainer.classList.remove('hidden');
-        }
+        cell.querySelector('.date-number').style.visibility = 'visible';
+        cell.querySelector('.dots-container').style.opacity = '0';
+      } else if (isFirstDayOfMonth(date)) {
+        cell.classList.add('first-of-month');
+        cell.querySelector('.date-number').style.visibility = 'visible';
+        cell.querySelector('.dots-container').style.opacity = '0';
       } else {
-        cell.classList.remove('ring-2', 'ring-white', 'today');
-        // Re-enable click functionality for non-today cells
-        if (!cell.hasAttribute('data-click-initialized')) {
-          initializeCellClickHandling(cell);
-        }
+        cell.classList.remove('ring-2', 'ring-white', 'today', 'first-of-month');
+        cell.querySelector('.date-number').style.visibility = 'hidden';
+        cell.querySelector('.dots-container').style.opacity = '1';
       }
     });
   }
