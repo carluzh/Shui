@@ -171,8 +171,13 @@ const script = `
     opacity: 1;
   }
   .calendar-cell.first-of-month .dots-container {
+    opacity: 0 !important;
+  }
+  .calendar-cell .dots-container {
+    opacity: 1;
+  }
+  .calendar-cell.today .dots-container {
     opacity: 0;
-    transition: opacity 0.2s ease-in-out;
   }
   .calendar-cell.clicked .activity-background {
     opacity: 0 !important;
@@ -334,6 +339,10 @@ const script = `
 
       if (isSameDay(date, today)) {
         // Client date matches server date
+        cell.querySelector('.dots-container').style.opacity = '0';
+        cell.querySelector('.date-number').style.visibility = 'visible';
+      } else if (isFirstDayOfMonth(date)) {
+        // First day of the month rule
         cell.querySelector('.dots-container').style.opacity = '0';
         cell.querySelector('.date-number').style.visibility = 'visible';
       } else {
