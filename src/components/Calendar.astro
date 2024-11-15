@@ -331,32 +331,35 @@ const script = `
     }
   }
 
-  function synchronizeDates() {
-    const today = getToday();
-    document.querySelectorAll('.calendar-cell').forEach(cell => {
-      const dateStr = cell.dataset.date;
-      const date = new Date(dateStr);
-
-      if (isSameDay(date, today)) {
-        // Client date matches server date
-        cell.querySelector('.dots-container').style.opacity = '0';
-        cell.querySelector('.date-number').style.visibility = 'visible';
-      } else if (isFirstDayOfMonth(date)) {
-        // First day of the month rule
-        cell.querySelector('.dots-container').style.opacity = '0';
-        cell.querySelector('.date-number').style.visibility = 'visible';
-      } else {
-        // Client date does not match server date
-        cell.querySelector('.dots-container').style.opacity = '1';
-        cell.querySelector('.date-number').style.visibility = 'hidden';
-      }
-    });
-  }
-
   // Initialize both calendar functionality and date updates
-  document.addEventListener('astro:page-load', () => {
-    initializeCalendar();
-    initializeDateUpdates(updateCalendarDates);
-    synchronizeDates();
+// Remove or comment out the window.addEventListener('load') section
+document.addEventListener('astro:page-load', () => {
+  initializeCalendar();
+  synchronizeDates();
+});
+
+function synchronizeDates() {
+  const today = getToday();
+  document.querySelectorAll('.calendar-cell').forEach(cell => {
+    const dateStr = cell.dataset.date;
+    const date = new Date(dateStr);
+    const dotsContainer = cell.querySelector('.dots-container');
+    const dateNumber = cell.querySelector('.date-number');
+    const serverDate = new Date(document.querySelector('.today')?.dataset.date || '');
+
+    if (isSameDay(date, today) && !isSameDay(today, serverDate)) {
+      // Client date differs from server date - show dots
+      dotsContainer.style.opacity = '1';
+      dateNumber.style.visibility = 'hidden';
+    } else if (isSameDay(date, today) || isFirstDayOfMonth(date)) {
+      // Today's date or first of month - hide dots, show date
+      dotsContainer.style.opacity = '0';
+      dateNumber.style.visibility = 'visible';
+    } else {
+      // All other cells - show dots, hide date
+      dotsContainer.style.opacity = '1';
+      dateNumber.style.visibility = 'hidden';
+    }
   });
+}
 </script>
