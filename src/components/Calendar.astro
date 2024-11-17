@@ -326,9 +326,28 @@ const script = `
     }
   }
 
+  function synchronizeDates() {
+    const today = getToday();
+    document.querySelectorAll('.calendar-cell').forEach(cell => {
+      const dateStr = cell.dataset.date;
+      const date = new Date(dateStr);
+
+      if (isSameDay(date, today)) {
+        // Client date matches server date
+        cell.querySelector('.dots-container').style.opacity = '0';
+        cell.querySelector('.date-number').style.visibility = 'visible';
+      } else {
+        // Client date does not match server date
+        cell.querySelector('.dots-container').style.opacity = '1';
+        cell.querySelector('.date-number').style.visibility = 'hidden';
+      }
+    });
+  }
+
   // Initialize both calendar functionality and date updates
   document.addEventListener('astro:page-load', () => {
     initializeCalendar();
     initializeDateUpdates(updateCalendarDates);
+    synchronizeDates();
   });
 </script>
