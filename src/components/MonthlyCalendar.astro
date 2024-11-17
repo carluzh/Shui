@@ -212,3 +212,31 @@ const streakCount = calculateStreak();
   }
 </style>
 
+// ... existing imports ...
+
+<script>
+  import { getToday, initializeDateUpdates } from '../utils/dateUtils';
+
+  function updateCalendarDates() {
+    const today = getToday();
+    const squares = document.querySelectorAll('.calendar-square');
+    
+    squares.forEach(square => {
+      const dateStr = square.dataset.date;
+      const date = new Date(dateStr);
+      
+      // Update today's highlighting
+      if (date.toDateString() === today.toDateString()) {
+        square.classList.add('today');
+      } else {
+        square.classList.remove('today');
+      }
+    });
+  }
+
+  // Initialize date updates on page load
+  document.addEventListener('astro:page-load', () => {
+    initializeDateUpdates(updateCalendarDates);
+  });
+</script>
+
