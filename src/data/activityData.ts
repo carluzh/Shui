@@ -9,6 +9,54 @@ export interface DayActivity {
 
 export const ACTIVITY_DATA: DayActivity[] = [
   {
+    date: '2024-11-19',
+    sports: true,
+    twitter: true,
+    work: false,
+    growth: true,
+    note: ''
+  },
+  {
+    date: '2024-11-18',
+    sports: false,
+    twitter: true,
+    work: false,
+    growth: true,
+    note: ''
+  },
+  {
+    date: '2024-11-17',
+    sports: false,
+    twitter: false,
+    work: false,
+    growth: false,
+    note: ''
+  },
+  {
+    date: '2024-11-16',
+    sports: true,
+    twitter: false,
+    work: false,
+    growth: true,
+    note: ''
+  },
+  {
+    date: '2024-11-15',
+    sports: false,
+    twitter: true,
+    work: false,
+    growth: true,
+    note: ''
+  },
+  {
+    date: '2024-11-14',
+    sports: true,
+    twitter: true,
+    work: false,
+    growth: true,
+    note: ''
+  },
+  {
     date: '2024-11-13',
     sports: true,
     twitter: true,
