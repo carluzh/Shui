@@ -1,0 +1,367 @@
+---
+import { format, subWeeks, eachDayOfInterval, isSameMonth, isSameDay, isFirstDayOfMonth, startOfWeek, endOfWeek } from 'date-fns';
+import { ACTIVITY_DATA, getActivityLevel, getActivityForDate, type DayActivity } from '@/data/activityData';
+import { getToday, formatDate } from '@/utils/dateUtils';
+
+const { view = 'weekly' } = Astro.props;
+
+const today = getToday();
+const startDate = startOfWeek(subWeeks(today, 2), { weekStartsOn: 1 });
+const endDate = endOfWeek(today, { weekStartsOn: 1 });
+const dateRange = eachDayOfInterval({ start: startDate, end: endDate });
+
+const daysOfWeek = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
+
+function getActivityColor(activityLevel: number): string {
+  const colors = [
+    'rgb(25, 23, 22)',   // No activity
+    'rgb(26, 38, 77)',   // 1/4 activity
+    'rgb(29, 59, 140)',  // 2/4 activity
+    'rgb(30, 80, 211)',  // 3/4 activity
+    'rgb(31, 94, 255)'   // 4/4 activity
+  ];
+  return colors[activityLevel];
+}
+
+const noActivityColor = 'rgb(25, 23, 22)';
+const greyDotColor = 'rgb(75, 75, 75)';
+const activityColors = {
+  sports: 'rgb(31, 94, 255)',
+  twitter: 'rgb(31, 94, 255)',
+  work: 'rgb(31, 94, 255)',
+  growth: 'rgb(31, 94, 255)'
+};
+
+// Create a map of all dates in the range with their activities
+const activityMap = new Map(dateRange.map(date => {
+  const dateString = format(date, 'yyyy-MM-dd');
+  const activity = getActivityForDate(dateString) || {
+    date: dateString,
+    sports: false,
+    twitter: false,
+    work: false,
+    growth: false,
+    note: ''
+  };
+  return [dateString, activity];
+}));
+
+// Update ACTIVITY_DATA with the new map
+const updatedActivityData = Array.from(activityMap.values());
+
+// Prepare the updated activity data for client-side use
+const activityDataJSON = JSON.stringify(updatedActivityData);
+
+// Make activity data and functions available globally
+const script = `
+  window.ACTIVITY_DATA = ${activityDataJSON};
+  window.getActivityForDate = ${getActivityForDate.toString()};
+  window.getActivityLevel = ${getActivityLevel.toString()};
+  window.activityColors = ${JSON.stringify(activityColors)};
+  window.greyDotColor = "${greyDotColor}";
+`;
+---
+
+<!-- Add the script to make data available globally -->
+<script set:html={script} />
+
+<div class="calendar-container">
+  {view === 'weekly' ? (
+    <div class="grid grid-cols-7 gap-1">
+      {daysOfWeek.map(day => (
+        <div class="text-center text-xs font-medium text-muted-foreground">{day}</div>
+      ))}
+      {dateRange.map(date => {
+        const activity = getActivityForDate(format(date, 'yyyy-MM-dd'));
+        const activityLevel = activity ? getActivityLevel(activity) : 0;
+        const activityColor = getActivityColor(activityLevel);
+        return (
+          <div
+            class={`
+              calendar-cell aspect-square rounded-sm relative cursor-pointer
+              ${!isSameMonth(date, today) ? 'opacity-50' : ''}
+              ${isSameDay(date, today) ? 'ring-2 ring-white today' : ''}
+              ${isFirstDayOfMonth(date) ? 'first-of-month' : ''}
+              group
+            `}
+            style={`background-color: ${noActivityColor};`}
+            title={activity?.note}
+            data-date={format(date, 'yyyy-MM-dd')}
+            data-activity-color={activityColor}
+            data-no-activity-color={noActivityColor}
+            data-state="0"
+          >
+            <div class="absolute inset-0 flex items-center justify-center z-10">
+              <span class="date-number text-xs font-bold">
+                {isFirstDayOfMonth(date) ? (
+                  format(date, 'MMM')
+                ) : (
+                  format(date, 'd')
+                )}
+              </span>
+            </div>
+            <div class="icon-container absolute inset-0 flex items-center justify-center hidden z-10"></div>
+            <div class="dots-container absolute inset-0 flex items-center justify-center z-10">
+              {!isSameDay(date, today) && (
+                <div class="w-4 h-4 relative">
+                  <div class="absolute top-0 left-0 w-1 h-1 rounded-full" style={`background-color: ${activity?.sports ? activityColors.sports : greyDotColor};`}></div>
+                  <div class="absolute top-0 right-0 w-1 h-1 rounded-full" style={`background-color: ${activity?.twitter ? activityColors.twitter : greyDotColor};`}></div>
+                  <div class="absolute bottom-0 left-0 w-1 h-1 rounded-full" style={`background-color: ${activity?.work ? activityColors.work : greyDotColor};`}></div>
+                  <div class="absolute bottom-0 right-0 w-1 h-1 rounded-full" style={`background-color: ${activity?.growth ? activityColors.growth : greyDotColor};`}></div>
+                </div>
+              )}
+            </div>
+            <div class="activity-background absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-sm" style={`background-color: ${activityColor};`}></div>
+            <div class="clickable-area absolute inset-0 rounded-sm z-20"></div>
+          </div>
+        );
+      })}
+    </div>
+  ) : (
+    <div class="text-center">
+      <p>Monthly view example text</p>
+      <p>This is a placeholder for the monthly view.</p>
+    </div>
+  )}
+</div>
+
+<style>
+  .calendar-cell[data-state="0"]:not(.today):not(:first-child) .date-number {
+    visibility: hidden;
+  }
+  .calendar-cell[data-state="0"]:not(.today):not(:first-child):hover .date-number {
+    visibility: visible;
+  }
+  .calendar-cell:not([data-state="0"]):not(.today):not(:first-child) .date-number {
+    visibility: hidden !important;
+  }
+  .calendar-cell.today .date-number,
+  .calendar-cell.first-of-month .date-number {
+    visibility: visible !important;
+  }
+  .calendar-cell:hover .dots-container {
+    opacity: 0;
+  }
+  .calendar-cell.clicked .activity-background {
+    opacity: 0 !important;
+  }
+  .calendar-cell.clicked {
+    background-color: rgb(25, 23, 22) !important;
+  }
+  .calendar-cell .date-number {
+    color: rgb(200, 200, 200);
+    transition: color 0.2s ease-in-out;
+  }
+  .calendar-cell:hover .date-number {
+    color: white;
+  }
+  .calendar-cell {
+    cursor: pointer;
+  }
+  .calendar-cell.first-of-month .date-number {
+    color: rgb(75, 75, 75);
+    visibility: visible;
+  }
+  .calendar-cell.first-of-month:hover .date-number,
+  .calendar-cell.clicked .date-number {
+    visibility: hidden;
+  }
+  .calendar-cell.clicked .dots-container {
+    opacity: 1;
+  }
+  .calendar-cell.first-of-month .dots-container {
+    opacity: 0 !important;
+  }
+  .calendar-cell .dots-container {
+    opacity: 1;
+  }
+  .calendar-cell.today .dots-container {
+    opacity: 0;
+  }
+  .calendar-cell.clicked .activity-background {
+    opacity: 0 !important;
+  }
+  .calendar-cell.clicked {
+    background-color: rgb(25, 23, 22) !important;
+  }
+  .calendar-cell .date-number {
+    color: rgb(200, 200, 200);
+    transition: color 0.2s ease-in-out;
+  }
+  .calendar-cell:hover .date-number {
+    color: white;
+  }
+  .calendar-cell.client-today {
+    box-shadow: inset 0 0 0 2px rgb(31, 94, 255) !important;
+  }
+  
+  .calendar-cell.client-today:hover {
+    box-shadow: inset 0 0 0 2px rgb(31, 94, 255) !important;
+  }
+  
+  .calendar-cell.client-today .activity-background {
+    opacity: 0 !important;
+  }
+  
+  .calendar-cell.server-outdated .date-number svg {
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+  }
+</style>
+
+<script>
+  import { format, isSameDay, parseISO } from 'date-fns';
+  import { getToday } from '@/utils/dateUtils';
+
+  let calendar;
+  let clickStates = {};
+
+  function updateTodayDisplay() {
+    const clientToday = new Date();
+    const clientTodayStr = format(clientToday, 'yyyy-MM-dd');
+    
+    const serverTodayCell = document.querySelector('.calendar-cell.today');
+    if (!serverTodayCell) return;
+    
+    const serverTodayDate = serverTodayCell.dataset.date;
+    
+    if (clientTodayStr !== serverTodayDate) {
+      serverTodayCell.classList.remove('ring-2', 'ring-white');
+      
+      const serverDateNumber = serverTodayCell.querySelector('.date-number');
+      if (serverDateNumber) {
+        serverDateNumber.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="rgb(75, 75, 75)" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+        `;
+      }
+      
+      const clientTodayCell = document.querySelector(`[data-date="${clientTodayStr}"]`);
+      if (clientTodayCell) {
+        const dotsContainer = clientTodayCell.querySelector('.dots-container');
+        if (dotsContainer) {
+          dotsContainer.style.display = 'none';
+        }
+        
+        const dateNumber = clientTodayCell.querySelector('.date-number');
+        if (dateNumber) {
+          dateNumber.style.visibility = 'visible';
+          dateNumber.style.color = 'white';
+        }
+        
+        clientTodayCell.classList.add('client-today');
+      }
+    }
+  }
+
+  function initializeCellClickHandling(cell) {
+    cell.setAttribute('data-click-initialized', 'true');
+    const date = cell.dataset.date;
+    
+    if (clickStates[date]) {
+      updateCellState(cell, clickStates[date]);
+    }
+  }
+
+  function getActivityIcon(state, date) {
+    const activityData = ACTIVITY_DATA.find(activity => activity.date === date);
+    if (!activityData) return '';
+
+    const getColor = (category) => activityData[category] ? activityColors[category] : greyDotColor;
+
+    const icons = [
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-40 0 512 512" fill="${getColor('sports')}" class="w-5 h-5">
+        <path d="M272 96c26.51 0 48-21.49 48-48S298.51 0 272 0s-48 21.49-48 48 21.49 48 48 48zM113.69 317.47l-14.8 34.52H32c-17.67 0-32 14.33-32 32s14.33 32 32 32h77.45c19.25 0 36.58-11.44 44.11-29.09l8.79-20.52-10.67-6.3c-17.32-10.23-30.06-25.37-37.99-42.61zM384 223.99h-44.03l-26.06-53.25c-12.5-25.55-35.45-44.23-61.78-50.94l-71.08-21.14c-28.3-6.8-57.77-.55-80.84 17.14l-39.67 30.41c-14.03 10.75-16.69 30.83-5.92 44.86s30.84 16.66 44.86 5.92l39.69-30.41c7.67-5.89 17.44-8 25.27-6.14l14.7 4.37-37.46 87.39c-12.62 29.48-1.31 64.01 26.3 80.31l84.98 50.17-27.47 87.73c-5.28 16.86 4.11 34.81 20.97 40.09 3.19 1 6.41 1.48 9.58 1.48 13.61 0 26.23-8.77 30.52-22.45l31.64-101.06c5.91-20.77-2.89-43.08-21.64-54.39l-61.24-36.14 31.31-78.28 20.27 41.43c8 16.34 24.92 26.89 43.11 26.89H384c17.67 0 32-14.33 32-32s-14.33-31.99-32-31.99z"/>
+      </svg>`,
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 271" fill="${getColor('twitter')}" class="w-4 h-4">
+        <path d="M236 0h46L181 115l118 156h-92.6l-72.5-94.8-83 94.8h-46l107-123L-1.1 0h94.9l65.5 86.6zm-16.1 244h25.5L80.4 26H53z"/>
+      </svg>`,
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 53" fill="${getColor('work')}" class="w-4 h-4">
+        <path d="M43,6.5C43,2.64,39.86,0,36,0H24c-3.86,0-7,2.64-7,6.5V11H15V53H45V11H43Zm-20,0c0-.55.45-.5,1-.5H36c.55,0,1,0,1,.5V11H23ZM5,11h6V53H5c-2.76,0-5-2.74-5-5.5v-32C0,12.74,2.24,11,5,11Zm55,4.5v32c0,2.76-2.24,5.5-5,5.5H49V11h6C57.76,11,60,12.74,60,15.5Z"/>
+      </svg>`,
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440.31 254.48" fill="${getColor('growth')}" class="w-5 h-6">>
+        <path d="M89.36,101.46c2.4.32,4.8.64,7.21,1.12,3.36.8,6.56,1.6,9.77,2.4,2.07.64,4.14,1.12,6,1.59l.07,0c3.51,1.12,7,2.4,10.37,3.83,1.44.64,3,1.12,4.64,1.76a140.18,140.18,0,0,1,13.9,6.87l0,0,0,0,3-1.6a125.79,125.79,0,0,1,1-15.73,49,49,0,0,1,.8-5.12q.72-5.28,1.92-10.57c.48-2.08,1-4.16,1.6-6.24q1.2-4.8,2.88-9.61c.64-2.24,1.6-4.48,2.4-6.57.71-1.84,1.29-3.55,2-5.35a1,1,0,0,0-.38-1.15A238.55,238.55,0,0,0,105.8,32.92,13.66,13.66,0,0,0,87.47,43.49a235.23,235.23,0,0,0-4.26,56.08,1,1,0,0,0,.8.89C85.83,100.77,87.53,101.17,89.36,101.46Z"/>
+        <path d="M198.4,240.92c-2.88-3.36-5.92-6.89-9.13-10.89a2.21,2.21,0,0,1-.48-.64c-3-3.84-6.08-8.17-9.29-12.65-1-1.44-1.92-3-2.88-4.48q-3.36-5-6.73-10.57c-1.12-1.92-2.08-3.84-3.2-5.76-2.08-3.68-4-7.53-5.92-11.53-.8-1.92-1.76-3.84-2.72-5.92-2.08-5-4.16-10.25-5.92-15.53-.32-1.12-.64-2.08-1-3a161.56,161.56,0,0,1-4.41-17.56.91.91,0,0,0-.38-.59c-.33-.25-.6-.49-1-.74a123.72,123.72,0,0,0-12.17-8c-16.49-9.61-36-15.37-58.28-17.29-24.28-2.2-47.4.62-63.56,3.74A13.63,13.63,0,0,0,.86,137.8c9.71,27.79,31.43,74.82,72.66,98.66,45.37,26.22,103.05,17.8,129.59,11.88a.94.94,0,0,0,.51-1.55c-.68-.77-1.4-1.56-2.12-2.28l-.07-.08C200.46,243.14,199.51,242.19,198.4,240.92Z"/>
+        <path d="M365.4,115.71c-16.65,1.44-31.86,5-45.47,10.73A123.05,123.05,0,0,0,307,133c-3.83,2.23-7.81,5.1-12,8l-.09.07a7.2,7.2,0,0,1-.91.7,1,1,0,0,0-.4.61,172.17,172.17,0,0,1-4.24,17.5l0,.08a37.6,37.6,0,0,0-1.43,3.8c-1.76,5-3.52,9.93-5.6,14.73-1,2.08-1.92,4.16-3,6.4-1.76,3.68-3.52,7.37-5.44,10.89-1.12,2.08-2.4,4.16-3.52,6.24-2.08,3.36-4.16,6.72-6.24,9.93-1.12,1.76-2.24,3.36-3.36,5-2.72,4.16-5.6,8-8.33,11.53-.48.48-.8,1.12-1.28,1.6-3,4-6.08,7.53-9,10.73-1.12,1.44-2.08,2.4-3.2,3.68-.73.74-1.47,1.54-2.16,2.32a.94.94,0,0,0,.51,1.55c26.54,5.92,84.22,14.34,129.59-11.88,41.23-23.84,63-70.89,72.66-98.67a14,14,0,0,0-10.64-18.36C412.78,116.3,389.71,113.52,365.4,115.71Z"/>
+        <path d="M287.75,70.23c1.12,3.2,1.92,6.24,2.88,9.45.48,2.08,1.28,4.32,1.76,6.41.78,4.3,1.56,8.36,2.05,12.77.2.88.39,1.76.59,2.64a1,1,0,0,1,.08.33c.48,5.17.8,10.51.8,15.68l3,1.61,0,0,.05,0a141.27,141.27,0,0,1,13.9-6.87c1.6-.64,3.36-1.28,5-1.92a106.35,106.35,0,0,1,10.09-3.52c1.92-.64,4-1.12,6.08-1.76,3.2-.8,6.57-1.6,9.93-2.4,2.24-.48,4.64-.8,6.89-1.12,1.83-.28,3.66-.69,5.49-1a1,1,0,0,0,.8-.89,235.23,235.23,0,0,0-4.26-56.08,13.65,13.65,0,0,0-18.33-10.57,239.53,239.53,0,0,0-50.78,24.24,1,1,0,0,0-.38,1.15c.68,1.8,1.26,3.5,2,5.19C286.14,65.75,287.11,68,287.75,70.23Z"/>
+        <path d="M241,216.74a89.86,89.86,0,0,0,5.42-7.49l.05-.07c1.43-1.75,2.7-3.66,4-5.57,1.76-2.72,3.52-5.6,5.28-8.49,1.28-2.08,2.56-4.16,3.68-6.41,1.76-3,3.36-6.4,5-9.61,1.12-2.24,2.24-4.48,3.2-6.72,1.6-3.68,2.88-7.53,4.32-11.53.64-1.92,1.44-4,2.08-5.92a145.18,145.18,0,0,0,4.48-18.73,119.07,119.07,0,0,0,1.44-18.89c0-19.21-4.64-39.07-14.09-59.08-10.26-22.14-24.26-40.7-35-53.13-5.87-6.8-15.4-6.79-21.27,0-10.74,12.43-24.74,31-35,53.13a150.15,150.15,0,0,0-13,43.07,109.25,109.25,0,0,0-1.12,16A116,116,0,0,0,161.86,136a.83.83,0,0,0,0,.15,4.6,4.6,0,0,1,.3,1.21,120.74,120.74,0,0,0,4.16,17.45c.64,2.4,1.6,4.8,2.4,7.05a103.71,103.71,0,0,0,4.16,10.57c1.12,2.56,2.24,5,3.52,7.53,1.28,3,2.88,6.08,4.48,9,1.28,2.4,2.72,4.64,4.16,6.89,1.6,2.72,3.2,5.44,5,8,1.44,2.08,2.72,4.16,4.16,6.08,1.76,2.4,3.52,4.8,5.28,7.05a62.7,62.7,0,0,0,4,5.12c1.76,2.24,3.36,4.32,5.12,6.24,1.12,1.44,2.24,2.72,3.36,4,1.76,1.92,3.52,3.84,5.12,5.44.8.8,1.6,1.76,2.24,2.4l.8.8.8-.8c.8-.8,1.76-1.92,2.72-2.88q2.4-2.4,4.8-5.28c1.12-1.12,2.24-2.56,3.36-3.84,1.75-2.07,3.51-4.14,5.42-6.37l.05-.07C238.45,220.08,239.72,218.49,241,216.74Z"/>
+      </svg>`
+    ];
+    return icons[state - 1] || '';
+  }
+
+  function updateCellState(cell, state) {
+    const iconContainer = cell.querySelector('.icon-container');
+    const dotsContainer = cell.querySelector('.dots-container');
+    const activityBackground = cell.querySelector('.activity-background');
+
+    cell.dataset.state = state.toString();
+
+    if (state === 0) {
+      cell.classList.remove('clicked');
+      iconContainer.innerHTML = '';
+      iconContainer.classList.add('hidden');
+      dotsContainer.classList.remove('hidden');
+      activityBackground.classList.remove('opacity-100');
+      activityBackground.classList.add('opacity-0');
+    } else {
+      cell.classList.add('clicked');
+      iconContainer.innerHTML = getActivityIcon(state, cell.dataset.date);
+      iconContainer.classList.remove('hidden');
+      dotsContainer.classList.add('hidden');
+      activityBackground.classList.add('opacity-100');
+      activityBackground.classList.remove('opacity-0');
+    }
+  }
+
+  function handleCalendarClick(event) {
+    const cell = event.target.closest('.calendar-cell');
+    if (cell && !cell.classList.contains('today')) {
+      const date = cell.dataset.date;
+      clickStates[date] = (clickStates[date] || 0) + 1;
+      if (clickStates[date] > 4) {
+        clickStates[date] = 0;
+        cell.classList.remove('clicked');
+      }
+      updateCellState(cell, clickStates[date]);
+    }
+  }
+
+  function resetAllCells() {
+    const cells = calendar.querySelectorAll('.calendar-cell');
+    cells.forEach(cell => {
+      updateCellState(cell, 0);
+      delete clickStates[cell.dataset.date];
+    });
+  }
+
+  function initializeCalendar() {
+    calendar = document.querySelector('.calendar-container');
+    clickStates = {};
+
+    if (calendar) {
+      calendar.addEventListener('click', handleCalendarClick);
+      calendar.addEventListener('mouseleave', resetAllCells);
+      
+      document.querySelectorAll('.calendar-cell').forEach(cell => {
+        if (!cell.classList.contains('today')) {
+          initializeCellClickHandling(cell);
+        }
+      });
+
+      // Add the today display update
+      updateTodayDisplay();
+    }
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    initializeCalendar();
+  });
+</script>

@@ -1,0 +1,76 @@
+---
+import StudyActivityCard from "./cards/study-activity-card.astro";
+import ProjectActivityCard from "./cards/project-activity-card.astro";
+import MathAcademyCard from "./cards/math-academy/index.astro";
+import ProgressActivityCard from "./cards/progress-activity-card.astro";
+import LearningActivityCard from "./cards/learning-activity-card.astro";
+import PlanningActivityCard from "./cards/planning-activity-card.astro";
+import StartActivityCard from "./cards/start-activity-card.astro";
+import type { LogitActivity } from "@/types";
+
+interface Props {
+  group: LogitActivity[];
+  isLast: boolean;
+}
+
+const { group, isLast } = Astro.props;
+
+const getActivityComponent = (item: LogitActivity) => {
+  switch (item.type) {
+    case "study":
+      return StudyActivityCard;
+    case "project":
+      return ProjectActivityCard;
+    case "math-academy":
+      return MathAcademyCard;
+    case "progress":
+      return ProgressActivityCard;
+    case "learning":
+      return LearningActivityCard;
+    case "planning":
+      return PlanningActivityCard;
+    case "start":
+      return StartActivityCard;
+    default:
+      return null;
+  }
+};
+
+const ActivityComponent = getActivityComponent(group[0]);
+---
+
+<div class="flex items-start gap-4 relative w-full">
+  <div
+    class="flex-shrink-0 w-8 h-8 rounded-full bg-muted flex items-center justify-center text-lg z-20"
+  >
+    {group[0].icon}
+  </div>
+  <divc class="flex flex-col gap-4 w-full">
+    {!isLast && <div class="absolute left-4 top-8 h-full w-px bg-border" />}
+    <div class="flex-grow relative">
+      {
+        group.length > 1 && (
+          <>
+            <div class="absolute -bottom-3 left-1 right-1 h-[80%] bg-muted border rounded-lg shadow-sm z-10" />
+            <div class="absolute -bottom-6 left-2 right-2 h-full bg-muted border rounded-lg shadow-sm z-0" />
+          </>
+        )
+      }
+      <div
+        class="relative w-full [&>div]:w-full [&>div]:bg-[#FAF8EC] dark:[&>div]:bg-[#141212] z-20"
+      >
+        {ActivityComponent && <ActivityComponent item={group[0] as never} />}
+      </div>
+    </div>
+    {
+      group.length > 1 && (
+        <div class="mt-6 text-center">
+          <button class="text-sm text-primary hover:underline">
+            View {group.length - 1} more{" "}
+            {group.length - 1 === 1 ? "entry" : "entries"}
+          </button>
+        </div>
+      )
+    }
+  </divc>
+</div>

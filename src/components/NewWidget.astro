@@ -1,0 +1,82 @@
+---
+import Calendar from './Calendar.astro';
+import MonthlyCalendar from './MonthlyCalendar.astro';
+---
+
+<div class="flex-grow calendar-widget">
+  <div class="flex justify-end mb-1">
+    <button id="expand-toggle" class="view-toggle" data-view="weekly">Expand</button>
+  </div>
+  <div class="border bg-muted/30 rounded-md transition-all hover:shadow-md hover:border-primary/50 calendar-container">
+    <div id="calendar-container">
+      <div id="weekly-view" class="p-4">
+        <div id="calendar-wrapper">
+          <Calendar view="weekly" />
+        </div>
+      </div>
+      <div id="monthly-view" class="p-4 pb-2 hidden">
+        <MonthlyCalendar />
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .view-toggle {
+    font-size: 0.75rem;
+    font-weight: 400;
+    padding: 1px 2px;
+    color: hsl(var(--muted-foreground));
+    transition: all 0.2s ease-in-out;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .view-toggle.active {
+    font-weight: 400;
+    text-decoration: underline;
+  }
+
+  .view-toggle:hover {
+    color: hsl(var(--primary));
+  }
+</style>
+
+<script>
+  function initializeCalendarWidget() {
+    const expandToggle = document.getElementById('expand-toggle');
+    let currentView = 'weekly';
+
+    const updateCalendarView = (view) => {
+      const weeklyView = document.getElementById('weekly-view');
+      const monthlyView = document.getElementById('monthly-view');
+      
+      if (weeklyView && monthlyView && expandToggle) {
+        if (view === 'weekly') {
+          weeklyView.classList.remove('hidden');
+          monthlyView.classList.add('hidden');
+          expandToggle.textContent = 'Expand';
+          expandToggle.classList.remove('active');
+        } else {
+          weeklyView.classList.add('hidden');
+          monthlyView.classList.remove('hidden');
+          expandToggle.textContent = 'Expand';
+          expandToggle.classList.add('active');
+        }
+      }
+    };
+
+    expandToggle?.addEventListener('click', () => {
+      currentView = currentView === 'weekly' ? 'monthly' : 'weekly';
+      updateCalendarView(currentView);
+    });
+
+    // Initial setup
+    updateCalendarView(currentView);
+  }
+
+  // Run on both initial load and after Astro page transitions
+  document.addEventListener('astro:page-load', initializeCalendarWidget);
+</script>

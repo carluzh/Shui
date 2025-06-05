@@ -1,0 +1,578 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.prose {
+  @apply text-foreground;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  @apply text-foreground font-bold mb-4;
+}
+
+.prose p {
+  @apply mb-4;
+  text-align: justify;
+  hyphens: auto;
+}
+
+.prose a {
+  @apply text-accent-foreground underline underline-offset-2 hover:text-accent-foreground/80;
+}
+
+.prose img {
+  @apply mx-auto my-8 rounded-lg shadow-md;
+}
+
+.prose blockquote p {
+  @apply text-muted-foreground font-light italic;
+}
+
+.prose blockquote cite {
+  @apply block text-foreground font-normal not-italic mt-2 text-sm;
+}
+
+.prose ul,
+.prose ol {
+  @apply my-4 pl-6;
+}
+
+.prose li {
+  @apply mb-2;
+}
+
+.prose pre {
+  @apply my-4 p-4 rounded-lg bg-muted;
+}
+
+.prose code {
+  @apply text-accent-foreground bg-muted px-1 py-0.5 rounded;
+}
+
+:root {
+  /* ... existing custom properties ... */
+  --scale-factor: ; /* Adjust this value to scale up or down */
+  --doc-height: 100%;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --writing-scale: 0.95; /* Slightly smaller on medium screens */
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --writing-scale: 0.9; /* Even smaller on large screens */
+  }
+}
+
+#site-wrapper {
+  transform: scale(var(--scale-factor));
+  transform-origin: top left;
+  width: calc(100svw / 1);
+  height: calc(100svh / 1);
+  height: --webkit-fill-available;
+  overflow: scroll;
+}
+
+html {
+  height: --webkit-fill-available;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+@layer base {
+  :root {
+    --page-width: 1200px; /* Increased from 1072px */
+    --content-width: 900px; /* Increased from 768px */
+    --page-left: auto;
+    --page-top: 60px;
+    --header-height: 48px;
+    --footer-height: 48px;
+    --icon-primary: var(--mono11);
+    --icon-secondary: transparent;
+    --body-margin-left: max(16px, env(safe-area-inset-left));
+    --body-margin-right: max(16px, env(safe-area-inset-right));
+    --layer-above-sticky: 20;
+    --layer-header: 10;
+    --layer-sticky: 10;
+
+    --flexoki-bg: 0 3% 6%;
+    --flexoki-bg-2: 30 4% 11%;
+
+    --flexoki-ui: 30 3% 15%;
+    --flexoki-ui-2: 40 3% 20%;
+    --flexoki-ui-3: 30 3% 24%;
+
+    --flexoki-tx: 55 10% 79%;
+    --flexoki-tx-2: 43 3% 52%;
+    --flexoki-tx-3: 45 2% 33%;
+
+    --flexoki-re: 5 61% 54%;
+
+    --flexoki-ye: 208 162 21;
+    --flexoki-or: 218 112 44;
+    --flexoki-gr: 135 154 57;
+    --flexoki-cy: 58 169 159;
+    --flexoki-bl: 67 133 190;
+    --flexoki-pu: 139 126 200;
+    --flexoki-ma: 206 93 151;
+  }
+
+  :root {
+    --background: var(--flexoki-bg);
+    --foreground: var(--flexoki-tx);
+    --card: var(--flexoki-bg-2);
+    --card-foreground: var(--flexoki-tx);
+    --popover: var(--flexoki-bg);
+    --popover-foreground: var(--flexoki-tx);
+    --primary: var(--flexoki-tx);
+    --primary-foreground: var(--flexoki-bg);
+    --secondary: var(--flexoki-ui-2);
+    --secondary-foreground: var(--flexoki-tx-2);
+    --faint: var(--flexoki-bg);
+    --faint-foreground: var(--flexoki-tx-3);
+    --muted: var(--flexoki-bg-2);
+    --muted-foreground: var(--flexoki-tx-2);
+    --accent: var(--flexoki-ui);
+    --accent-foreground: var(--flexoki-tx-2);
+    --destructive: var(--flexoki-re);
+    --destructive-foreground: var(--flexoki-bg);
+    --border: var(--flexoki-ui-2);
+    --input: var(--flexoki-ui-2);
+    --ring: var(--flexoki-ui-3);
+    --radius: 0.5rem;
+    --gradient: linear-gradient(
+      45deg,
+      #000000,
+      #1c1c1c,
+      #383838,
+      #555555,
+      #717171
+    );
+    --blur: 5px; /* Adjust blur intensity */
+    --transparent: rgba(0, 0, 0, 0); /* Transparent color for gradient */
+    --mask-visible: rgba(0, 0, 0, 1); /* Mask visible color */
+    --mask-hidden: rgba(0, 0, 0, 0); /* Mask hidden color */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    scrollbar-color: hsl(var(--flexoki-tx-2) / 0.5) hsl(var(--flexoki-ui) / 0.5);
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    @apply min-h-screen dark:selection:bg-stone-800 selection:bg-muted antialiased;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+  }
+
+  html.dark .astro-code,
+  html.dark .astro-code span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+  }
+
+  html.dark .astro-code,
+  html:not(.dark) .astro-code {
+    border: 1px solid hsl(var(--border)) !important;
+    font-size: 13px;
+  }
+
+  html.dark .astro-code code,
+  html:not(.dark) .astro-code code {
+    counter-reset: step !important;
+    counter-increment: step calc(var(--start, 1) - 1) !important;
+  }
+
+  html.dark .astro-code code .line:not(:last-child)::before,
+  html:not(.dark) .astro-code code .line:not(:last-child)::before {
+    content: counter(step) !important;
+    counter-increment: step !important;
+    width: 1rem !important;
+    margin-right: 1.5rem !important;
+    display: inline-block !important;
+    text-align: right !important;
+    color: hsl(var(--muted-foreground)) !important;
+    opacity: 0.5 !important;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .astro-code,
+    .astro-code span {
+      color: var(--shiki-dark) !important;
+      background-color: var(--shiki-dark-bg) !important;
+    }
+  }
+
+  .dotted-background {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Adjust as needed */
+    background-color: hsl(var(--flexoki-bg)); /* Background color */
+    background-image: radial-gradient(
+      hsl(var(--flexoki-bg-2)) 1px,
+      transparent 1px
+    );
+    background-size: 20px 20px; /* Adjust dot spacing as needed */
+  }
+  .grid-background {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Adjust as needed */
+    background: linear-gradient(
+        to right,
+        hsl(var(--flexoki-bg-2)) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, hsl(var(--flexoki-bg-2)) 1px, transparent 1px);
+    background-size: 20px 20px; /* Adjust grid size as needed */
+    background-color: hsl(var(--flexoki-bg));
+  }
+
+  .top-blur {
+    position: relative;
+    user-select: none;
+    pointer-events: none;
+    --h: min(96px, var(--page-top));
+    position: sticky;
+    width: 100%;
+    height: var(--h);
+    z-index: 1;
+    backdrop-filter: blur(var(--blur));
+    opacity: 0.95;
+    mask-image: linear-gradient(
+      var(--direction),
+      var(--mask-visible) 25%,
+      var(--mask-hidden)
+    );
+  }
+
+  .top-blur:after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      var(--direction),
+      var(--background),
+      var(--transparent)
+    );
+  }
+
+  .top-blur:first-child {
+    margin-bottom: calc(-1 * var(--h));
+    top: 0;
+    --direction: to bottom;
+  }
+  .top-blur:last-child {
+    margin-top: calc(-1 * var(--h));
+    bottom: 0;
+    --direction: to top;
+  }
+
+  .main-container {
+    min-height: calc(100vh - var(--footer-height));
+    position: relative;
+    padding: var(--page-top) 0;
+    margin: 0 auto;
+    max-width: var(--page-width);
+  }
+
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1fr minmax(auto, var(--content-width)) 1fr;
+    max-width: var(--page-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--body-margin-left);
+    padding-right: var(--body-margin-right);
+  }
+
+  .main-grid > * {
+    grid-column: 2;
+  }
+
+  @media (max-width: 1024px) {
+    .main-grid {
+      grid-template-columns: auto var(--content-width) auto;
+      -moz-column-gap: 16px;
+      column-gap: 16px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .main-grid {
+      display: flex;
+      flex-direction: column;
+      align-items: unset;
+      justify-content: flex-start;
+    }
+  }
+}
+
+.todo-title {
+  color: hsl(var(--muted-foreground));
+  transition: color 0.3s ease;
+}
+
+.todo-title:hover,
+.todo-title.active {
+  color: white;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+/* Add this at the end of your file or in an appropriate @layer */
+@layer components {
+  .ActivityTracker {
+    background-color: hsl(var(--card));
+    color: hsl(var(--card-foreground));
+    border-radius: var(--radius);
+    border: 1px solid hsl(var(--border));
+    padding: 1rem;
+    height: 100%; /* This will make it fill its container */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ActivityTracker h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: hsl(var(--foreground));
+  }
+
+  .ActivityTracker p {
+    margin-top: 0.5rem;
+    color: hsl(var(--muted-foreground));
+    flex-grow: 1; /* This will make the paragraph expand to fill available space */
+  }
+}
+
+.centered-images img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+@media (min-width: 640px) {
+  .main-container {
+    padding: 2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .main-container {
+    padding: 3rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .main-container {
+    padding: 1rem;
+    padding-bottom: 4rem; /* Add extra padding at the bottom */
+    min-height: auto;
+    overflow-y: visible;
+  }
+    html, body {
+    height: 100%;
+    height: var(--doc-height);
+    overflow-y: auto;
+  }
+  
+  .flex-col.md\:flex-row {
+    gap: 2rem;
+  }
+
+  body {
+    overflow-y: auto;
+  }
+
+  .main-grid {
+    overflow-y: visible;
+    height: auto;
+  }
+}
+
+/* Article-specific colors */
+.article-orange-blue {
+  --article-color: #FF8C00;
+}
+
+.article-purple {
+  --article-color: #df206d;
+}
+
+.article-orange-hero {
+  --article-color: rgb(248, 170, 25);
+}
+
+
+.article-green {
+  --article-color: #98fce4;
+}
+.article-dark {
+  --article-color: #5b5b5b;
+}
+.article-neon-green {
+  --article-color: #c0ff66;
+}
+.article-white {
+  --article-color: #ffffff;
+}
+.article-pink {
+  --article-color: #ff64ff;
+}
+/* Add more article color classes as needed */
+
+/* Blockquote styles */
+.writing-content blockquote {
+  position: relative;
+  border: 1px solid hsl(var(--border));
+  background-color: hsl(var(--muted) / 0.3);
+  border-radius: 0.375rem;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.writing-content blockquote .quote-author {
+  position: absolute;
+  bottom: 0;
+  right: 1rem;
+  font-style: italic;
+  font-size: 0.9em;
+  color: hsl(var(--muted-foreground));
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.writing-content blockquote:hover .quote-author {
+  transform: translateY(0);
+}
+
+.writing-content blockquote:hover {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  border-color: color-mix(in srgb, var(--article-color, hsl(var(--primary))) 80%, transparent);
+}
+
+.writing-content blockquote p {
+  padding: 0;
+  margin: 0;
+  font-weight: 400;
+  color: hsl(var(--foreground));
+}
+
+/* Dark mode specific styles */
+
+
+.writing-content h3,
+.writing-content h4 {
+  color: var(--article-color, hsl(var(--primary)));
+}
+
+.writing-content a:hover {
+  color: color-mix(in srgb, var(--article-color, hsl(var(--primary))) 80%, black);
+}
+
+.writing-content figure img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 0.5rem; /* Reduce space between image and caption */
+}
+
+.writing-content figcaption {
+  text-align: center;
+  color: hsl(var(--accent-foreground));
+  font-size: 0.9em; /* Slightly smaller text */
+  margin-top: 0.5rem; /* Space between image and caption */
+  font-style: italic; /* Optional: makes the caption italic */
+}
+
+.writing-content .comment {
+  font-style: italic;
+  color: hsl(var(--accent-foreground));
+}
+
+.writing-content .highlight {
+  color: var(--article-color, hsl(var(--primary)));
+}
+
+.tweet-container {
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.tweet {
+  background-color: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tweet:hover {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  border-color: color-mix(in srgb, var(--article-color, hsl(var(--primary))) 80%, transparent);
+}
+
+.tweet-content {
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: normal;
+  color: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.tweet-separator {
+  text-align: center;
+  margin: 24px 0;
+  color: hsl(var(--muted-foreground));
+  font-size: 12px;
+  line-height: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.personal {
+  background-color: rgb(100, 149, 237); /* Cornflower Blue */
+}
+
+.personal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

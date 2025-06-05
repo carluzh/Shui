@@ -1,0 +1,227 @@
+---
+import { format, subMonths, eachDayOfInterval, startOfWeek, endOfWeek, isSameMonth, isSameDay, addDays, startOfMonth, differenceInDays, isFirstDayOfMonth, subDays } from 'date-fns';
+import { ACTIVITY_DATA, getActivityLevel, getActivityForDate } from '@/data/activityData';
+import { getToday } from '@/utils/dateUtils';
+
+// Initial server-side calculations for rendering
+const today = getToday();
+const monthlyEndDate = endOfWeek(today, { weekStartsOn: 1 });
+const monthlyStartDate = startOfWeek(subMonths(monthlyEndDate, 3), { weekStartsOn: 1 });
+const weekDays = 7;
+const totalWeeks = 14;
+
+// Initial streak calculation for first render
+let streakCount = 0;
+let currentDate = subDays(today, 1);
+while (true) {
+  const dateString = format(currentDate, 'yyyy-MM-dd');
+  const activity = getActivityForDate(dateString);
+  if (activity && getActivityLevel(activity) === 4) {
+    streakCount++;
+    currentDate = subDays(currentDate, 1);
+  } else {
+    break;
+  }
+}
+
+function getActivityColor(activityLevel: number): string {
+  const colors = [
+    'rgb(25, 23, 22)',   // No activity
+    'rgb(26, 38, 77)',   // 1/4 activity
+    'rgb(29, 59, 140)', // 2/4 activity
+    'rgb(30, 80, 211)', // 3/4 activity
+    'rgb(31, 94, 255)'  // 4/4 activity
+  ];
+  return colors[activityLevel];
+}
+
+const monthPositions = Array.from({ length: 3 }, (_, i) => subMonths(today, 2 - i));
+
+function getMonthStartColumn(month: Date): number {
+  const firstDayOfMonth = startOfMonth(month);
+  return Math.floor(differenceInDays(firstDayOfMonth, monthlyStartDate) / 7) + 1;
+}
+
+---
+
+<div class="calendar-wrapper">
+  <div class="grid grid-cols-[repeat(14,1fr)] gap-1">
+    {Array.from({ length: weekDays }).map((_, dayIndex) => (
+      <div class="contents">
+        {Array.from({ length: totalWeeks }).map((_, weekIndex) => {
+          const date = addDays(monthlyStartDate, weekIndex * 7 + dayIndex);
+          const activity = getActivityForDate(format(date, 'yyyy-MM-dd'));
+          const activityLevel = activity ? getActivityLevel(activity) : 0;
+          const backgroundColor = getActivityColor(activityLevel);
+          const isFullActivity = activityLevel === 4;
+          const isToday = isSameDay(date, today);
+          
+          return (
+            <div
+              class={`w-4 h-4 relative group rounded-[0.15rem] calendar-square ${isToday ? 'today' : 'hover-outline'} ${isFullActivity ? 'full-activity' : ''}`}
+              style={`background-color: ${backgroundColor};`}
+              title={`${format(date, 'MMMM d, yyyy')}${activity?.note ? `: ${activity.note}` : ''}`}
+              data-date={format(date, 'yyyy-MM-dd')}
+              data-activity-level={activityLevel}
+            >
+              <span class="activity-level">{activityLevel}</span>
+            </div>
+          );
+        })}
+      </div>
+    ))}
+  </div>
+  <div class="flex justify-between items-center mt-2">
+    <div class="flex items-center">
+      <div class="full-activity-dot mr-2"></div>
+      <span class="text-xs text-muted-foreground">Goals Completed</span>
+    </div>
+    <div class="streak-container" title="Streak">
+      <span class="streak-count">{streakCount}</span>
+      <svg class="flame-icon" xmlns="http://www.w3.org/2000/svg" viewBox="-3 0 32 32">
+        <path class="flame" fill="#888888" fill-rule="evenodd" d="M22.905 6.953C18.52 8.203 17.717 11.748 18 14c-3.128-3.678-3-7.907-3-14C4.968 3.783 7.301 14.688 7 18c-2.523-2.065-3-7-3-7-2.664 1.371-4 5.031-4 8 0 7.18 5.82 13 13 13s13-5.82 13-13c0-4.267-3.133-6.235-3.095-12.047"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<style>
+  .calendar-wrapper {
+    font-size: calc(2rem * var(--scale-factor));
+  }
+
+  .streak-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .streak-count {
+    font-size: 0.75rem;
+    color: hsl(var(--muted-foreground));
+    margin-right: 0.25rem;
+  }
+
+  .flame-icon {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  .flame {
+    animation: flicker 1.5s infinite alternate;
+    transform-origin: center bottom;
+    transition: fill 0.3s ease, animation-duration 0.3s ease;
+  }
+
+  .streak-container:hover .flame {
+    fill: rgb(31, 94, 255);
+    animation-duration: 0.75s; /* Increase animation speed on hover */
+  }
+
+  @keyframes flicker {
+    0% {
+      transform: scaleY(1);
+    }
+    25% {
+      transform: scaleY(0.95);
+    }
+    50% {
+      transform: scaleY(1.05);
+    }
+    75% {
+      transform: scaleY(0.98);
+    }
+    100% {
+      transform: scaleY(1.02);
+    }
+  }
+
+  .today {
+    box-shadow: inset 0 0 0 0.1rem white;
+  }
+
+  .full-activity::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.25rem;
+    height: 0.25rem;
+    background-color: white;
+    border-radius: 50%;
+  }
+
+  .full-activity-dot {
+    width: 0.25rem;
+    height: 0.25rem;
+    background-color: white;
+    border-radius: 50%;
+  }
+
+  .hover-outline {
+    transition: box-shadow 0.2s ease-in-out;
+  }
+
+  .hover-outline:hover {
+    box-shadow: 0 0 0 0.1rem #888888;
+  }
+
+  .activity-level {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.5rem;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    pointer-events: none;
+  }
+
+  .hover-outline:hover .activity-level {
+    opacity: 1;
+  }
+
+  .hover-outline:hover.full-activity::after {
+    opacity: 0;
+  }
+
+  .activity-level {
+    color: white;
+  }
+
+  .activity-level[data-level="0"] {
+    color: #888888;
+  }
+
+  .hover-outline:hover .activity-level[data-level="0"] {
+    color: #888888;
+  }
+</style>
+
+<script>
+  import { getToday, initializeDateUpdates } from '../utils/dateUtils';
+
+  function updateCalendarDates() {
+    const today = getToday();
+    const squares = document.querySelectorAll('.calendar-square');
+    
+    squares.forEach(square => {
+      const dateStr = square.dataset.date;
+      const date = new Date(dateStr);
+      
+      // Update today's highlighting
+      if (date.toDateString() === today.toDateString()) {
+        square.classList.add('today');
+      } else {
+        square.classList.remove('today');
+      }
+    });
+  }
+
+  // Initialize date updates on page load
+  document.addEventListener('astro:page-load', () => {
+    initializeDateUpdates(updateCalendarDates);
+  });
+</script>
+

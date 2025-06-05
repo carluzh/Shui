@@ -1,0 +1,55 @@
+---
+import { LearningInPublic } from './LearningInPublic.jsx';
+---
+
+<section class="mt-8">
+  <h2 class="text-base !font-medium mt-0">Learning in Public<span class="dots" style="display: inline-block; width: 1em;"></span></h2>
+  <p class="text-muted-foreground text-justify hyphens-auto leading-relaxed pr-4">
+    <span class="hidden md:inline">Always Studying. </span>Jumping from one rabbit hole to the next. <span class="hidden md:inline">Crypto fanatic and wannabe researcher. </span>This site contains my thoughts and keeps me accountable.
+  </p>
+  <div class="mt-2 flex items-center">
+    <a href="https://x.com/ShuiTangs" target="_blank" rel="noopener noreferrer" class="text-muted-foreground hover:text-[rgb(31,94,255)] transition-colors mr-3">
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="22" viewBox="0 0 300 271" fill="currentColor" stroke="none">
+        <path d="M236 0h46L181 115l118 156h-92.6l-72.5-94.8-83 94.8h-46l107-123L-1.1 0h94.9l65.5 86.6zm-16.1 244h25.5L80.4 26H53z"/>
+      </svg>
+      <span class="sr-only">Twitter</span>
+    </a>
+    <a href="https://t.me/ShuiTangs" target="_blank" rel="noopener noreferrer" class="text-muted-foreground hover:text-[rgb(31,94,255)] transition-colors">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 48 48" fill="currentColor" stroke="none">
+        <path d="M41.42 7.309s3.885-1.515 3.56 2.164c-.107 1.515-1.078 6.818-1.834 12.553l-2.59 16.99s-.216 2.489-2.159 2.922c-1.942.432-4.856-1.515-5.396-1.948-.432-.325-8.094-5.195-10.792-7.575-.756-.65-1.62-1.948.108-3.463L33.648 18.13c1.295-1.298 2.59-4.328-2.806-.649l-15.11 10.28s-1.727 1.083-4.964.109l-7.016-2.165s-2.59-1.623 1.835-3.246c10.793-5.086 24.068-10.28 35.831-15.15Z"/>
+      </svg>
+      <span class="sr-only">Telegram</span>
+    </a>
+  </div>
+</section>
+
+<style>
+  @keyframes typingDots {
+    20% { content: ''; }
+    40% { content: '.'; }
+    60% { content: '..'; }
+    80%, 100% { content: '...'; }
+  }
+
+  .dots::after {
+    content: '';
+    display: inline-block;
+    animation: typingDots 3s infinite;
+    text-align: left;
+  }
+</style>
+
+<script>
+  const dots = document.getElementById('dots');
+  const dotStates = ['', '.', '..', '...'];
+  let currentState = 0;
+
+  function animateDots() {
+    if (dots) {
+      dots.textContent = dotStates[currentState];
+      currentState = (currentState + 1) % dotStates.length;
+    }
+  }
+
+  setInterval(animateDots, 500); // Change dots every 500ms (0.5 seconds)
+</script>

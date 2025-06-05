@@ -1,0 +1,150 @@
+---
+import "@/styles/globals.css";
+import "@fontsource-variable/figtree";
+import BaseHead from "@/components/base-head.astro";
+import GoBack from "@/components/go-back.astro";
+import { SITE_TITLE, SITE_DESCRIPTION, SITE_AUTHOR } from "../config";
+
+interface Props {
+  title?: string;
+  description?: string;
+  author?: string;
+  backTitle?: string;
+  backUrl?: string;
+  image?: string;
+  headings?: any[];
+}
+
+const {
+  title = SITE_TITLE,
+  description = SITE_DESCRIPTION,
+  author = SITE_AUTHOR,
+  backTitle,
+  backUrl,
+  image,
+} = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <BaseHead
+      title={title}
+      description={description}
+      image={image}
+      author={author}
+    />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-10TN9H2GWH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-10TN9H2GWH');
+    </script>
+  </head>
+  <body>
+    <div id="site-wrapper">
+      <main class="main-container">
+        <div class="main-grid">
+          {backTitle && backUrl && <GoBack title={backTitle} to={backUrl} />}
+          <slot />
+        </div>
+      </main>
+    </div>
+    <script async src="https://eocampaign1.com/form/86092bf4-7c42-11ef-a0e5-b3529160268e.js" data-form="86092bf4-7c42-11ef-a0e5-b3529160268e"></script>
+  </body>
+</html>
+
+<script>
+  function initializeFunctionality() {
+    // Logo rotation and messages
+    let rotation = 0;
+    let clickCount = 0;
+    const logoContainer = document.getElementById('logo-container');
+    const svg = logoContainer?.querySelector('svg');
+    const tempMessage = document.getElementById('temp-message');
+
+    function showMessage(message) {
+      if (tempMessage) {
+        tempMessage.textContent = message;
+        tempMessage.style.opacity = '1';
+        setTimeout(() => {
+          tempMessage.style.opacity = '0';
+        }, 2000);
+      }
+    }
+
+    logoContainer?.addEventListener('click', () => {
+      rotation += 90;
+      clickCount++;
+
+      if (svg) {
+        svg.style.transform = `rotate(${rotation}deg) scale(${rotation % 180 === 90 ? 0.8 : 1})`;
+      }
+
+      switch (clickCount) {
+        case 7:
+          showMessage("Slow down there Buckaroo.");
+          break;
+        case 15:
+          showMessage("Read an article or something.");
+          break;
+        case 25:
+          showMessage("Stop.");
+          break;
+        case 35:
+          showMessage("No seriously. Please stop.");
+          break;
+        case 50:
+          showMessage("STOOOP!!");
+          break;
+        case 55:
+          showMessage("stop.");
+          break;
+        case 60:
+          window.open('https://www.youtube.com/watch?v=tJXGz4N00dA', '_blank');
+          break;
+      }
+    });
+
+    // Learning in Public animation
+    const dots = document.getElementById('dots');
+    const dotStates = ['', '.', '..', '...'];
+    let currentState = 0;
+
+    function animateDots() {
+      if (dots) {
+        dots.textContent = dotStates[currentState];
+        currentState = (currentState + 1) % dotStates.length;
+      }
+    }
+
+    setInterval(animateDots, 500);
+
+    // Home link full page reload
+    const homeLink = document.getElementById('home-link');
+    if (homeLink) {
+      homeLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.href = '/';
+      });
+    }
+
+    // Reload on navigation back to home
+    if (window.location.pathname === '/') {
+      const pageLoadTime = Date.now();
+      window.addEventListener('popstate', () => {
+        if (Date.now() - pageLoadTime > 1000) {
+          window.location.reload();
+        }
+      });
+    }
+
+    // Ensure all necessary initializations are called
+    if (typeof initializeCalendar === 'function') {
+      initializeCalendar();
+    }
+  }
+
+  // Run on both initial load and after Astro page transitions
+  document.addEventListener('astro:page-load', initializeFunctionality);
+</script>

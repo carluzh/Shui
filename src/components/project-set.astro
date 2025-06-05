@@ -1,0 +1,229 @@
+---
+import { getACTIVITIES } from "@/data/activities";
+
+const ACTIVITIES = await getACTIVITIES();
+const articles = ACTIVITIES.filter(activity => activity.type === 'article');
+
+// Sort articles by date in descending order
+const sortedArticles = articles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+// Get the current year
+const currentYear = new Date().getFullYear();
+
+// Group all articles by year (no filtering here)
+const groupedArticles = sortedArticles.reduce((acc, article) => {
+  const year = new Date(article.date).getFullYear();
+  if (!acc[year]) {
+    acc[year] = [];
+  }
+  acc[year].push(article);
+  return acc;
+}, {} as Record<number, typeof articles>);
+
+// Sort years in descending order
+const sortedYears = Object.keys(groupedArticles).map(Number).sort((a, b) => b - a);
+
+// Format the date to show only month and day
+const formatDate = (dateString: string | Date) => {
+  const date = typeof dateString === 'string' ? new Date(dateString) : dateString;
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+};
+
+// Create two groups of articles: initial (7) and remaining
+let totalShown = 0;
+const initialArticles = [];
+const remainingArticles = [];
+
+// Split articles into initial and remaining groups
+sortedArticles.forEach(article => {
+  if (totalShown < 7) {
+    initialArticles.push(article);
+    totalShown++;
+  } else {
+    remainingArticles.push(article);
+  }
+});
+
+// Group initial articles by year
+const initialGroupedArticles = initialArticles.reduce((acc, article) => {
+  const year = new Date(article.date).getFullYear();
+  if (!acc[year]) {
+    acc[year] = [];
+  }
+  acc[year].push(article);
+  return acc;
+}, {} as Record<number, typeof articles>);
+
+// Group remaining articles by year
+const remainingGroupedArticles = remainingArticles.reduce((acc, article) => {
+  const year = new Date(article.date).getFullYear();
+  if (!acc[year]) {
+    acc[year] = [];
+  }
+  acc[year].push(article);
+  return acc;
+}, {} as Record<number, typeof articles>);
+
+const initialYears = Object.keys(initialGroupedArticles).map(Number).sort((a, b) => b - a);
+const remainingYears = Object.keys(remainingGroupedArticles).map(Number).sort((a, b) => b - a);
+---
+
+<section class="space-y-0" id="articles-container">
+  <div class="space-y-1">
+    <h2 class="text-lg font-semibold">Writing</h2>
+    <p class="text-sm text-muted-foreground pb-2 md:pb-0">Curated collection of articles, threads, and insights.</p>
+  </div>
+  
+  <div class="animation-container" id="lottie-container-project-set">
+    <div class="lottie-animation" id="squiggly-line"></div>
+  </div>
+
+  <!-- Initial visible articles -->
+  {initialYears.map(year => (
+    <div class="space-y-1 pt-1">
+      {year !== currentYear && <h3 class="text-sm font-semibold pt-2">{year}</h3>}
+      <div class="space-y-3">
+        {initialGroupedArticles[year].map((article, index) => (
+          <div class="article-item flex justify-between items-center relative">
+            {index === 0 && year === initialYears[0] && (
+              <>
+                <div class="w-1.5 h-1.5 rounded-full mr-2 md:hidden" style="background-color: rgb(31, 94, 255);"></div>
+                <div class="absolute -left-4 top-1/2 transform -translate-y-1/2 w-1.5 h-1.5 rounded-full hidden md:block" style="background-color: rgb(31, 94, 255);"></div>
+              </>
+            )}
+            <div class="flex items-center flex-grow">
+              <h4 class="text-sm">
+                {'slug' in article ? (
+                  <a href={`${article.slug}`} class="hover:underline">
+                    {article.title}
+                  </a>
+                ) : (
+                  article.title
+                )}
+              </h4>
+            </div>
+            <div class="text-sm text-muted-foreground ml-2">{formatDate(article.date)}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
+
+  <!-- Modify the remaining articles section -->
+  <div id="remaining-articles" class="md:hidden">
+    {remainingYears.map(year => (
+      <div class="space-y-1 pt-1">
+        {year !== currentYear && <h3 class="text-sm font-semibold pt-2">{year}</h3>}
+        <div class="space-y-3">
+          {remainingGroupedArticles[year].map((article, index) => (
+            <div class="article-item flex justify-between items-center relative">
+              <div class="flex items-center flex-grow">
+                <h4 class="text-sm">
+                  {'slug' in article ? (
+                    <a href={`${article.slug}`} class="hover:underline">
+                      {article.title}
+                    </a>
+                  ) : (
+                    article.title
+                  )}
+                </h4>
+              </div>
+              <div class="text-sm text-muted-foreground ml-2">{formatDate(article.date)}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Hidden articles for desktop -->
+  <div id="remaining-articles-desktop" class="hidden md:hidden">
+    {remainingYears.map(year => (
+      <div class="space-y-1 pt-1">
+        {year !== currentYear && <h3 class="text-sm font-semibold pt-2">{year}</h3>}
+        <div class="space-y-3">
+          {remainingGroupedArticles[year].map((article, index) => (
+            <div class="article-item flex justify-between items-center relative">
+              <div class="flex items-center flex-grow">
+                <h4 class="text-sm">
+                  {'slug' in article ? (
+                    <a href={`${article.slug}`} class="hover:underline">
+                      {article.title}
+                    </a>
+                  ) : (
+                    article.title
+                  )}
+                </h4>
+              </div>
+              <div class="text-sm text-muted-foreground ml-2">{formatDate(article.date)}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Show More button only on desktop -->
+  <div class="pt-1 hidden md:block">
+    <button class="view-toggle" id="show-more-btn">Show More</button>
+  </div>
+</section>
+
+<script>
+  import lottie from 'lottie-web';
+
+  document.addEventListener('astro:page-load', () => {
+    const squigglyLineContainer = document.getElementById('squiggly-line');
+
+    if (squigglyLineContainer) {
+      // Load the squiggly line animation
+      lottie.loadAnimation({
+        container: squigglyLineContainer,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: '/animations/squiggly-line.json'
+      });
+    }
+
+    // Simplified toggle functionality
+    const showMoreBtn = document.getElementById('show-more-btn');
+    const remainingArticles = document.getElementById('remaining-articles-desktop');
+    
+    if (showMoreBtn && remainingArticles) {
+      showMoreBtn.addEventListener('click', () => {
+        const isExpanded = remainingArticles.style.display === 'block';
+        remainingArticles.style.display = isExpanded ? 'none' : 'block';
+        showMoreBtn.classList.toggle('active');
+        showMoreBtn.textContent = isExpanded ? 'Show More' : 'Show Less';
+      });
+    }
+  });
+</script>
+
+<style>
+  .animation-container {
+    display: flex;
+    align-items: center;
+    overflow: visible;
+  }
+
+  .view-toggle {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: hsl(var(--muted-foreground));
+    transition: all 0.2s ease-in-out;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .view-toggle:hover {
+    color: hsl(var(--primary));
+  }
+
+  .view-toggle.active {
+    text-decoration: underline;
+  }
+</style>

@@ -1,0 +1,16 @@
+---
+import { Code } from "astro:components";
+import oneHunterVercel2024Light from "../../public/theme/one-hunter-vercel-light.json";
+import oneHunterVercel2024 from "../../public/theme/one-hunter-vercel-dark.json";
+---
+
+<Code
+  code={Astro.props.code}
+  lang={Astro.props.lang as any}
+  wrap={Astro.props.wrap}
+  inline={Astro.props.inline}
+  themes={{
+    light: oneHunterVercel2024Light as any,
+    dark: oneHunterVercel2024 as any,
+  }}
+/>
