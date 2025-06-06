@@ -1,6 +1,7 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import tailwind from "@astrojs/tailwind";
+import vercel from "@astrojs/vercel/serverless";
 
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
@@ -9,7 +10,9 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 // import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 
 export default defineConfig({
-  site: 'https://main--flourishing-cupcake-51dfe2.netlify.app/',  // Update this to your actual Netlify URL
+  output: 'server',
+  adapter: vercel(),
+  site: 'https://your-vercel-domain.vercel.app/',  // Update this to your actual Netlify URL
   integrations: [mdx(), tailwind()],
   markdown: {
     shikiConfig: {
