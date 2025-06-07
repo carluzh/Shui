@@ -102,8 +102,9 @@ export const ACTIVITIES: Activity[] = [
         percentage: 77,
         items: [
           { text: "Create Whitepaper", done: 1 },
-          { text: "Write Business Plan", done: 0 },
-          { text: "Pre-Seed Deck", done: 0 },
+          { text: "Write Business Plan", done: 1 },
+          { text: "Pre-Seed Deck", done: 1 },
+          { text: "Base Batch Incubator", done: 0 },
         ],
       },
       {
@@ -111,7 +112,7 @@ export const ACTIVITIES: Activity[] = [
         percentage: 55,
         items: [
           { text: "Core Hook Development", done: 0 },
-          { text: "Frontend App", done: 0 },
+          { text: "Frontend App", done: 1 },
           { text: "Private Alpha", done: 1 },
           { text: "Private Beta", done: 0 },
         ],

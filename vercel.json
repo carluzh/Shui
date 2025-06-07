@@ -1,14 +1,5 @@
 {
     "buildCommand": "yarn build",
     "outputDirectory": "dist",
-    "devCommand": "yarn dev",
-    "functions": {
-      "api/**": {
-        "runtime": "nodejs20.x"
-      },
-      "edge/**": {
-        "runtime": "edge"
-      }
-    },
-    "regions": ["sfo1"]
-  }
+    "devCommand": "yarn dev"
+}

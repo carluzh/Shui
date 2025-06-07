@@ -719,6 +719,158 @@ export const ACTIVITY_DATA: DayActivity[] = [
     work: true,
     growth: true,
     note: ''
+  },
+  {
+    date: '2025-05-25',
+    sports: false,
+    twitter: false,
+    work: true,
+    growth: false,
+    note: ''
+  },
+  {
+    date: '2025-05-24',
+    sports: false,
+    twitter: false,
+    work: true,
+    growth: true,
+    note: ''
+  },
+  {
+    date: '2025-05-23',
+    sports: true,
+    twitter: false,
+    work: true,
+    growth: false,
+    note: ''
+  },
+  {
+    date: '2025-05-21',
+    sports: false,
+    twitter: false,
+    work: true,
+    growth: false,
+    note: ''
+  },
+  {
+    date: '2025-05-20',
+    sports: true,
+    twitter: false,
+    work: true,
+    growth: false,
+    note: ''
+  },
+  {
+    date: '2025-05-19',
+    sports: false,
+    twitter: false,
+    work: true,
+    growth: true,
+    note: ''
+  },
+  {
+    date: '2025-06-07',
+    sports: false,
+    twitter: false,
+    work: true,
+    growth: false,
+    note: ''
+  },
+  {
+    date: '2025-06-06',
+    sports: false,
+    twitter: true,
+    work: true,
+    growth: false,
+    note: ''
+  },
+  {
+    date: '2025-06-05',
+    sports: true,
+    twitter: false,
+    work: true,
+    growth: false,
+    note: ''
+  },
+  {
+    date: '2025-06-04',
+    sports: false,
+    twitter: false,
+    work: true,
+    growth: true,
+    note: ''
+  },
+  {
+    date: '2025-06-03',
+    sports: false,
+    twitter: false,
+    work: true,
+    growth: false,
+    note: ''
+  },
+  {
+    date: '2025-06-02',
+    sports: false,
+    twitter: false,
+    work: true,
+    growth: false,
+    note: ''
+  },
+  {
+    date: '2025-06-01',
+    sports: true,
+    twitter: false,
+    work: true,
+    growth: false,
+    note: ''
+  },
+  {
+    date: '2025-05-31',
+    sports: false,
+    twitter: false,
+    work: true,
+    growth: false,
+    note: ''
+  },
+  {
+    date: '2025-05-30',
+    sports: true,
+    twitter: false,
+    work: true,
+    growth: false,
+    note: ''
+  },
+  {
+    date: '2025-05-29',
+    sports: true,
+    twitter: false,
+    work: true,
+    growth: true,
+    note: ''
+  },
+  {
+    date: '2025-05-28',
+    sports: false,
+    twitter: false,
+    work: true,
+    growth: false,
+    note: ''
+  },
+  {
+    date: '2025-05-27',
+    sports: false,
+    twitter: false,
+    work: true,
+    growth: false,
+    note: ''
+  },
+  {
+    date: '2025-05-26',
+    sports: true,
+    twitter: false,
+    work: true,
+    growth: false,
+    note: ''
   }
 ];
 
